@@ -40,6 +40,14 @@ const userSchema = mongoose.Schema({
     isAdmin: {
         type: Boolean,
         required: true
+    },
+    taxID: {
+        type: Number,
+        required:true
+    },
+    photo:{
+        type : String,
+        required:false
     }
     //missing photo and one other
 },{timestamps: true});//timestamp for updated at and created at

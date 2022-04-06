@@ -25,11 +25,12 @@ app.get('/users', async (req,res) => {
   try {
       await User.find({})
       .then(result => {
-              res.send(result);
+              res.status(200).send(result);
       })
   }
   catch (err) {
       console.log(err)
+      res.status(404).send(`doesn't exist`)
   }
 });
 
@@ -37,11 +38,12 @@ app.get('/user/:id', async(req,res) => {
   try {
       await User.findById({_id:req.params.id}).
       then(result => {
-        res.send(result);
+        res.status(200).send(result);
       })
   }
   catch (err) {
-      res.send(err);
+    console.log(err);
+      res.status(404).send('Not Found');
   }
 })
 
@@ -57,13 +59,18 @@ app.post('/add_user', async(req,res) => {
         country: req.body.country,
         city: req.body.city,
         codePostal: req.body.codePostal,
-        isAdmin: req.body.isAdmin
+        isAdmin: req.body.isAdmin,
+        taxID: req.body.taxID,
+        photo:req.body.photo
       });
       await new_user.save();
-      res.send('save effectué par succés!');
+      res.status(201).send('save effectué par succés!');
   }
   catch (err) {
       console.log(err);
+      res.status(400).send(`couldn't be created, Something is wrong`);
+
+
   }
 });
 
