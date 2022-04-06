@@ -24,8 +24,11 @@ const annonceSchema = mongoose.Schema({
     User: { 
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'user' 
+    },
+    audience: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref : 'Audience'
     }
-    //missing audience
 },{timestamps: true});//timestamp for updated at and created at
 
 const Annonce = mongoose.model("annonce", annonceSchema);
