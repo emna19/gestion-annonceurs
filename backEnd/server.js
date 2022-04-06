@@ -1,6 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const User = require("./models/user")
+const Transaction = require("./models/transaction")
 const bodyParser = require("body-parser")
 
 const app = express()
@@ -52,6 +53,44 @@ app.post('/add_user', async(req,res) => {
         isAdmin: req.body.isAdmin
       });
       await new_user.save();
+      res.send('save effectué par succés!');
+  }
+  catch (err) {
+      console.log(err);
+  }
+});
+
+app.get('/transactions', async (req,res) => {
+  try {
+      await Transaction.find({})
+      .then(result => {
+              res.send(result);
+      })
+  }
+  catch (err) {
+      console.log(err)
+  }
+});
+
+app.get('/transaction/:id', async(req,res) => {
+  try {
+      await Transaction.findById({_id:req.params.id}).
+      then(result => {
+        res.send(result);
+      })
+  }
+  catch (err) {
+      res.send(err);
+  }
+})
+
+app.post('/add_transaction', async(req,res) => {
+  try {
+      let new_transaction = new Transaction({
+        date: req.body.date,
+        author: req.body.author,
+        });
+      await new_transaction.save();
       res.send('save effectué par succés!');
   }
   catch (err) {

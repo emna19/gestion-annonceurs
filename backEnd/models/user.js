@@ -41,6 +41,7 @@ const userSchema = mongoose.Schema({
         type: Boolean,
         required: true
     }
+    //missing photo and one other
 },{timestamps: true});//timestamp for updated at and created at
 
 const User = mongoose.model("user", userSchema);
