@@ -13,6 +13,30 @@ app.get('/api', function (req, res) {
   res.json({"users": ["userOne", "userTwo", "userThree", "userFour"] })
 })
 
+app.get('/users', async (req,res) => {
+  try {
+      await User.find({})
+      .then(result => {
+              res.send(result);
+      })
+  }
+  catch (err) {
+      console.log(err)
+  }
+});
+
+app.get('/user/:id', async(req,res) => {
+  try {
+      await User.findById({_id:req.params.id}).
+      then(result => {
+        res.send(result);
+      })
+  }
+  catch (err) {
+      res.send(err);
+  }
+})
+
 app.post('/add_user', async(req,res) => {
   try {
       let new_user = new User({
