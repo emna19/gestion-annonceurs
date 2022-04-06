@@ -14,15 +14,15 @@ const audienceSchema = mongoose.Schema({
         required : true
     },
     countries : {
-        type: Array[String] , 
+        type: [String] , 
         required : true
     },
     keywords : {
-        type: Array[String] , 
+        type: [String] , 
         required : true
     },
     videoIDs : {
-        type: Array[Number] , 
+        type: [Number] , 
         required : true
     },
     

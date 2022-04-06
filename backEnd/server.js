@@ -4,6 +4,7 @@ const express = require('express')
 const User = require("./src/models/user")
 const Transaction = require("./src/models/transaction")
 const Annonce = require("./src/models/annonce")
+const Audience = require('./src/models/audience')
 const bodyParser = require("body-parser")
 
 const app = express()
@@ -149,7 +150,59 @@ app.post('/add_annonce', async(req,res) => {
 });
 
 
+/// Audience API 
+  //create audience 
+  app.post('/add_audience', async(req,res) => {
+    var audience = req.body ;
+    try {
+        let new_audience = new Audience({
+          
+          name: audience.name,
+          minAge : audience.minAge, 
+          maxAge : audience.maxAge,
+          countries : audience.countries,
+          keywords : audience.keywords,
+          videoIDs : audience.videoIDs
 
+        });
+        await new_audience.save();
+        res.status(201).send('a type of audience is created!');
+    }
+    catch (err) {
+        console.log(`Something is wrong !!`,err);
+        res.status(400).send('creation failed')
+    }
+  });
+  //get all types of audience
+  app.get('/audience', async (req,res) => {
+    try {
+        await Audience.find({})
+        .then(result => {
+                res.status(200).send(result);
+        })
+    }
+    catch (err) {
+        console.log(err)
+        res.status(404).send("Audience not found")
+    }
+  });
+  //get audience by id 
+  app.get('/audience/:id', async(req,res) => {
+    try {
+        await Audience.findById({_id:req.params.id}).
+        then(result => {
+          res.status(200).send(result);
+        })
+    }
+    catch (err) {
+      console.log(err)
+      res.status(404).send("Audience not found")
+    }
+  })
+
+
+
+  
 
 
 
