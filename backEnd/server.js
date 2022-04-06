@@ -113,11 +113,12 @@ app.get('/annonces', async (req,res) => {
   try {
       await Annonce.find({})
       .then(result => {
-              res.send(result);
+              res.status(200).send(result);
       })
   }
   catch (err) {
       console.log(err)
+      res.status(404).res(`annonces doesn't exist`)
   }
 });
 
@@ -125,29 +126,32 @@ app.get('/annonce/:id', async(req,res) => {
   try {
       await Annonce.findById({_id:req.params.id}).
       then(result => {
-        res.send(result);
+        res.status(200).send(result);
       })
   }
   catch (err) {
-      res.send(err);
+      res.status(404).send(`annonce not found`, err);
   }
 })
 
 app.post('/add_annonce', async(req,res) => {
+    var annonce= req.body
   try {
       let new_annonce = new Annonce({
-        name: req.body.name,
-        startDate: req.body.startDate,
-        endtDate: req.body.endtDate,
-        sector: req.body.sector,
-        budget: req.body.budget,
-        User: req.body.User,
+        name: annonce.name,
+        startDate: annonce.startDate,
+        endtDate: annonce.endtDate,
+        sector: annonce.sector,
+        budget: annonce.budget,
+        User: annonce.User,
+        audience: annonce.audience
         });
       await new_annonce.save();
-      res.send('save effectué par succés!');
+      res.status(201).send('save effectué par succés!');
   }
   catch (err) {
       console.log(err);
+      res.status(400).send("creation failed")
   }
 });
 
