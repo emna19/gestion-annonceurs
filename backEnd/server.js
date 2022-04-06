@@ -5,6 +5,7 @@ const User = require("./src/models/user")
 const Transaction = require("./src/models/transaction")
 const Annonce = require("./src/models/annonce")
 const Audience = require('./src/models/audience')
+const Impression = require('./src/models/impression')
 const bodyParser = require("body-parser")
 
 const app = express()
@@ -13,9 +14,10 @@ app.use(bodyParser.urlencoded({ extended: false}));
 
 app.use(bodyParser.json());
 
-app.get('/api', function (req, res) {
-  res.json({"users": ["userOne", "userTwo", "userThree", "userFour"] })
-})
+  ///testing backend and frontend connectivity
+// app.get('/api', function (req, res) {
+//   res.json({"users": ["userOne", "userTwo", "userThree", "userFour"] })
+// })
 
 
 //user api
@@ -199,6 +201,58 @@ app.post('/add_annonce', async(req,res) => {
       res.status(404).send("Audience not found")
     }
   })
+
+  /// Impression API
+    //create audience 
+  app.post('/add_impression', async(req,res) => {
+    var impression = req.body ;
+    try {
+        let new_impression = new Impression({
+          
+          date: impression.date,
+          annonce : impression.annonce, 
+          clientID : impression.clientID,
+          country : impression.country,
+          age : impression.age
+          
+
+        });
+        await new_impression.save();
+        res.status(201).send('the impression is created!');
+    }
+    catch (err) {
+        console.log(`Something is wrong !!`,err);
+        res.status(400).send('creation failed')
+    }
+  });
+  //get all impressions
+  app.get('/impressions', async (req,res) => {
+    try {
+        await Impression.find({})
+        .then(result => {
+                res.status(200).send(result);
+        })
+    }
+    catch (err) {
+        console.log(err)
+        res.status(404).send("Impressions not found")
+    }
+  });
+  // //get impression by id 
+  app.get('/impression/:id', async(req,res) => {
+    try {
+        await Impression.findById({_id:req.params.id}).
+        then(result => {
+          res.status(200).send(result);
+        })
+    }
+    catch (err) {
+      console.log(err)
+      res.status(404).send("Impression not found")
+    }
+  })
+
+
 
 
 

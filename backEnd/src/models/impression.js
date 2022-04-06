@@ -18,7 +18,7 @@ const impressionSchema = mongoose.Schema({
         type:String,
         required :true
     },
-    Age:{
+    age:{
         type:Number,
         required :true
     },
