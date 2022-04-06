@@ -1,5 +1,6 @@
+require('./src/db/mongoose')
 const express = require('express')
-const mongoose = require('mongoose')
+// const mongoose = require('./src/db/mongoose')
 const User = require("./src/models/user")
 const Transaction = require("./src/models/transaction")
 const Annonce = require("./src/models/annonce")
@@ -147,9 +148,12 @@ app.post('/add_annonce', async(req,res) => {
   }
 });
 
-mongoose.connect("mongodb://localhost:27017/gestion-annonceurs", (err, done) => {
-    if (err) console.log(err);
-    if (done) console.log('base de données connecté avec succes !');
-});
+
+
+
+
+
+
+
 
 app.listen(5000, () => console.log("Server started on port 5000"))
