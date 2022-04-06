@@ -48,20 +48,21 @@ app.get('/user/:id', async(req,res) => {
 })
 
 app.post('/add_user', async(req,res) => {
+    var user = req.body
   try {
       let new_user = new User({
-        name: req.body.name,
-        organistaion: req.body.organistaion,
-        email: req.body.email,
-        password: req.body.password,
-        adress: req.body.adress,
-        phone: req.body.phone,
-        country: req.body.country,
-        city: req.body.city,
-        codePostal: req.body.codePostal,
-        isAdmin: req.body.isAdmin,
-        taxID: req.body.taxID,
-        photo:req.body.photo
+        name: user.name,
+        organistaion: user.organistaion,
+        email: user.email,
+        password: user.password,
+        adress: user.adress,
+        phone: user.phone,
+        country: user.country,
+        city: user.city,
+        codePostal: user.codePostal,
+        isAdmin: user.isAdmin,
+        taxID: user.taxID,
+        photo:user.photo
       });
       await new_user.save();
       res.status(201).send('save effectué par succés!');
