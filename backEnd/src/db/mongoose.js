@@ -5,7 +5,7 @@
 
 var mongoose = require('mongoose');
 //Set up default mongoose connection
-const mongoDB = 'mongodb://127.0.0.1/my_database';
+const mongoDB = 'mongodb://127.0.0.1/Gestion_Annonceurs';
 mongoose.connect(mongoDB, { useNewUrlParser: true , UseUnifiedTopology:true} , (error)=>{
     if (!error) {
         console.log(`DATABASE CONNECTED`)
