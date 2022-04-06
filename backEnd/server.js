@@ -1,8 +1,8 @@
 const express = require('express')
 const mongoose = require('mongoose')
-const User = require("./models/user")
-const Transaction = require("./models/transaction")
-const Annonce = require("./models/annonce")
+const User = require("./src/models/user")
+const Transaction = require("./src/models/transaction")
+const Annonce = require("./src/models/annonce")
 const bodyParser = require("body-parser")
 
 const app = express()
