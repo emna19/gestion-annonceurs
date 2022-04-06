@@ -5,7 +5,7 @@ const transactionSchema = mongoose.Schema({
         type: String,
         required: true,
     },
-    author: { 
+    User: { 
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'User' 
     }

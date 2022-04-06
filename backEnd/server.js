@@ -2,6 +2,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 const User = require("./models/user")
 const Transaction = require("./models/transaction")
+const Annonce = require("./models/annonce")
 const bodyParser = require("body-parser")
 
 const app = express()
@@ -14,6 +15,8 @@ app.get('/api', function (req, res) {
   res.json({"users": ["userOne", "userTwo", "userThree", "userFour"] })
 })
 
+
+//user api
 app.get('/users', async (req,res) => {
   try {
       await User.find({})
@@ -60,6 +63,8 @@ app.post('/add_user', async(req,res) => {
   }
 });
 
+
+//transaction api
 app.get('/transactions', async (req,res) => {
   try {
       await Transaction.find({})
@@ -88,9 +93,53 @@ app.post('/add_transaction', async(req,res) => {
   try {
       let new_transaction = new Transaction({
         date: req.body.date,
-        author: req.body.author,
+        User: req.body.User,
         });
       await new_transaction.save();
+      res.send('save effectué par succés!');
+  }
+  catch (err) {
+      console.log(err);
+  }
+});
+
+
+//annonce api
+app.get('/annonces', async (req,res) => {
+  try {
+      await Annonce.find({})
+      .then(result => {
+              res.send(result);
+      })
+  }
+  catch (err) {
+      console.log(err)
+  }
+});
+
+app.get('/annonce/:id', async(req,res) => {
+  try {
+      await Annonce.findById({_id:req.params.id}).
+      then(result => {
+        res.send(result);
+      })
+  }
+  catch (err) {
+      res.send(err);
+  }
+})
+
+app.post('/add_annonce', async(req,res) => {
+  try {
+      let new_annonce = new Annonce({
+        name: req.body.name,
+        startDate: req.body.startDate,
+        endtDate: req.body.endtDate,
+        sector: req.body.sector,
+        budget: req.body.budget,
+        User: req.body.User,
+        });
+      await new_annonce.save();
       res.send('save effectué par succés!');
   }
   catch (err) {
