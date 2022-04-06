@@ -73,11 +73,12 @@ app.get('/transactions', async (req,res) => {
   try {
       await Transaction.find({})
       .then(result => {
-              res.send(result);
+              res.status(200).send(result);
       })
   }
   catch (err) {
       console.log(err)
+      res.status(404).send(`doesn't exist`)
   }
 });
 
@@ -85,25 +86,30 @@ app.get('/transaction/:id', async(req,res) => {
   try {
       await Transaction.findById({_id:req.params.id}).
       then(result => {
-        res.send(result);
+        res.status(200).send(result);
       })
   }
   catch (err) {
-      res.send(err);
+    console.log(err);
+      res.status(404).send(`doesn't exist`);
   }
 })
 
 app.post('/add_transaction', async(req,res) => {
+  var transaction = req.body
   try {
       let new_transaction = new Transaction({
-        date: req.body.date,
-        User: req.body.User,
+        date: transaction.date,
+        User: transaction.User,
+        annonce : transaction.annonce,
+        amount : transaction.amount
         });
       await new_transaction.save();
-      res.send('save effectué par succés!');
+      res.status(201).send('save effectué par succés!');
   }
   catch (err) {
       console.log(err);
+      res.status(400).send(`couldn't be created`)
   }
 });
 
