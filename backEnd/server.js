@@ -194,7 +194,7 @@ app.post('/add_annonce', async(req,res) => {
     }
   });
   //get all types of audience
-  app.get('/audience', async (req,res) => {
+  app.get('/audiences', async (req,res) => {
     try {
         await Audience.find({})
         .then(result => {
