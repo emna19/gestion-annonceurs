@@ -41,7 +41,7 @@ const annonceSchema = mongoose.Schema({
         type:String,
         required:true
     },
-    valid:{
+    isValid:{
         type:Date,
         required:false
     }

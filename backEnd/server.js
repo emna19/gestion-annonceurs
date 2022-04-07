@@ -162,7 +162,7 @@ app.post('/add_annonce', async(req,res) => {
         clickUrl:annonce.clickUrl,
         sourceUrl:annonce.sourceUrl,
         type : annonce.type,
-        valid : annonce.valid 
+        isValid : annonce.valid 
         });
       await new_annonce.save();
       res.status(201).send('save effectué par succés!');
