@@ -28,6 +28,22 @@ const annonceSchema = mongoose.Schema({
     audience: {
         type: mongoose.Schema.Types.ObjectId,
         ref : 'Audience'
+    },
+    clickUrl:{
+        type:String,
+        required:true
+    },
+    sourceUrl:{
+        type:String,
+        required:true
+    },
+    type:{
+        type:String,
+        required:true
+    },
+    valid:{
+        type:Date,
+        required:false
     }
 },{timestamps: true});//timestamp for updated at and created at
 
