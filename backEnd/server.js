@@ -158,7 +158,11 @@ app.post('/add_annonce', async(req,res) => {
         sector: annonce.sector,
         budget: annonce.budget,
         User: annonce.User,
-        audience: annonce.audience
+        audience: annonce.audience,
+        clickUrl:annonce.clickUrl,
+        sourceUrl:annonce.sourceUrl,
+        type : annonce.type,
+        isValid : annonce.valid 
         });
       await new_annonce.save();
       res.status(201).send('save effectué par succés!');
