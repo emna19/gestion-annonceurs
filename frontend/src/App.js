@@ -26,7 +26,12 @@ function App() {
       
     // </div>
     
-
+    <BrowserRouter>
+    <Routes>
+      {/* login route */}
+     <Route  path="/login" element={ <Login/>} />
+    </Routes>
+   </BrowserRouter>
 
   )
 }
