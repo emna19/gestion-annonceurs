@@ -1,6 +1,8 @@
-import { BrowserRouter , Link, Route , Routes } from "react-router-dom";
+import { BrowserRouter , Route , Routes } from "react-router-dom";
 import Login from "./components/login/Login";
-
+import Error from "./components/ErrorPage/Error";
+import Signup from "./components/Signup";
+import ResetPassword from "./components/ResetPassword";
 // import logo from './logo.svg';
 // import './App.css';
 // import React, {useEffect, useState} from 'react';
@@ -30,6 +32,9 @@ function App() {
     <Routes>
       {/* login route */}
      <Route  path="/login" element={ <Login/>} />
+     <Route  path="/signup" element={ <Signup/>} />
+     <Route  path="/RestPassword" element={ <ResetPassword/>} />
+     <Route path="*" element={<Error/>} />
     </Routes>
    </BrowserRouter>
 
