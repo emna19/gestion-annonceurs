@@ -1,0 +1,75 @@
+* {
+    font-family: 'Tajawal';
+}
+
+body {
+    background-color: #114A71;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid rgba(236, 236, 236, 0.11);
+    box-shadow: 0px 0px 8px 3px rgba(0, 0, 0, 0.15);
+    border-radius: 9px;
+    padding: 1em 40px;
+    width: 550px;
+}
+
+.card-title {
+    margin-bottom: 1.5em;
+}
+
+.btn {
+    background: #F17B22;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.15);
+    border-radius: 5px;
+    margin-bottom: 10px;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: 0.1em;
+}
+
+.btn:hover {
+    background: rgb(224, 115, 31);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+}
+
+.input-elements {
+    margin-bottom: 5px;
+}
+
+.checkbox:hover {
+    background: rgba(224, 115, 31, 0.204);
+}
+
+.checkbox:checked {
+    background: #F17B22;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.card-title {
+font-style: normal;
+font-weight: 700;
+font-size: 28px;
+line-height: 46px;
+letter-spacing: 0.02em;
+}
+
+.form-control:not(.Email-text), .checkbox, .form-select {
+    box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.05);
+    border-radius: 5px;
+}
+
+.Email {
+    box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.05);
+    border-radius: 5px;
+}
+
+.input-group-text {
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 5px 2px 2px 5px;
+}
