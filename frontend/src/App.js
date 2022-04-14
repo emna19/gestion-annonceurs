@@ -9,6 +9,7 @@ import Navbar from './components/navbar/navbar'
 
 
 
+
 function App() {
   
 
@@ -17,7 +18,9 @@ function App() {
       <Routes>
         <Route  exact path="/signup" element={ <SignUp/>} />
         <Route  exact path="/login" element={ <Login/>} />
+
         <Route  exact path="/Home" element={ <div><Navbar /> <Home /></div>} />
+
         <Route  exact path="/RestPassword" element={ <ResetPassword/>} />
         <Route exact path="*" element={<Error/>} />
        
