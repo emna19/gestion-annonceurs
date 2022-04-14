@@ -16,28 +16,28 @@
 }
 
 .artify-logo{
-    background-image: url('C:\Users\Admin\Documents\gestion-annonceurs\frontend\src\assets\artifyLogo.png');
-    background-color: white;
-    height: 50px;
+    background-color: transparent;
     left: 64px;
-    width: 100px;
-    margin-top: 50px;
+    margin-top: 20px;
+    position: relative;
 }
 .artify-ads-log-in{
     color: #000000c5;
-    background-color:white ;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    background-color:transparent ;
+    font-family:'Lucida Sans Regular';
+    font-weight: bolder;
     font-size: 25px;
     font-weight: bold;
     left: 0;
     letter-spacing: 0;
     position: relative;
-    top: 45px;
+    top: 35px;
 }
 .email{
     align-self: flex-start;
-    background-color: white;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    background-color: transparent;
+    font-family:'Lucida Sans Regular';
+    font-weight: bolder;
     font-size: medium;
     letter-spacing: 0;
     position: relative;
@@ -48,8 +48,9 @@
 
 .password{
     align-self: flex-start;
-    background-color: white;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    background-color: transparent;
+    font-family:'Lucida Sans Regular';
+    font-weight: bolder;
     font-size: medium;
     letter-spacing: 0;
     position: relative;
@@ -59,7 +60,7 @@
 }
 .input{
     border-radius: 10px;
-    background-color: white;
+    background-color: transparent;
     height: 45px;
     width: 300px;
     position: relative;
@@ -68,7 +69,7 @@
     /* box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.25); */
   }
   
-.login-button{
+.login-button,textarea{
      position: relative; 
      width: 350px; 
      height: 50px; 
@@ -77,6 +78,8 @@
      border: 1px solid rgba(0, 0, 0, 0.06); 
      box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.25); 
      border-radius: 8px; 
+     font-family:'Lucida Sans Regular';
+     color: white;
 }
 
 .login{
@@ -84,7 +87,7 @@
     height: 43px;
     left: 642px;
     top: 856px;
-    background-color: #F17B22;
+    background-color: transparent;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-style: normal;
     font-weight: 700;
@@ -98,7 +101,7 @@
 
     .forgot-password-frame{
         position: relative;
-            background-color: white;
+            background-color: transparent;
             margin-top: 70px;
     }
     .forgot-password{
@@ -107,7 +110,6 @@
         font-size: medium;
         font-weight: 400;
         letter-spacing: 0;
-       
         background-color: transparent;
     }
 

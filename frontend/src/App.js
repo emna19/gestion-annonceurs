@@ -31,10 +31,10 @@ function App() {
     <BrowserRouter>
     <Routes>
       {/* login route */}
-     <Route  path="/login" element={ <Login/>} />
-     <Route  path="/signup" element={ <Signup/>} />
-     <Route  path="/RestPassword" element={ <ResetPassword/>} />
-     <Route path="*" element={<Error/>} />
+     <Route  exact path="/login" element={ <Login/>} />
+     <Route  exact path="/signup" element={ <Signup/>} />
+     <Route  exact path="/RestPassword" element={ <ResetPassword/>} />
+     <Route exact path="*" element={<Error/>} />
     </Routes>
    </BrowserRouter>
 
