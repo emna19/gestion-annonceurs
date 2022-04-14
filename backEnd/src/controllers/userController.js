@@ -27,17 +27,21 @@ const allUsers= async (req,res) => {
   }
   //adding login api find by email and password
   const login = async(req,res) => {
-    
+    try{
     const user= await User.findOne({
          email : req.body.email,
          password : req.body.password,
      })
-
+    
      if (user) {
        return  res.status(200).send({status:'ok' , user:true});
-     }else{
-         res.status(404).send({status:'error', user:false});
-     }
+    //  }else{
+    //      res.status(404).send({status:'error', user:false});
+    //  }
+     }} catch (err) {
+        console.log(err);
+        res.status(400).send(`couldn't be created, Something is wrong`);
+  }
 }
 
   const createUser = async(req,res) => {
