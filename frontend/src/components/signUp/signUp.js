@@ -1,10 +1,9 @@
 import './signUp.css';
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import Axios from 'axios';
 
 export default function SignUp() {
     const url = "http://localhost:5000/users"
-    const form = useRef(null)
     const [user, setUser] = useState(
         {
             name: 'Name',
