@@ -39,7 +39,7 @@ const userSchema = mongoose.Schema({
     },
     isAdmin: {
         type: Boolean,
-        required: true
+        required: false
     },
     taxID: {
         type: Number,
