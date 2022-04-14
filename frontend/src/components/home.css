@@ -6,8 +6,12 @@
 .container {
     width: 1301px;
     height: 140px;
-    border: 1px dashed rgba(17, 74, 113, 0.42);
-    box-sizing: border-box;
-    filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.3));
-    border-radius: 16px;
+    background-image:
+        radial-gradient(circle at 2.5px, #000 1.25px, rgba(255,255,255,0) 2.5px),
+        radial-gradient(circle, #000 1.25px, rgba(255,255,255,0) 2.5px),
+        radial-gradient(circle at 2.5px, #000 1.25px, rgba(255,255,255,0) 2.5px),
+        radial-gradient(circle, #000 1.25px, rgba(255,255,255,0) 2.5px);
+    background-position: top, right, bottom, left;
+    background-size: 15px 5px, 5px 15px;
+    background-repeat: repeat-x, repeat-y;
 }
