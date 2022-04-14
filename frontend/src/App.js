@@ -4,6 +4,7 @@ import SignUp from "./components/signUp/signUp"
 import Login from "./components/login/Login";
 import Error from "./components/ErrorPage/Error";
 import ResetPassword from "./components/ResetPassword";
+import Home from './components/Home/Home';
 
 
 
@@ -13,9 +14,9 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route exact path="/SignUp" element={<SignUp />}/>
-        <Route  exact path="/login" element={ <Login/>} />
         <Route  exact path="/signup" element={ <SignUp/>} />
+        <Route  exact path="/login" element={ <Login/>} />
+        <Route  exact path="/Home" element={ <Home/>} />
         <Route  exact path="/RestPassword" element={ <ResetPassword/>} />
         <Route exact path="*" element={<Error/>} />
        
