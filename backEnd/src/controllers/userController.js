@@ -25,6 +25,20 @@ const allUsers= async (req,res) => {
         res.status(404).send('Not Found');
     }
   }
+  //adding login api find by email and password
+  const login = async(req,res) => {
+    
+    const user= await User.findOne({
+         email : req.body.email,
+         password : req.body.password,
+     })
+
+     if (user) {
+       return  res.status(200).send({status:'ok' , user:true});
+     }else{
+         res.status(404).send({status:'error', user:false});
+     }
+}
 
   const createUser = async(req,res) => {
     var user = req.body
@@ -55,5 +69,6 @@ const allUsers= async (req,res) => {
   module.exports = {
     allUsers,
     userById,
-    createUser
+    createUser,
+    login
   }
