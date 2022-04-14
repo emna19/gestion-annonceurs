@@ -7,16 +7,16 @@ export default function Home() {
                 <span className="navbar-brand mb-0 h1">Artify Ads</span>
             </nav>
             <main>
+                <h5>Statistics</h5>
                 <div className="statics container">
-                    <h5>Statistics</h5>
                 </div>
-                <div className="announcements container">
-                    <h5>Announcements</h5>
-                    <button type="button">+ Add</button>
+                <h5>Announcements</h5>
+                <button type="button">+ Add</button>
+                <div className="announcements container">   
                 </div>
-                <div className="audiences container">
-                    <h5>Audiences</h5>
-                    <button type="button">+ Add</button>
+                <h5>Audiences</h5>
+                <button type="button">+ Add</button>
+                <div className="audiences container"> 
                 </div>
             </main>
         </div>
