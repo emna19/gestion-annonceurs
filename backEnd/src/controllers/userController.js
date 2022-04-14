@@ -33,12 +33,9 @@ const allUsers= async (req,res) => {
          password : req.body.password,
      })
     
-     if (user) {
-       return  res.status(200).send({status:'ok' , user:true});
-    //  }else{
-    //      res.status(404).send({status:'error', user:false});
-    //  }
-     }} catch (err) {
+      if (user) return res.status(200).send({status:'ok' , user:true});
+      return res.status(404).send({status:'error', user:false});
+    } catch (err) {
         console.log(err);
         res.status(400).send(`couldn't be created, Something is wrong`);
   }
