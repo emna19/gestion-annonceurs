@@ -6,6 +6,7 @@ import Error from "./components/ErrorPage/Error";
 import ResetPassword from "./components/ResetPassword";
 import Home from './components/home/home';
 import Navbar from './components/navbar/navbar'
+import Audience from './components/audiences/Audience';
 
 
 
@@ -18,6 +19,7 @@ function App() {
       <Routes>
         <Route  exact path="/signup" element={ <SignUp/>} />
         <Route  exact path="/login" element={ <Login/>} />
+        <Route  exact path="/Audience" element={ <Audience/>} />
 
         <Route  exact path="/Home" element={ <div><Navbar /> <Home /></div>} />
 
