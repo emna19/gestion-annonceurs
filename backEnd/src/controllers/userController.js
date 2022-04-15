@@ -33,7 +33,7 @@ const allUsers= async (req,res) => {
          password : req.body.password,
      })
     
-      if (user) return res.status(200).send({status:'ok' , user:true});
+      if (user) return res.status(200).send({status:'ok' , user});
       return res.status(404).send({status:'error', user:false});
     } catch (err) {
         console.log(err);

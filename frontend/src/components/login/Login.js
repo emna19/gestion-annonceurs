@@ -23,8 +23,8 @@ const Login = () => {
 		})
 
 		const data = await response.json()
-
 		if (data.user) {
+      //save user into local storage
 			localStorage.setItem('token', data.user)
 			alert('Login successful')
 			window.location.href = '/Home'
