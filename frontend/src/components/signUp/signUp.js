@@ -44,6 +44,9 @@ export default function SignUp() {
         })
         .then(res => {window.location.href = '/login'})
     }
+
+    //change the background-color of each body in component
+    document.body.style = 'background-color: #114A71';
         
 
     return(
