@@ -5,8 +5,9 @@ import Login from "./components/login/Login";
 import Error from "./components/ErrorPage/Error";
 import ResetPassword from "./components/ResetPassword";
 import Profile from './components/Profile/Profile';
-// import Home from './components/Home/Home';
-// import Navbar from './components/navbar/navbar'
+
+import Home from './components/home/home';
+import Navbar from './components/navbar/navbar'
 
 
 

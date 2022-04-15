@@ -33,18 +33,16 @@ const Login = () => {
 		}
 	}
 
+  document.body.style = 'background-color: #114A71';
 
-  document.body.style ='background-color:  #114a71';
 
   return (
    <div >
      <form onSubmit={loginUser}>
-       <div className='container'>
+       <div className='container position-absolute top-50 start-50 translate-middle'>
            <div className='artify-logo'/> 
-           
-           <img  className='artify-logo' src={Logo} alt="Artify Logo" height="80" width="100" loading="lazy"></img>
-           {/* <div className='artify-logo'/>  */}
-           <h1 className='artify-ads-log-in'> ArtifyAds LogIn</h1>
+           <img  className='artify-logo' src={require("../../assets/artifyLogo.png")} alt="Artify Logo" height="60" width="65" loading="lazy"></img>
+           <h1 className='artify-ads-log-in'>ArtifyAds LogIn</h1>
            
            <h2 className='email'>Email</h2>
            <input className='input' 

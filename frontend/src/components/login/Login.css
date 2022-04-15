@@ -1,25 +1,23 @@
-*{
-    font-family: 'Tajawal';
-}
+/* body{
+    background-color:  #114a71;
+} */
 
 
 
 .container{
     align-items: center;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.92);
     border-radius: 12px;
     box-shadow: 0px 6px 12px #0000003d;
     display: flex;
     flex-direction: column;
     height: 554px;
-    margin-top: 46px;
     overflow: hidden;
     width: 427px;
 }
 
 .artify-logo{
     background-color: transparent;
-    left: 64px;
     margin-top: 20px;
     margin-right: 120px;
     position: relative;
