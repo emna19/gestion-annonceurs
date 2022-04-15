@@ -34,7 +34,7 @@ const Login = () => {
 	}
 
 
-
+  document.body.style ='background-color:  #114a71';
 
   return (
    <div >
