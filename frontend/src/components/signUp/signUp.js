@@ -2,6 +2,10 @@ import './signUp.css';
 import { useState } from 'react';
 import Axios from 'axios';
 
+//add background color to signup
+document.body.style ='background-color:  #114a71';
+
+
 export default function SignUp() {
     const url = "http://localhost:5000/users"
     const [user, setUser] = useState(
@@ -45,6 +49,7 @@ export default function SignUp() {
         .then(res => {window.location.href = '/login'})
     }
         
+
 
     return(
         <div>
