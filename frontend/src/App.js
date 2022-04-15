@@ -4,7 +4,7 @@ import SignUp from "./components/signUp/signUp"
 import Login from "./components/login/Login";
 import Error from "./components/ErrorPage/Error";
 import ResetPassword from "./components/ResetPassword";
-import Home from './components/Home/Home';
+import Home from './components/home/home';
 import Navbar from './components/navbar/navbar'
 
 
