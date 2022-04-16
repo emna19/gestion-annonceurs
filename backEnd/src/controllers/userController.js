@@ -1,4 +1,7 @@
+const express = require("express");
 const User = require("../models/user")
+const expressAsyncHandler = require('express-async-handler');
+
 
 const allUsers= async (req,res) => {
     try {
@@ -33,7 +36,7 @@ const allUsers= async (req,res) => {
          password : req.body.password,
      })
     
-      if (user) return res.status(200).send({status:'ok' , user});
+      if (user) return res.status(200).send({user});
       return res.status(404).send({status:'error', user:false});
     } catch (err) {
         console.log(err);
@@ -41,6 +44,22 @@ const allUsers= async (req,res) => {
   }
 }
 
+// Profile 
+const profile = expressAsyncHandler(async (req,res) =>{
+      // find the logged in user 
+      const user = await User.findById(req.user._id); 
+      try{
+      if (user) {
+        console.log(user);
+        return  res.status(200).json(user);}
+      return res.status(404).send({status:'error', user:false});
+    } catch (err) {
+        console.log(err);
+        
+  }
+}
+) 
+//create user 
   const createUser = async(req,res) => {
     var user = req.body
     try {
@@ -71,5 +90,6 @@ const allUsers= async (req,res) => {
     allUsers,
     userById,
     createUser,
-    login
+    login,
+    profile,
   }
