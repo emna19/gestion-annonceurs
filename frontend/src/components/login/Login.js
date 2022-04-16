@@ -2,7 +2,6 @@ import React from 'react'
 import './Login.css'
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
-import Logo from '../../assets/artifyLogo.png'
 const Login = () => {
 
   const [email, setEmail] = useState('')
@@ -41,7 +40,7 @@ const Login = () => {
      <form onSubmit={loginUser}>
        <div className='container position-absolute top-50 start-50 translate-middle'>
            <div className='artify-logo'/> 
-           <img  className='artify-logo' src={require("../../assets/artifyLogo.png")} alt="Artify Logo" height="60" width="65" loading="lazy"></img>
+           <img  className='artify-logo' src={require("../../assets/artifyLogo.png")} alt="Artify Logo" height="80" width="90" loading="lazy"></img>
            <h1 className='artify-ads-log-in'>ArtifyAds LogIn</h1>
            
            <h2 className='email'>Email</h2>

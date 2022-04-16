@@ -1,94 +1,33 @@
 import React from "react";
-
-
+import './Profile.css'
 const Profile = () => {
   return (
-    <div className="row">
-      <div className="col-xl-4">
-        {/* <!-- Profile picture card--> */}
-        <div className="card mb-4 mb-xl-0">
-          <div className="card-header">Profile Picture</div>
-          <div className="card-body text-center">
-            {/* <!-- Profile picture image--> */}
-            <img
-              className="img-account-profile rounded-circle mb-2"
-              src="http://bootdey.com/img/Content/avatar/avatar1.png"
-              alt=""
-            />
+      <div className="profile">
+          <div className="profile-picture-frame">
+            <img className="profile-image" src="http://bootdey.com/img/Content/avatar/avatar1.png" alt=""/> 
+            <div className="profile-name-frame">
+            <label className="profile-Name  profile-style " for="inputName">name</label>     
+            </div>    
           </div>
-        </div>
-      </div>
-      <div className="col-xl-8">
-        {/* <!-- Account details card--> */}
-          <div className="card mb-4">
-            <div className="card-header">Account Details</div>
-            <div className="card-body">
-              {/* <!-- Form Group (username)--> */}
-              <div className="mb-3">
-                <label className="small mb-1" for="inputUsername">
-                  Username{" "}
-                </label>
-              </div>
-              {/* <!-- Form Row--> */}
-              <div className="row gx-3 mb-3" >
-                {/* <!-- Form Group (first name)--> */}
-                <div className="col-md-6">
-                  <label className="small mb-1" for="inputFirstName">
-                    First name
-                  </label>
-                </div>
-                {/* <!-- Form Group (last name)--> */}
-                <div className="col-md-6">
-                  <label className="small mb-1" for="inputLastName">
-                    Last name
-                  </label>
-                </div>
-              </div>
-              {/* <!-- Form Row        --> */}
-              <div className="row gx-3 mb-3">
-                {/* <!-- Form Group (organization name)--> */}
-                <div className="col-md-6">
-                  <label className="small mb-1" for="inputOrgName">
-                    Organization name
-                  </label>
-                </div>
-                {/* <!-- Form Group (location)--> */}
-                <div className="col-md-6">
-                  <label className="small mb-1" for="inputLocation">
-                    Location
-                  </label>
-                </div>
-              </div>
-              {/* <!-- Form Group (email address)--> */}
-              <div className="mb-3">
-                <label className="small mb-1" for="inputEmailAddress">
-                  Email address
-                </label>
-              </div>
-              {/* <!-- Form Row--> */}
-              <div className="row gx-3 mb-3">
-                {/* <!-- Form Group (phone number)--> */}
-                <div className="col-md-6">
-                  <label className="small mb-1" for="inputPhone">
-                    Phone number
-                  </label>
-                </div>
-                {/* <!-- Form Group (birthday)--> */}
-                <div className="col-md-6">
-                  <label className="small mb-1" for="inputBirthday">
-                    Birthday
-                  </label>
-                </div>
-              </div>
-              {/* <!-- Save changes button--> */}
-              <button className="btn btn-primary" type="button">
-                Change details
-              </button>
-            </div>
+          <div className="profile-details-frame">
+          <div className="profile-account-details"> Account Details </div>
+          <div className="profile-account-organisation profile-style"> Organisation Name </div>
+          <div className="profile-account-email profile-style"> Email </div>
+          <div className="profile-account-phone profile-style "> phone </div>
+          <div className="profile-account-taxID profile-style "> taxID </div>
+          <div className="profile-account-adress profile-style "> adress </div>
+          <div className="profile-account-postcode  profile-style"> postcode </div>
+          <div className="profile-account-country profile-style "> country </div>
+          <div className="profile-account-state profile-style "> state </div>
+          <div className="profile-account-city profile-style "> city </div>
+          <button className="profile-button" type="button">Change details</button>
+
+
+
+
           </div>
       </div>
-    </div>
   );
-};
+}
 
 export default Profile;
