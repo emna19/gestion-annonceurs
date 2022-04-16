@@ -21,10 +21,6 @@ const annonceSchema = mongoose.Schema({
         type: Number,
         required: true,
     },
-    User: { 
-        type: mongoose.Schema.Types.ObjectId, 
-        ref: 'user' 
-    },
     audience: {
         type: mongoose.Schema.Types.ObjectId,
         ref : 'Audience'
@@ -44,8 +40,15 @@ const annonceSchema = mongoose.Schema({
     isValid:{
         type:Date,
         required:false
+    },
+    User: { 
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'user' 
     }
 },{timestamps: true});//timestamp for updated at and created at
+
+
+
 
 const Annonce = mongoose.model("annonce", annonceSchema);
 module.exports = Annonce;
