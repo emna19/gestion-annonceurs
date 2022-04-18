@@ -40,7 +40,7 @@ export default function SignUp() {
             codePostal: user.codePostal,
             taxID: user.taxID,
             adress: user.adress,
-            isAdmin: true
+            isAdmin: false
         })
         .then(res => {window.location.href = '/login'})
     }
@@ -50,7 +50,7 @@ export default function SignUp() {
         
 
     return(
-        <div>
+        <div className="signup-real">
             <div className="card col-5 text-center position-absolute top-50 start-50 translate-middle">
                 <div className="card-body">
                     <h5 className="card-title">Sign up to Artify Ads</h5>
