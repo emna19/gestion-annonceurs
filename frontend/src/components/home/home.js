@@ -9,7 +9,11 @@ export default function Home() {
 
   const [audience, setAudience] = useState([{}])
 
-  function add(e) {
+    function addAnnonce(e) {
+        window.location.href = '/Annonce'
+    }
+
+  function addAudience(e) {
     window.location.href = '/Audience'
   }
 
@@ -31,12 +35,12 @@ export default function Home() {
           <div className="statics login-container"></div>
           <div className="home-container-head">
             <h5 className="home-container-title">Advertisements</h5>
-            <button className="home-container-Add" type="button">+ Add</button>
+            <button onClick={addAnnonce} className="home-container-Add" type="button">+ Add</button>
           </div>  
           <div className="announcements login-container"></div>
           <div className="home-container-head">
             <h5 className="home-container-title">Audiences</h5>
-            <button onClick={add} className="home-container-Add" type="button">+ Add</button>
+            <button onClick={addAudience} className="home-container-Add" type="button">+ Add</button>
           </div>                
           <div id="carouselExampleControlsNoTouching" className="carousel slide" data-bs-touch="false" data-bs-interval="false">
             <div className="carousel-inner audiences login-container">
