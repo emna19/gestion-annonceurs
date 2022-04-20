@@ -1,6 +1,7 @@
 const express = require("express");
 const User = require("../models/user");
 const asynHandler = require("express-async-handler");
+const generateToken = require("../../utils/generateToken");
 
 const allUsers = async (req, res) => {
   try {
@@ -31,7 +32,10 @@ const login = asynHandler(async (req, res) => {
       password: req.body.password,
     });
 
-    if (user) return res.status(200).json({ user });
+    if (user) return res.status(200).json({ 
+      user , 
+      token : generateToken(user._id) ,
+    });
     return res.status(404).send({ status: "error", user: false });
   } catch (err) {
     console.log(err);
