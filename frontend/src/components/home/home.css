@@ -74,3 +74,8 @@
 .home .audiences span {
     font-weight: 600;
 }
+
+.home .validation {
+    justify-content: center;
+    align-items: center;
+}
