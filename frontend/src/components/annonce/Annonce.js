@@ -1,15 +1,24 @@
 import './Annonce.css'
-
-import { useState } from 'react'
+import { Link } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import Axios from 'axios'
 
 export default function Annonce() {
 
+    const url = "http://localhost:5000/annonces"
+
+    const [audience, setAudience] = useState([])
+
     const [annonce, setAnnonce] = useState({
         name : '',
-        minAge : '',
-        maxAge : '',
-        keywords : '',
-        videoIDs : '',
+        startDate : '',
+        endtDate : '',
+        sector : '',
+        budget : '',
+        audience : '',
+        clickUrl : '',
+        sourceUrl : '',
+        type : '',
     }) 
     // still not complete
 
@@ -20,8 +29,31 @@ export default function Annonce() {
     }
 
     function submit(e) {
-
+        e.preventDefault();
+        console.log(e)
+        Axios.post(url, {
+            name: annonce.name,
+            startDate: annonce.startDate,
+            endtDate: annonce.endtDate,
+            sector: annonce.sector,
+            budget: annonce.budget,
+            audience: annonce.audience,
+            clickUrl: annonce.clickUrl,
+            sourceUrl: annonce.sourceUrl,
+            type: annonce.type
+        })
+        .then(res => {window.location.href = '/Home'})
     }
+    console.log(annonce.audience)
+
+    useEffect(() => {
+        // GET request using axios inside useEffect React hook
+        fetch('http://localhost:5000/audiences')
+            .then(res => res.json())
+            .then(data => setAudience(data))
+    
+    // empty dependency array means this effect will only run once (like componentDidMount in classes)
+      }, []);
 
     return(
         <div className="audience annonce">
@@ -49,45 +81,46 @@ export default function Annonce() {
                                 <input type="text" placeholder="Name..." className="form-control lg-input" onChange={handle} value={annonce.name} id="name" aria-describedby="emailHelp"/>
                             </div>
                         </div>
-                        <div className="col-8 row mb">
-                            <div className="col-2 form-label age-text">Date:</div>
-                            <div className="col-3">
-                                <input type="text" className="age-input form-control" placeholder="Start" onChange={handle} value={annonce.minAge} id="minAge" aria-label="First name"/>
+                        <div className="row mb">
+                            <div className="col-2 form-label">Date:</div>
+                            <div className="col-2">
+                                <input type="text" className="age-input form-control" placeholder="Start" onChange={handle} value={annonce.startDate} id="startDate" aria-label="First name"/>
                             </div>
                             <p className='form-label' style={{display: "contents"}}>-</p>
-                            <div className="col-3">
-                                <input type="text" className="age-input form-control" placeholder="End" onChange={handle} value={annonce.maxAge} id="maxAge" aria-label="Last name"/>
+                            <div className="col-2">
+                                <input type="text" className="age-input form-control" placeholder="End" onChange={handle} value={annonce.endtDate} id="endtDate" aria-label="Last name"/>
                             </div>
                         </div>
-                        <div className="select-row row mb">
+                        <div className="row mb-3">
                             <div className="col-2 form-label countries-text">Audience:</div>
                                 <div className="col-3">
-                                    <select style={{margin:"0px"}} className="form-select form-control countries-select"  value={annonce.name} id="countries" aria-label="Default select example">
+                                    <select style={{margin:"0px"}} className="form-select form-control countries-select" onChange={handle} value={annonce.audience} id="audience" aria-label="Default select example">
+                                        <option value="" disabled>Choose...</option>
+                                        {audience.map((item, index) => (
+                                            <option key={index} value={item._id}>{item.name}</option>
+                                        ))}
+                                    </select>
+                                    <Link to="/Audience" >or create an audience</Link>
+                                </div>
+                                <div className="col-2 text-center form-label countries-text">Sector:</div>
+                                <div className="col-3">
+                                    <select style={{margin:"0px"}} className="form-select form-control countries-select" onChange={handle} value={annonce.sector} id="sector" aria-label="Default select example">
                                         <option value="" disabled>Choose...</option>
                                         <option value="1">One</option>
                                         <option value="2">Two</option>
                                         <option value="3">Three</option>
                                     </select>
                                 </div>
-                                <div className="col-2 text-center form-label countries-text">Sector:</div>
-                                <div className="col-3">
-                                <select style={{margin:"0px"}} className="form-select form-control countries-select"  value={annonce.name} id="countries" aria-label="Default select example">
-                                    <option value="" disabled>Choose...</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
-                                </select>
-                                </div>
                         </div>
 
                         <div className="row mb">
                             <label htmlFor="exampleInputPassword1" className="col-2 form-label">Budget:</label>
                             <div className="col-3">
-                                <input type="text" placeholder="..." onChange={handle} value={annonce.keywords} id="keywords" className=" form-control" />
+                                <input type="text" placeholder="..." onChange={handle} value={annonce.budget} id="budget" className=" form-control" />
                             </div>
                             <label htmlFor="exampleInputPassword1" className="col-2 text-center form-label">Type:</label>
                             <div className="col-3">
-                                <input type="text" placeholder="..." onChange={handle} value={annonce.keywords} id="keywords" className=" form-control" />
+                                <input type="text" placeholder="..." onChange={handle} value={annonce.type} id="type" className=" form-control" />
                             </div>
                             
                         </div>
@@ -95,13 +128,13 @@ export default function Annonce() {
                         <div className="row mb">
                             <label htmlFor="exampleInputPassword1" className="col-2 form-label">Page url:</label>
                             <div className="col-auto">
-                                <input type="text" placeholder="https://www.google.com/" onChange={handle} value={annonce.keywords} id="keywords" className="lg-input form-control" />
+                                <input type="text" placeholder="https://www.google.com/" onChange={handle} value={annonce.clickUrl} id="clickUrl" className="lg-input form-control" />
                             </div>
                         </div>
                         <div className="row mb-3">
                             <label htmlFor="exampleInputPassword1" className="col-auto form-label">Source url:</label>
                             <div className="col-auto">
-                                <input type="text" placeholder="https://www.google.com/" onChange={handle} value={annonce.videoIDs} id="videoIDs" className="lg-input form-control" />
+                                <input type="text" placeholder="https://www.google.com/" onChange={handle} value={annonce.sourceUrl} id="sourceUrl" className="lg-input form-control" />
                             </div>
                         </div>
                     </div>

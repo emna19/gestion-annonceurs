@@ -9,6 +9,8 @@ export default function Home() {
 
   const [audience, setAudience] = useState([{}])
 
+  const [annonce, setAnnonce] = useState([])
+
     function addAnnonce(e) {
         window.location.href = '/Annonce'
     }
@@ -17,14 +19,25 @@ export default function Home() {
     window.location.href = '/Audience'
   }
 
+  function GetAudienceById(props) {
+    const aud = audience.find(element => element._id === props.id)
+    if(aud !== undefined){
+    return aud.name}
+  }
+
   useEffect(() => {
     // GET request using axios inside useEffect React hook
     fetch('http://localhost:5000/audiences')
-        .then(res => res.json())
-        .then(data => setAudience(data))
+      .then(res => res.json())
+      .then(data => setAudience(data))
+    
+    fetch('http://localhost:5000/annonces')
+      .then(res => res.json())
+      .then(data => setAnnonce(data))
+      
 
 // empty dependency array means this effect will only run once (like componentDidMount in classes)
-}, []);
+  }, []);
 
     return(
       <div className="home"> 
@@ -36,8 +49,55 @@ export default function Home() {
           <div className="home-container-head">
             <h5 className="home-container-title">Advertisements</h5>
             <button onClick={addAnnonce} className="home-container-Add" type="button">+ Add</button>
-          </div>  
-          <div className="announcements login-container"></div>
+          </div>
+
+
+          <div id="carouselExampleControlsNoTouching" className="carousel slide" data-bs-touch="false" data-bs-interval="false">  
+            <div className="carousel-inner audiences announcements login-container">
+
+              {annonce.map((item, index) =>(
+                  <div key={index} className="card text-center">
+                  <div className="card-body">
+                    <h5 className="card-title">{ item.name }</h5>
+                    <div className='row mb-3'>
+                      <span className="col-auto text-start card-text">Date:</span>
+                      <div className="col-9 d-flex text-start flex-wrap" style={{gap:"8px"}}>
+                        <div className='col-auto minAge'>{ item.startDate }</div>-
+                        <div className='col-auto maxAge'>{ item.endtDate }</div>
+                      </div>
+                    </div>
+                    <div className="row mb-3">
+                      <span className="col-auto card-text">Sector:</span>
+                      <div className='col-8 text-start countries'>{item.sector }</div>
+                    </div>
+                    <div className="row mb-3">
+                      <span className="col-auto card-text">Budget:</span>
+                      <div className='col-8 text-start keywords'>{ item.budget }</div>
+                    </div>
+                    <div className="row mb-3">
+                      <span className="col-auto card-text">Audience:</span>
+                      <div className='col-8 text-start movieIds'> <GetAudienceById id = {item.audience}/> </div>
+                    </div> 
+                    <div className="row mb-3">
+                      <span className="col-auto card-text">Page url:</span>
+                      <div className='col-7 text-start keywords'>{ item.clickUrl }</div>
+                    </div>
+                    <div className="row mb-3">
+                      <span className="col-auto card-text">Source url:</span>
+                      <div className='col-7 text-start keywords'>{ item.sourceUrl }</div>
+                    </div>
+                    <div className="row mb-3">
+                      <span className="col-auto card-text">Type:</span>
+                      <div className='col-8 text-start keywords'>{ item.type }</div>
+                    </div>
+                  </div>
+                </div>
+                ))}
+
+            </div>
+          </div>
+
+
           <div className="home-container-head">
             <h5 className="home-container-title">Audiences</h5>
             <button onClick={addAudience} className="home-container-Add" type="button">+ Add</button>
