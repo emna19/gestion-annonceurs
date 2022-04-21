@@ -24,6 +24,9 @@ const userById = async (req, res) => {
     res.status(404).send("Not Found");
   }
 };
+
+
+
 //adding login api find by email and password
 const login = asynHandler(async (req, res) => {
   try {
@@ -33,7 +36,18 @@ const login = asynHandler(async (req, res) => {
     });
 
     if (user) return res.status(200).json({ 
-      user , 
+      name: user.name,
+      organistaion: user.organistaion,
+      email: user.email,
+      password: user.password,
+      adress: user.adress,
+      phone: user.phone,
+      country: user.country,
+      city: user.city,
+      codePostal: user.codePostal,
+      isAdmin: user.isAdmin,
+      taxID: user.taxID,
+      photo: user.photo,  
       token : generateToken(user._id) ,
     });
     return res.status(404).send({ status: "error", user: false });
@@ -42,6 +56,8 @@ const login = asynHandler(async (req, res) => {
     res.status(400).send(`couldn't login, Something is wrong`);
   }
 });
+
+
 
 // Profile
 const profile = asynHandler(async (req, res) => {
@@ -79,7 +95,21 @@ const createUser = async (req, res) => {
       photo: user.photo,
     });
     await new_user.save();
-    res.status(201).send("save effectué par succés!");
+    res.status(201).json({ 
+      name: new_user.name,
+      organistaion: new_user.organistaion,
+      email: new_user.email,
+      password: new_user.password,
+      adress: new_user.adress,
+      phone: new_user.phone,
+      country: new_user.country,
+      city: new_user.city,
+      codePostal: new_user.codePostal,
+      isAdmin: new_user.isAdmin,
+      taxID: new_user.taxID,
+      photo: new_user.photo, 
+      token : generateToken(new_user._id) ,
+    });
   } catch (err) {
     console.log(err);
     res.status(400).send(`couldn't be created, Something is wrong`);
