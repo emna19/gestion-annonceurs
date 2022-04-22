@@ -7,12 +7,13 @@ const AudienceRoutes = require('./src/routes/audienceRoutes')
 const ImpressionRoutes = require('./src/routes/impressionRoutes')
 // const mongoose = require('./src/db/mongoose')
 const bodyParser = require("body-parser")
-
 dotenv.config();
 require('./src/db/mongoose')
 
 
 const app = express()
+
+
 
 app.use(bodyParser.urlencoded({ extended: false}));
 

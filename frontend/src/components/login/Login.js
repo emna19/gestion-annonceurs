@@ -14,6 +14,7 @@ const Login = () => {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
+        
 			},
 			body: JSON.stringify({
 				email,
@@ -22,11 +23,13 @@ const Login = () => {
 		})
 
 		const data = await response.json()
-		if (data.user) {
+		if (data) {
       //save user into local storage
-			localStorage.setItem('token', data.user)
+			localStorage.setItem('user', JSON.stringify(data))
+      localStorage.setItem('token',data.token)
+      console.log(data);
 			alert('Login successful')
-			window.location.href = '/Home'
+			window.location.href = '/Profile'
 		} else {
 			alert('Please check your Email and password')
 		}

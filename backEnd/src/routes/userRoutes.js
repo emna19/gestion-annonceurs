@@ -10,6 +10,8 @@ router.put('/update', authMiddleware, UserController.updateProfile);
 //adding profile api 
 router.get('/profile', authMiddleware , UserController.profile )
 
+
+
 //adding login api  route
 router.post('/login',UserController.login)
 

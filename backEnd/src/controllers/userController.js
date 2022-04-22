@@ -29,35 +29,25 @@ const userById = async (req, res) => {
 
 
 //adding login api find by email and password
-const login = asynHandler(async (req, res) => {
+const login = async (req, res) => {
+  console.log('login get ');
   try {
     const user = await User.findOne({
       email: req.body.email,
       password: req.body.password,
     });
 
-    if (user) return res.status(200).json({ 
-      id: user._id,
-      name: user.name,
-      organistaion: user.organistaion,
-      email: user.email,
-      password: user.password,
-      adress: user.adress,
-      phone: user.phone,
-      country: user.country,
-      city: user.city,
-      codePostal: user.codePostal,
-      isAdmin: user.isAdmin,
-      taxID: user.taxID,
-      photo: user.photo,  
-      token : generateToken(user._id) ,
+    if (user) return res.json({ 
+      // ...user._doc, 
+      // token : generateToken(user._id) ,
+      user
     });
     return res.status(404).send({ status: "error", user: false });
   } catch (err) {
     console.log(err);
     res.status(400).send(`couldn't login, Something is wrong`);
   }
-});
+};
 
 
 
