@@ -1,20 +1,19 @@
 const express = require('express');
 const router = express.Router();
+const authMiddleware = require('../middlewares/authMiddleware');
 const UserController = require('../controllers/userController');
 
-const authMiddleware = require('../middlewares/authMiddleware');
-const asynHandler = require('express-async-handler');
 
+//adding profile api 
+router.get('/profile', authMiddleware , UserController.profile )
 
-
-router.get('/', UserController.allUsers)
+router.get('/',  UserController.allUsers)
   
 router.get('/:id', UserController.userById)
   
 router.post('/', UserController.createUser);
 //adding login api  route
 router.post('/login',UserController.login)
-//adding profile api 
-router.get('/profile', authMiddleware , UserController.profile  )
+
 
 module.exports = router;

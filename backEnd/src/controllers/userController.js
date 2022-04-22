@@ -36,6 +36,7 @@ const login = asynHandler(async (req, res) => {
     });
 
     if (user) return res.status(200).json({ 
+      id: user._id,
       name: user.name,
       organistaion: user.organistaion,
       email: user.email,
@@ -59,20 +60,6 @@ const login = asynHandler(async (req, res) => {
 
 
 
-// Profile
-const profile = asynHandler(async (req, res) => {
-  // find the logged in user
-  const user = await User.findById(req.user._id);
-  try {
-    if (user) {
-      console.log(user);
-      return  res.status(200).json({user});}
-    return res.status(404).send({status:'error', user:false});
-   
-  } catch (err) {
-    console.log(err);
-  }
-});
 
 
 
@@ -81,6 +68,7 @@ const createUser = async (req, res) => {
   var user = req.body;
   try {
     let new_user = new User({
+      id: user._id,
       name: user.name,
       organistaion: user.organistaion,
       email: user.email,
@@ -115,6 +103,28 @@ const createUser = async (req, res) => {
     res.status(400).send(`couldn't be created, Something is wrong`);
   }
 };
+
+
+
+// Profile
+const profile = asynHandler(async (req, res) => {
+  // find the logged in user
+  const user = await User.findById(req.user._id).populate('annonces');
+  try {
+    if (user) {
+      console.log(user);
+      return  res.status(200).json({user});}
+    return res.status(404).send({status:'error', user:false});
+   
+  } catch (err) {
+    console.log(err);
+  }
+
+  
+});
+
+
+
 
 module.exports = {
   allUsers,

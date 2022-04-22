@@ -8,7 +8,6 @@ const ImpressionRoutes = require('./src/routes/impressionRoutes')
 // const mongoose = require('./src/db/mongoose')
 const bodyParser = require("body-parser")
 
-
 dotenv.config();
 require('./src/db/mongoose')
 

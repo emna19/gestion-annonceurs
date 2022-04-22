@@ -53,7 +53,6 @@ const userSchema = mongoose.Schema({
 },{timestamps: true});//timestamp for updated at and created at
 
 // connecting annonce to user 
-
 userSchema.virtual('annonces',{
     ref:'annonce',
     foreignField:'User',
