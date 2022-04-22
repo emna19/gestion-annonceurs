@@ -1,5 +1,6 @@
-const express = require("express");
+
 const User = require("../models/user");
+const expressAsyncHandler = require('express-async-handler')
 const asynHandler = require("express-async-handler");
 const generateToken = require("../utils/generateToken");
 
@@ -119,9 +120,32 @@ const profile = asynHandler(async (req, res) => {
   } catch (err) {
     console.log(err);
   }
-
   
 });
+
+// update user profile 
+
+  const updateProfile = expressAsyncHandler(async (req, res) => {
+    //Find the login user by ID
+    const user = await User.findById(req.user._id);
+
+    if (user) {
+      user.name = req.body.name || user.name;
+      user.email = req.body.email || user.email;
+      if (req.body.password) {
+        user.password = req.body.password || user.password;
+      }
+
+      const updatedUser = await user.save();
+
+      res.json({
+        _id: updatedUser._id,
+        name: updatedUser.name,
+        email: updatedUser.email,
+        token: generateToken(updatedUser._id),
+      });
+    }
+  })
 
 
 
@@ -132,4 +156,5 @@ module.exports = {
   createUser,
   login,
   profile,
+  updateProfile,
 };
