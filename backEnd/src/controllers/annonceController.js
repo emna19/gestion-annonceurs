@@ -39,7 +39,7 @@ const createAnnonce = async(req,res) => {
         clickUrl:annonce.clickUrl,
         sourceUrl:annonce.sourceUrl,
         type : annonce.type,
-        isValid : annonce.valid 
+        isValid : annonce.valid
         });
       await new_annonce.save();
       res.status(201).send('save effectué par succés!');

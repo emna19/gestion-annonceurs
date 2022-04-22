@@ -7,35 +7,36 @@ const annonceSchema = mongoose.Schema({
     },
     startDate: {
         type: Date,
-        required: true,
+        required: false,
     },
     endtDate: {
         type: Date,
-        required: true,
+        required: false,
     },
     sector: {
         type: String,
-        required: true,
+        required: false,
     },
     budget: {
         type: Number,
-        required: true,
+        required: false,
     },
     audience: {
         type: mongoose.Schema.Types.ObjectId,
-        ref : 'Audience'
+        ref : 'Audience',
+        required: false,
     },
     clickUrl:{
         type:String,
-        required:true
+        required:false
     },
     sourceUrl:{
         type:String,
-        required:true
+        required:false
     },
     type:{
         type:String,
-        required:true
+        required:false
     },
     isValid:{
         type:Date,
