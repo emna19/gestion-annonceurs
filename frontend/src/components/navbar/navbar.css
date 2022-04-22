@@ -1,9 +1,9 @@
-.navbar-brand {
+.brand-navbar {
     font-style: normal;
     font-weight: 550;
     font-size: 25px;
-    line-height: 28px;
-    letter-spacing: 0.04em;
+    line-height: 35px;
+    letter-spacing: 0.1em;
     margin: auto;
 }
 

@@ -7,19 +7,19 @@ const audienceSchema = mongoose.Schema({
     },
     minAge : {
         type: Number , 
-        required : true
+        required : false
     },
     maxAge : {
         type: Number , 
-        required : true
+        required : false
     },
     countries : {
         type: [String] , 
-        required : true
+        required : false
     },
     keywords : {
         type: [String] , 
-        required : true
+        required : false
     },
     videoIDs : {
         type: [Number] , 
