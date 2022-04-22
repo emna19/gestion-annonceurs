@@ -1,4 +1,4 @@
-// import "./Profile.css";
+import "./Profile.css";
 // import axios from "axios";
 import { useEffect, useState } from "react";
 
