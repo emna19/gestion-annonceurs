@@ -38,9 +38,8 @@ const login = async (req, res) => {
     });
 
     if (user) return res.json({ 
-      // ...user._doc, 
-      // token : generateToken(user._id) ,
-      user
+      ...user._doc, 
+      token : generateToken(user._id)
     });
     return res.status(404).send({ status: "error", user: false });
   } catch (err) {
@@ -103,7 +102,6 @@ const profile = asynHandler(async (req, res) => {
   const user = await User.findById(req.user._id).populate('annonces');
   try {
     if (user) {
-      console.log(user);
       return  res.status(200).json({user});}
     return res.status(404).send({status:'error', user:false});
    
@@ -129,9 +127,7 @@ const profile = asynHandler(async (req, res) => {
       const updatedUser = await user.save();
 
       res.json({
-        _id: updatedUser._id,
-        name: updatedUser.name,
-        email: updatedUser.email,
+        ...updatedUser._doc,
         token: generateToken(updatedUser._id),
       });
     }
