@@ -2,8 +2,15 @@ import './signUp.css';
 import { useState } from 'react';
 import Axios from 'axios';
 
+
+
+
 export default function SignUp() {
-    const url = "http://localhost:5000/users"
+    
+    //add background color to signup
+  document.body.style ='background-color:  #114a71';
+    
+  const url = "http://localhost:5000/users"
     const [user, setUser] = useState(
         {
             name: '',
@@ -48,6 +55,7 @@ export default function SignUp() {
     //change the background-color of each body in component
     document.body.style = 'background-color: #114A71';
         
+
 
     return(
         <div className="signup-real">

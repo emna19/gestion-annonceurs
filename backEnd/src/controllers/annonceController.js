@@ -1,3 +1,4 @@
+const expressAsyncHandler = require('express-async-handler');
 const Annonce = require('../models/annonce');
 
 const allAnnonces = async (req,res) => {
@@ -25,8 +26,9 @@ const annonceById = async(req,res) => {
     }
 }
 
-const createAnnonce = async(req,res) => {
+const createAnnonce = expressAsyncHandler(async(req,res) => {
     var annonce= req.body
+    const userId = req.user._id
   try {
       let new_annonce = new Annonce({
         name: annonce.name,
@@ -34,12 +36,12 @@ const createAnnonce = async(req,res) => {
         endtDate: annonce.endtDate,
         sector: annonce.sector,
         budget: annonce.budget,
-        User: annonce.User,
         audience: annonce.audience,
         clickUrl:annonce.clickUrl,
         sourceUrl:annonce.sourceUrl,
         type : annonce.type,
-        isValid : annonce.valid 
+        isValid : annonce.valid,
+        User: userId
         });
       await new_annonce.save();
       res.status(201).send('save effectué par succés!');
@@ -48,7 +50,7 @@ const createAnnonce = async(req,res) => {
       console.log(err);
       res.status(400).send("creation failed")
   }
-}
+})
 
 module.exports = {
     allAnnonces,

@@ -1,13 +1,26 @@
 const express = require('express');
 const router = express.Router();
-const UserController = require('../controllers/userController')
+const authMiddleware = require('../middlewares/authMiddleware');
+const UserController = require('../controllers/userController');
 
-router.get('/', UserController.allUsers)
+
+// update user profile 
+router.put('/update', authMiddleware, UserController.updateProfile);
+
+//adding profile api 
+router.get('/profile', authMiddleware , UserController.profile )
+
+
+
+//adding login api  route
+router.post('/login',UserController.login)
+
+router.get('/',  UserController.allUsers)
   
 router.get('/:id', UserController.userById)
   
 router.post('/', UserController.createUser);
-//adding login api  route
-router.post('/login',UserController.login)
+
+
 
 module.exports = router;
