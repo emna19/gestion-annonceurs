@@ -1,5 +1,6 @@
 const expressAsyncHandler = require('express-async-handler');
 const Annonce = require('../models/annonce');
+const generateToken = require("../utils/generateToken");
 
 const allAnnonces = async (req,res) => {
     try {
@@ -28,7 +29,7 @@ const annonceById = async(req,res) => {
 
 const createAnnonce = expressAsyncHandler(async(req,res) => {
     var annonce= req.body
-    const userId = req.user._id
+    // const userId = req.user._id
   try {
       let new_annonce = new Annonce({
         name: annonce.name,
@@ -40,8 +41,8 @@ const createAnnonce = expressAsyncHandler(async(req,res) => {
         clickUrl:annonce.clickUrl,
         sourceUrl:annonce.sourceUrl,
         type : annonce.type,
-        isValid : annonce.valid,
-        User: userId
+        isValid : annonce.isValid,
+        User: annonce.User
         });
       await new_annonce.save();
       res.status(201).send('save effectué par succés!');
@@ -52,8 +53,40 @@ const createAnnonce = expressAsyncHandler(async(req,res) => {
   }
 })
 
+
+// update Annonce 
+
+const updateAnnonce = async (req, res) => {
+    try{
+        await Annonce.findByIdAndUpdate(req.params.id, req.body).
+        then(
+            res.json({...req.body})
+          )
+    }
+    catch (err) {
+        console.log(err);
+        res.status(400).send("creation failed")
+    }
+}
+
+// Delete Annonce 
+const deleteAnnonce = async (req, res) => {
+    try{
+        await Annonce.findByIdAndDelete(req.params.id).
+        then(
+            res.send("annonce deleted")
+          )
+    }
+    catch (err) {
+        console.log(err);
+        res.status(400).send("creation failed")
+    }
+}
+
 module.exports = {
     allAnnonces,
     annonceById,
-    createAnnonce
+    createAnnonce,
+    updateAnnonce,
+    deleteAnnonce
 }
