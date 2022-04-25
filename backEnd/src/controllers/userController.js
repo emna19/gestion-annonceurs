@@ -97,7 +97,7 @@ const createUser = async (req, res) => {
 
 
 // Profile
-const profile = asynHandler(async (req, res) => {
+const profile = async (req, res) => {
   // find the logged in user
   const user = await User.findById(req.user._id).populate('annonces');
   try {
@@ -109,11 +109,11 @@ const profile = asynHandler(async (req, res) => {
     console.log(err);
   }
   
-});
+}
 
 // update user profile 
 
-  const updateProfile = expressAsyncHandler(async (req, res) => {
+  const updateProfile = async (req, res) => {
     //Find the login user by ID
     const user = await User.findById(req.user._id);
 
@@ -141,7 +141,7 @@ const profile = asynHandler(async (req, res) => {
         token: generateToken(updatedUser._id),
       });
     }
-  })
+  }
 
 
 
