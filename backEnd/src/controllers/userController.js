@@ -119,7 +119,18 @@ const profile = asynHandler(async (req, res) => {
 
     if (user) {
       user.name = req.body.name || user.name;
-      user.email = req.body.email || user.email;
+      user.email = req.body.email || user.email; 
+      user.organistaion = req.body.organistaion || user.organistaion;
+      // user.password =req.body.password || user.password;
+      user.adress = req.body.adress || user.adress;
+      user.phone = req.body.phone || user.phone;
+      user.country = req.body.country || user.country;
+      user.city = req.body.city || user.city;
+      user.codePostal = req.body.codePostal || user.codePostal;
+      user.isAdmin = req.body.isAdmin || user.isAdmin;
+      user.taxID = req.body.taxID || user.taxID;
+      user.photo = req.body.photo || user.photo;
+
       if (req.body.password) {
         user.password = req.body.password || user.password;
       }

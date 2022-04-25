@@ -8,8 +8,6 @@ const Profile = () => {
   //testing
       const userData = JSON.parse(localStorage.getItem('user')) || {} ;
       const [user, setUser] = useState(userData);
-      
-
     // const getProfile = async()=>{
     //   console.log('get profile');
     //   const res =  axios.get('http://localhost:5000/users/Profile' , {
