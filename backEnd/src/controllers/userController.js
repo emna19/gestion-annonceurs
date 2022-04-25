@@ -121,7 +121,6 @@ const profile = asynHandler(async (req, res) => {
       user.name = req.body.name || user.name;
       user.email = req.body.email || user.email; 
       user.organistaion = req.body.organistaion || user.organistaion;
-      // user.password =req.body.password || user.password;
       user.adress = req.body.adress || user.adress;
       user.phone = req.body.phone || user.phone;
       user.country = req.body.country || user.country;
