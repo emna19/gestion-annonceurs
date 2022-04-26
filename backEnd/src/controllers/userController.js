@@ -1,7 +1,5 @@
 
 const User = require("../models/user");
-const expressAsyncHandler = require('express-async-handler')
-const asynHandler = require("express-async-handler");
 const generateToken = require("../utils/generateToken");
 
 const allUsers = async (req, res) => {
@@ -30,7 +28,6 @@ const userById = async (req, res) => {
 
 //adding login api find by email and password
 const login = async (req, res) => {
-  console.log('login get ');
   try {
     const user = await User.findOne({
       email: req.body.email,
@@ -74,18 +71,19 @@ const createUser = async (req, res) => {
     });
     await new_user.save();
     res.status(201).json({ 
-      name: new_user.name,
-      organistaion: new_user.organistaion,
-      email: new_user.email,
-      password: new_user.password,
-      adress: new_user.adress,
-      phone: new_user.phone,
-      country: new_user.country,
-      city: new_user.city,
-      codePostal: new_user.codePostal,
-      isAdmin: new_user.isAdmin,
-      taxID: new_user.taxID,
-      photo: new_user.photo, 
+      // name: new_user.name,
+      // organistaion: new_user.organistaion,
+      // email: new_user.email,
+      // password: new_user.password,
+      // adress: new_user.adress,
+      // phone: new_user.phone,
+      // country: new_user.country,
+      // city: new_user.city,
+      // codePostal: new_user.codePostal,
+      // isAdmin: new_user.isAdmin,
+      // taxID: new_user.taxID,
+      // photo: new_user.photo, 
+      ...user._doc,
       token : generateToken(new_user._id) ,
     });
   } catch (err) {
