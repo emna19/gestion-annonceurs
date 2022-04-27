@@ -18,7 +18,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route  exact path="/signup" element={ <SignUp/>} />
+        <Route  exact path="/signup" element={  <SignUp/>} />
         <Route  exact path="/login" element={ <Login/>} />
         <Route  exact path="/Audience" element={ <Audience/>} />
         <Route  exact path="/Annonce" element={ <Annonce/>} />

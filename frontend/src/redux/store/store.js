@@ -1,10 +1,11 @@
+
 import { configureStore } from "@reduxjs/toolkit";
 // import { composeWithDevTools } from "redux-devtools-extension";
-import { applyMiddleware, combineReducers } from "redux";
-import thunk from "redux-thunk";
+import { combineReducers } from "redux";
+// import thunk from "redux-thunk";
 import { createUserReducer } from "../reducers/users/createUserReducer";
 
-const middlewares = [thunk];
+// const middlewares = [thunk];
 
 const reducer = combineReducers({
   userSignUp: createUserReducer,
@@ -14,7 +15,8 @@ const reducer = combineReducers({
 
 const store = configureStore({
      reducer ,
-    //  composeWithDevTools(applyMiddleware(...middlewares)),
+    //      composeWithDevTools(applyMiddleware(...middlewares)) only in createStore
+
     }
 )
 export {store} ; 

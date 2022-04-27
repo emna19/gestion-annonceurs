@@ -1,7 +1,7 @@
 import './signUp.css';
 import { useState } from 'react';
-import Axios from 'axios';
-
+import { useDispatch } from 'react-redux';
+import { createUserAction } from '../../redux/actions/users/userActions';
 
 
 
@@ -9,48 +9,38 @@ export default function SignUp() {
     
     //add background color to signup
   document.body.style ='background-color:  #114a71';
-    
-  const url = "http://localhost:5000/users"
-    const [user, setUser] = useState(
-        {
-            name: '',
-            photo: '',
-            email: '',
-            password: '',
-            organistaion: '',
-            phone: '',
-            country: '',
-            city: '',
-            codePostal: '',
-            taxID: '',
-            adress: '',
-    });
 
+  ////////////// NEW with redux //////////////
+  const [user, setUser] = useState(
+            {
+                name: '',
+                photo: '',
+                email: '',
+                password: '',
+                organistaion: '',
+                phone: '',
+                country: '',
+                city: '',
+                codePostal: '',
+                taxID: '',
+                adress: '',
+        });
+    // entering user data 
     function handle(e) {
         const newUser = {...user}
         newUser[e.target.id] = e.target.value
         setUser(newUser)
     }
 
-    function submit(e) {
+    //dispatching 
+    const dispatch = useDispatch();
+
+    const formSubmitHandler = e=>{
         e.preventDefault();
-        console.log(e)
-        Axios.post(url, {
-            name: user.name,
-            photo: user.photo,
-            email: user.email,
-            password: user.password,
-            organistaion: user.organistaion,
-            phone: user.phone,
-            country: user.country,
-            city: user.city,
-            codePostal: user.codePostal,
-            taxID: user.taxID,
-            adress: user.adress,
-            isAdmin: false
-        })
-        .then(res => {window.location.href = '/login'})
+        //dispatch user create action 
+        dispatch(createUserAction(user))
     }
+
 
     //change the background-color of each body in component
     document.body.style = 'background-color: #114A71';
@@ -62,7 +52,7 @@ export default function SignUp() {
             <div className="card col-5 text-center position-absolute top-50 start-50 translate-middle">
                 <div className="card-body">
                     <h5 className="card-title">Sign up to Artify Ads</h5>
-                    <form className="row g-2" onSubmit={submit}>
+                    <form className="row g-2" onSubmit={formSubmitHandler}>
                         <div className="input-elements row g-2">
                             <div className="col-md-7">
                                 <input type="text" className="form-control" onChange={handle} id="name" value={user.name} placeholder= "Name" required/>
