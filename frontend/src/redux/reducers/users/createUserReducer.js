@@ -10,7 +10,7 @@ const createUserReducer = (state = {}, action) => {
         };
         case USER_REGISTER_SUCCESS : 
         return {
-             user : action.payload ,  
+             userInfo : action.payload ,  
         };
         case USER_REGISTER_FAIL : 
         return{

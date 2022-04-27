@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { composeWithDevTools } from "@reduxjs/toolkit/dist/devtoolsExtension";
+// import { composeWithDevTools } from "redux-devtools-extension";
 import { applyMiddleware, combineReducers } from "redux";
 import thunk from "redux-thunk";
 import { createUserReducer } from "../reducers/users/createUserReducer";
@@ -7,11 +7,14 @@ import { createUserReducer } from "../reducers/users/createUserReducer";
 const middlewares = [thunk];
 
 const reducer = combineReducers({
-  userCreated: createUserReducer,
+  userSignUp: createUserReducer,
 });
 
-const store = configureStore(
-    reducer,
-    composeWithDevTools(applyMiddleware(...middlewares))
+
+
+const store = configureStore({
+     reducer ,
+    //  composeWithDevTools(applyMiddleware(...middlewares)),
+    }
 )
 export {store} ; 
