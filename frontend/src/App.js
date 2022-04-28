@@ -7,7 +7,7 @@ import ResetPassword from "./components/ResetPassword";
 import Profile from './components/Profile/Profile';
 import Home from './components/home/home'
 import Navbar from './components/navbar/navbar'
-import Audience from './components/audiences/Audience';
+// import Audience from './components/audiences/Audience';
 import Annonce from './components/annonce/Annonce'
 
 
@@ -20,7 +20,7 @@ function App() {
       <Routes>
         <Route  exact path="/signup" element={  <SignUp/>} />
         <Route  exact path="/login" element={ <Login/>} />
-        <Route  exact path="/Audience" element={ <Audience/>} />
+        {/* <Route  exact path="/Audience" element={ <Audience/>} /> */}
         <Route  exact path="/Annonce" element={ <Annonce/>} />
 
         <Route  exact path="/Home" element={ <div><Navbar /> <Home /></div>} />

@@ -7,7 +7,7 @@ import { UserReducer } from "../reducers/users/userAuthReducer";
 // const middlewares = [thunk];
 
 const reducer = combineReducers({
-  userSignUp: UserReducer,
+  userLogin : UserReducer // contains login & signup reducer 
 });
 
 // get user from local storage to save it
@@ -19,7 +19,7 @@ const userAuthFromStorage = localStorage.getItem("userAuth")
 const initialState = {
   userLogin: { userInfo: userAuthFromStorage },
 };
-// console.log(initialState.userLogin.userInfo);
+console.log(initialState.userLogin.userInfo);
 const store = configureStore({
   reducer,
   initialState,

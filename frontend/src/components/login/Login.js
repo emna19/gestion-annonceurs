@@ -2,37 +2,20 @@ import React from 'react'
 import './Login.css'
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { loginUserAction } from '../../redux/actions/users/userActions'
 const Login = () => {
 
   const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
+  
+  const dispatch=useDispatch();
 
-  async function loginUser(event) {
+  const loginUser = (event) => {
 		event.preventDefault()
-
-		const response = await fetch('http://localhost:5000/users/login', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-        
-			},
-			body: JSON.stringify({
-				email,
-				password,
-			}),
-		})
-
-		const data = await response.json()
-		if (data) {
-      //save user into local storage
-			localStorage.setItem('user', JSON.stringify(data))
-      localStorage.setItem('token',data.token)
-      console.log(data);
-			alert('Login successful')
-			window.location.href = '/Profile'
-		} else {
-			alert('Please check your Email and password')
-		}
+    //send login params to loginuser action 
+    dispatch(loginUserAction(email,password));
+	
 	}
 
   document.body.style = 'background-color: #114A71';

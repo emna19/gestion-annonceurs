@@ -1,6 +1,6 @@
 import "./signUp.css";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { createUserAction } from "../../redux/actions/users/userActions";
 
 export default function SignUp({ history }) {
@@ -26,17 +26,19 @@ export default function SignUp({ history }) {
   const dispatch = useDispatch();
 
   // fetching user login from store
-  const userLogin = useSelector((store) => store.userSignUp);
-  // const userLogin = useSelector((state)=>state.userLogin); /// wouldn't work !!!!
-  // const {userInfo} = userLogin
-  console.log(userLogin);
+//   const userLogin = useSelector((store) => store.userLogin);
+//   // const userLogin = useSelector((state)=>state.userLogin); /// wouldn't work !!!!
+//   const { userInfo } = userLogin;
+//   console.log(userInfo);
 
-  //redirecting if user is logged in
-  // useEffect (()=>{
-  //     if (userInfo) {
-  //         // history.push('/Home')
-  //     }
-  // },[history, userInfo])
+//   //   redirecting if user is logged in
+//   useEffect(() => {
+//     if (userInfo) {
+//       console.log("am here");
+//         // history.push('/Home')
+//       //   window.location.href = '/Home'
+//     }
+//   }, [userInfo]);
 
   // entering user data
   function handle(e) {

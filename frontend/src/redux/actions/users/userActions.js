@@ -71,7 +71,7 @@ const loginUserAction = (email, password) => {
       });
 
        //save user into local storage
-       localStorage.setItem("userAuth", JSON.stringify(data));
+      localStorage.setItem("userAuth", JSON.stringify(data));
 
     } catch (error) {
       //login fail
