@@ -71,19 +71,19 @@ const createUser = async (req, res) => {
     });
     await new_user.save();
     res.status(201).json({ 
-      // name: new_user.name,
-      // organistaion: new_user.organistaion,
-      // email: new_user.email,
-      // password: new_user.password,
-      // adress: new_user.adress,
-      // phone: new_user.phone,
-      // country: new_user.country,
-      // city: new_user.city,
-      // codePostal: new_user.codePostal,
-      // isAdmin: new_user.isAdmin,
-      // taxID: new_user.taxID,
-      // photo: new_user.photo, 
-      ...user._doc,
+      name: new_user.name,
+      organistaion: new_user.organistaion,
+      email: new_user.email,
+      password: new_user.password,
+      adress: new_user.adress,
+      phone: new_user.phone,
+      country: new_user.country,
+      city: new_user.city,
+      codePostal: new_user.codePostal,
+      isAdmin: new_user.isAdmin,
+      taxID: new_user.taxID,
+      photo: new_user.photo, 
+      // ...user._doc, 
       token : generateToken(new_user._id) ,
     });
   } catch (err) {

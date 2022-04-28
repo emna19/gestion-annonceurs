@@ -1,3 +1,5 @@
+
+
 import axios from "axios";
 import {
   USER_REGISTER_FAIL,
@@ -18,8 +20,7 @@ const createUserAction = (user) => {
         "Content-Type": "application/json",
       };
 
-      const { data } = await axios.post("/users", user, config);
-      console.log(user);
+      const {data}  = await axios.post("/users", user, config)    
 
       dispatch({
         //user register succeess
@@ -28,7 +29,7 @@ const createUserAction = (user) => {
       });
 
       //save user into local storage
-      localStorage.setItem("userAuthData", JSON.stringify(data));
+      localStorage.setItem("userAuth", JSON.stringify(data));
     } catch (error) {
       dispatch({
         type: USER_REGISTER_FAIL,
