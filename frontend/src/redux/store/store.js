@@ -2,12 +2,12 @@ import { configureStore } from "@reduxjs/toolkit";
 // import { composeWithDevTools } from "redux-devtools-extension";
 import { combineReducers } from "redux";
 // import thunk from "redux-thunk";
-import { createUserReducer } from "../reducers/users/createUserReducer";
+import { UserReducer } from "../reducers/users/userAuthReducer";
 
 // const middlewares = [thunk];
 
 const reducer = combineReducers({
-  userSignUp: createUserReducer,
+  userSignUp: UserReducer,
 });
 
 // get user from local storage to save it
