@@ -3,11 +3,12 @@ import { configureStore } from "@reduxjs/toolkit";
 import { combineReducers } from "redux";
 // import thunk from "redux-thunk";
 import { UserReducer } from "../reducers/users/userAuthReducer";
+import { userProfileReducer } from "../reducers/users/userProfileReducer";
 
-// const middlewares = [thunk];
 
 const reducer = combineReducers({
-  userLogin : UserReducer // contains login & signup reducer 
+  userLogin : UserReducer ,// contains login & signup reducer 
+  userProfile : userProfileReducer ,
 });
 
 // get user from local storage to save it
@@ -19,7 +20,6 @@ const userAuthFromStorage = localStorage.getItem("userAuth")
 const initialState = {
   userLogin: { userInfo: userAuthFromStorage },
 };
-console.log(initialState.userLogin.userInfo);
 const store = configureStore({
   reducer,
   initialState,

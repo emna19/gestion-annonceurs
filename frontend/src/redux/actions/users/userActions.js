@@ -6,8 +6,10 @@ import {
   USER_REGISTER_SUCCESS,
   USER_LOGIN_SUCCESS,
   USER_LOGIN_FAIL,
+  USER_PROFILE_REQUEST,
+  USER_PROFILE_SUCCESS,
+  USER_PROFILE_FAIL,
 } from "../actionTypes";
-
 /// create user action
 // name,photo,email,password,organistaion,phone,country,city,codePostal,taxID,adress
 const createUserAction = (user) => {
@@ -23,17 +25,17 @@ const createUserAction = (user) => {
         },
       };
 
-      const { data } = await axios.post("/users", user, config);
+      const { data } = await axios.post("http://localhost:5000/users", user, config);
 
       dispatch({
         //user register succeess
         type: USER_REGISTER_SUCCESS,
         payload: data,
       });
+      
 
       //save user into local storage
       localStorage.setItem("userAuth", JSON.stringify(data));
-
     } catch (error) {
       dispatch({
         type: USER_REGISTER_FAIL,
@@ -59,7 +61,7 @@ const loginUserAction = (email, password) => {
       };
 
       const { data } = await axios.post(
-        "/users/login",
+        "http://localhost:5000/users/login",
         { email, password },
         config
       );
@@ -70,9 +72,8 @@ const loginUserAction = (email, password) => {
         payload: data,
       });
 
-       //save user into local storage
+      //save user into local storage
       localStorage.setItem("userAuth", JSON.stringify(data));
-
     } catch (error) {
       //login fail
       dispatch({
@@ -83,4 +84,42 @@ const loginUserAction = (email, password) => {
   };
 };
 
-export { createUserAction, loginUserAction };
+////Profile Action
+
+const userProfileAction = () => {
+  return async (dispatch, getState) => {
+    //get user token from store
+    const userInfo = getState().userLogin;
+    try {
+      //get profile request
+      dispatch({
+        type: USER_PROFILE_REQUEST,
+      });
+      //set header auth
+      const config = {
+        headers: {
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      };
+
+      //making request to endpoint
+      const { data } = await axios.get('http://localhost:5000/users/profile', config);
+      console.log(data);
+      //request profile success
+      dispatch({
+        type: USER_PROFILE_SUCCESS,
+        payload: data,
+      });
+      
+    } catch (error) {
+      //request profile fail
+      dispatch({
+        type: USER_PROFILE_FAIL,
+        payload: error.message,
+      });
+
+    }
+  };
+};
+
+export { createUserAction, loginUserAction, userProfileAction };

@@ -1,15 +1,32 @@
-import React from 'react'
-import './Login.css'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector} from 'react-redux'
+import './Login.css'
 import { loginUserAction } from '../../redux/actions/users/userActions'
-const Login = () => {
 
+const Login = () => {
   const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
   
   const dispatch=useDispatch();
+
+
+  //  fetching user login from store
+  const userLogin = useSelector((store) => store.userLogin);
+  const  userInfo = userLogin.userInfo;
+  // // console.log(userInfo);
+
+    //  redirecting if user is logged in
+  useEffect(() => {
+    if (userInfo) {
+      console.log("am here");
+        // history.push('/Profile')
+        window.location.href = '/Profile'
+    }
+  });
+
+
 
   const loginUser = (event) => {
 		event.preventDefault()

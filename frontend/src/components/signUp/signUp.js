@@ -25,21 +25,7 @@ export default function SignUp({ history }) {
   //dispatching
   const dispatch = useDispatch();
 
-  // fetching user login from store
-//   const userLogin = useSelector((store) => store.userLogin);
-//   // const userLogin = useSelector((state)=>state.userLogin); /// wouldn't work !!!!
-//   const { userInfo } = userLogin;
-//   console.log(userInfo);
-
-//   //   redirecting if user is logged in
-//   useEffect(() => {
-//     if (userInfo) {
-//       console.log("am here");
-//         // history.push('/Home')
-//       //   window.location.href = '/Home'
-//     }
-//   }, [userInfo]);
-
+ 
   // entering user data
   function handle(e) {
     const newUser = { ...user };
