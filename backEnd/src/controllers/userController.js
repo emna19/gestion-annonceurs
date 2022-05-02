@@ -32,7 +32,6 @@ const login = async (req, res) => {
     });
 
     if (user)
-      const token = jwt.sign({id: user._id})
       return res.json({
         ...user._doc,
         token: generateToken(user._id),
