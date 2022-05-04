@@ -36,35 +36,35 @@ const Profile = () => {
           Organisation Name : {user.organistaion}
         </div>
         <div className="profile-account-email profile-style">
-          {" "}
-          Email : {user.email}{" "}
+    
+          Email : {user.email}
         </div>
         <div className="profile-account-phone profile-style ">
-          {" "}
+          
           phone : {user.phone}
         </div>
         <div className="profile-account-taxID profile-style ">
-          {" "}
+          
           taxID : {user.taxID}
         </div>
         <div className="profile-account-adress profile-style ">
-          {" "}
-          adress : {user.adress}{" "}
+          
+          adress : {user.adress}
         </div>
         <div className="profile-account-postcode  profile-style">
-          postcode: {user.postcode}{" "}
+          postcode: {user.postcode}
         </div>
         <div className="profile-account-country profile-style ">
-          {" "}
-          country : {user.country}{" "}
+          
+          country : {user.country}
         </div>
         <div className="profile-account-state profile-style ">
-          {" "}
-          state : {user.state}{" "}
+          
+          state : {user.state}
         </div>
         <div className="profile-account-city profile-style ">
-          {" "}
-          city : {user.city}{" "}
+          
+          city : {user.city}
         </div>
         <button className="profile-button" type="button">
         <Link to="/update" className='change-details' >
