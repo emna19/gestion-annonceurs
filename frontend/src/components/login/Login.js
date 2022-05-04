@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import { useDispatch, useSelector} from 'react-redux'
 import './Login.css'
-import { loginUserAction } from '../../redux/actions/users/userActions'
+import { loginUserAction } from '../../redux/actions/users/userActions';
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState('')
@@ -11,19 +12,20 @@ const Login = () => {
   
   const dispatch=useDispatch();
 
-
   //  fetching user login from store
   const userLogin = useSelector((store) => store.userLogin);
   // console.log(userLogin.userInfo);
   const  userInfo = userLogin.userInfo;
   // console.log(userInfo);
+  const navigate = useNavigate();
 
     //  redirecting if user is logged in
   useEffect(() => {
     if (userInfo) {
-      console.log("am here");
-        // history.push('/Profile')
-          // window.location.href = '/Profile'
+
+       navigate('/Profile');
+
+
       }
     });
 

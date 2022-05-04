@@ -11,9 +11,10 @@ const Profile = () => {
     dispatch(userProfileAction())
   },[dispatch])
 
-  const userProfile = useSelector(store => store.userLogin.user)
-  console.log(userProfile);
-
+  const user = useSelector(store => store.userLogin.userInfo)
+  console.log(user);
+  
+  document.body.style = 'background-color: white';
 
   return (
     
@@ -26,23 +27,23 @@ const Profile = () => {
         />
         <div className="profile-name-frame">
           <label className="profile-Name  profile-style " htmlFor="inputName">
-            name :
+           {user.name}
           </label>
         </div>
       </div>
       <div className="profile-details-frame">
         <div className="profile-account-details"> Account Details </div>
         <div className="profile-account-organisation profile-style">
-          Organisation Name :
+          Organisation Name : {user.organistaion}
         </div>
-        <div className="profile-account-email profile-style"> Email : </div>
-        <div className="profile-account-phone profile-style "> phone : </div>
-        <div className="profile-account-taxID profile-style "> taxID :</div>
-        <div className="profile-account-adress profile-style "> adress : </div>
-        <div className="profile-account-postcode  profile-style">postcode:</div>
-        <div className="profile-account-country profile-style "> country :</div>
-        <div className="profile-account-state profile-style "> state :</div>
-        <div className="profile-account-city profile-style "> city :</div>
+        <div className="profile-account-email profile-style"> Email : {user.email} </div>
+        <div className="profile-account-phone profile-style "> phone : {user.phone}</div>
+        <div className="profile-account-taxID profile-style "> taxID : {user.taxID}</div>
+        <div className="profile-account-adress profile-style "> adress : {user.adress} </div>
+        <div className="profile-account-postcode  profile-style">postcode: {user.postcode} </div>
+        <div className="profile-account-country profile-style "> country : {user.country} </div>
+        <div className="profile-account-state profile-style "> state : {user.state} </div>
+        <div className="profile-account-city profile-style "> city : {user.city} </div>
         <button className="profile-button" type="button">
           Change details
         </button>

@@ -8,7 +8,8 @@ import Profile from './components/Profile/Profile';
 // import Home from './components/home/home'
 import Navbar from './components/navbar/navbar'
 // import Audience from './components/audiences/Audience';
-import Annonce from './components/annonce/Annonce'
+import Annonce from './components/annonce/Annonce';
+// import updateProfile from './components/updateProfile/updateProfile';
 
 
 
@@ -22,7 +23,7 @@ function App() {
         <Route  exact path="/login" element={ <Login/>} />
         {/* <Route  exact path="/Audience" element={ <Audience/>} /> */}
         <Route  exact path="/Annonce" element={ <Annonce/>} />
-
+        {/* <Route  exact path="/update" element={ <div> <updateProfile/></div>} /> */}
         {/* <Route  exact path="/Home" element={ <div><Navbar /> <Home /></div>} /> */}
         <Route exact path="/Profile" element={ <div> <Navbar /><br/> <Profile/></div> }/>
         <Route  exact path="/RestPassword" element={ <ResetPassword/>} />
