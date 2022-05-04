@@ -2,10 +2,22 @@ import React from 'react'
 import './Login.css'
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
+
+import { useDispatch } from 'react-redux'
+import { login } from '../../features/userSlice'
+import { useSelector } from 'react-redux'
+import { selectUser } from '../../features/userSlice'
+import { useNavigate } from "react-router-dom";
+
 const Login = () => {
 
   const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
+
+  const dispatch = useDispatch()
+  const user = useSelector(selectUser);
+  console.log(user)
+  let navigate = useNavigate();
 
   async function loginUser(event) {
 		event.preventDefault()
@@ -25,11 +37,21 @@ const Login = () => {
 		const data = await response.json()
 		if (data) {
       //save user into local storage
-			localStorage.setItem('user', JSON.stringify(data))
-      localStorage.setItem('token',data.token)
-      console.log(data);
+			// localStorage.setItem('user', JSON.stringify(data))
+      // localStorage.setItem('token',data.token)
+      // console.log(data);
+      
+      dispatch(
+        login({
+          email: email,
+          password: password,
+          loggedIn: true
+        })
+      )
+
 			alert('Login successful')
-			window.location.href = '/Profile'
+      navigate('/Profile')
+			// window.location.href = '/Profile'
 		} else {
 			alert('Please check your Email and password')
 		}
