@@ -12,7 +12,7 @@ const Profile = () => {
   },[dispatch])
 
   const userProfile = useSelector(store => store.userLogin.user)
-console.log(userProfile);
+  console.log(userProfile);
 
 
   return (

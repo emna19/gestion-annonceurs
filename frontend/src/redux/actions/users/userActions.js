@@ -89,12 +89,14 @@ const loginUserAction = (email, password) => {
 const userProfileAction = () => {
   return async (dispatch, getState) => {
     //get user token from store
-    const userInfo = getState().userLogin;
+    const {userInfo} = getState().userLogin;
+
     try {
       //get profile request
       dispatch({
         type: USER_PROFILE_REQUEST,
       });
+
       //set header auth
       const config = {
         headers: {
@@ -104,7 +106,7 @@ const userProfileAction = () => {
 
       //making request to endpoint
       const { data } = await axios.get('http://localhost:5000/users/profile', config);
-      console.log(data);
+    
       //request profile success
       dispatch({
         type: USER_PROFILE_SUCCESS,

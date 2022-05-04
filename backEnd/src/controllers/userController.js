@@ -30,7 +30,6 @@ const login = async (req, res) => {
       email: req.body.email,
       password: req.body.password,
     });
-
     if (user)
       return res.json({
         ...user._doc,
@@ -88,7 +87,8 @@ const createUser = async (req, res) => {
 // Profile
 const profile = async (req, res) => {
   // find the logged in user
-  const user = await User.findById(req.user._id).populate("annonces");
+  const user = await User.findById(req.user._id);
+  console.log("USER IS HERE :" , user);
   try {
     if (user) {
       return res.status(200).json({ user });
@@ -102,7 +102,7 @@ const profile = async (req, res) => {
 // update user profile
 const updateProfile = async (req, res) => {
   //Find the login user by ID
-  const user = await User.findById(req.user._id);
+  const user = await User.findById(req.user.id);
 
   if (user) {
     user.name = req.body.name || user.name;

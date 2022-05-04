@@ -53,14 +53,6 @@ const userSchema = mongoose.Schema({
     //missing photo and one other
 },{timestamps: true});//timestamp for updated at and created at
 
-// connecting annonce to user 
-userSchema.virtual('annonces',{
-    ref:'annonce',
-    foreignField:'User',
-    localField: '_id',
-})
-
-userSchema.set('toJSON',{virtuals:true})
 
 
 
