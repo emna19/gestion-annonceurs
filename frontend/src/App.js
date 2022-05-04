@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import UpdateProfile from './components/updateProfile/updateProfile';
 import SignUp from "./components/signUp/signUp"
 import Login from "./components/login/Login";
 import Error from "./components/ErrorPage/Error";
@@ -9,7 +10,7 @@ import Profile from './components/Profile/Profile';
 import Navbar from './components/navbar/navbar'
 // import Audience from './components/audiences/Audience';
 import Annonce from './components/annonce/Annonce';
-// import updateProfile from './components/updateProfile/updateProfile';
+
 
 
 
@@ -23,8 +24,7 @@ function App() {
         <Route  exact path="/login" element={ <Login/>} />
         {/* <Route  exact path="/Audience" element={ <Audience/>} /> */}
         <Route  exact path="/Annonce" element={ <Annonce/>} />
-        {/* <Route  exact path="/update" element={ <div> <updateProfile/></div>} /> */}
-        {/* <Route  exact path="/Home" element={ <div><Navbar /> <Home /></div>} /> */}
+        <Route  exact path="/update" element={  <div> <Navbar /><br/> <UpdateProfile/> </div>} />
         <Route exact path="/Profile" element={ <div> <Navbar /><br/> <Profile/></div> }/>
         <Route  exact path="/RestPassword" element={ <ResetPassword/>} />
         <Route exact path="*" element={<Error/>} />
