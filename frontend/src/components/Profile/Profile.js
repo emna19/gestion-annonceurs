@@ -8,7 +8,7 @@ const Profile = () => {
   //testing
       const userData = JSON.parse(localStorage.getItem('user')) || {} ;
       const [user, setUser] = useState(userData);
-      document.body.style = 'background-color: white';
+      
 
     // const getProfile = async()=>{
     //   console.log('get profile');

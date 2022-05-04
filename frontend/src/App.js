@@ -9,10 +9,13 @@ import Home from './components/home/home'
 import Navbar from './components/navbar/navbar'
 import Audience from './components/audiences/Audience';
 import CreateAnnonce from './components/annonce/Annonce'
+import AudView from './components/audiences/AudView'
+import AnnView from './components/annonce/AnnView'
 
 
 
 function App() {
+  
 
   return (
     <Router>
