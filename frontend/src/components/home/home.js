@@ -153,6 +153,10 @@ export default function Home() {
 // empty dependency array means this effect will only run once (like componentDidMount in classes)
   }, []);
 
+  console.log(annonce)
+
+  if (annonce.length !== 0) console.log(format( parseISO(annonce[2].startDate), 'yyyy/MM/dd kk:mm:ss'));
+
     return(
       <div className="home" style={styles.home}> 
         <main className="container-home" style={styles.container_home}>
@@ -208,11 +212,11 @@ export default function Home() {
                     <h5 className="mb-3 card-title">{ item.name }</h5>
                     <div className='row mb-3'>
                       <span className="col-auto text-start card-text">Start date:</span>
-                      <div className='col-auto'>{ format( parseISO(item.startDate), 'yyyy/MM/dd kk:mm:ss') }</div>
+                      <div className='col-auto'>{ format( parseISO(item.startDate), 'yyyy/MM/dd kk:mm:ss')}</div>
                     </div>
                     <div className='row mb-3'>
                       <span className="col-auto text-start card-text">End date:</span>
-                      <div className='col-auto'>{ format( parseISO(item.endtDate), 'yyyy/MM/dd kk:mm:ss') }</div>
+                      <div className='col-auto'>{format( parseISO(item.startDate), 'yyyy/MM/dd kk:mm:ss')}</div>
                     </div>
                     {item.isValid ?  null: <div className='row mb-2 validation'>
                       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="red" className="col-auto bi bi-x-circle" viewBox="0 0 16 16">

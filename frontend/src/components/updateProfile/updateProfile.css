@@ -1,8 +1,8 @@
-.profile {
+.update-profile {
   display: inline;
 }
-/* profile image block */
-.profile-picture-frame {
+/* update-profile image block */
+.update-profile-picture-frame {
   display: inline-block;
   flex: 1;
   position: absolute;
@@ -16,7 +16,7 @@
   border-radius: 20px;
 }
 
-.profile-image {
+.update-profile-image {
   position: absolute;
   width: 173px;
   height: 184px;
@@ -32,24 +32,28 @@
   -o-border-radius: 90px;
 }
 
-.profile-Name {
+.update-profile-Name {
   position: relative;
   width: 158px;
   height: 27px;
-  left: 100px;
+  left: 79px;
   top: 217px;
+  font-family: "Tajawal";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 25px;
   line-height: 30px;
   letter-spacing: 0.04em;
-
-  border: 3px solid rgba(0, 0, 0, 0);
-  border-radius: 10px;
-
+  border: 2px solid #eeeeee;
+  box-sizing: border-box;
+  border-radius: 90px;
+  background-color: #eeeeee;
   color: #000000;
 }
 
-/* profile details block  */
+/* update-profile details block  */
 
-.profile-details-frame {
+.update-profile-details-frame {
   position: absolute;
   width: 800px;
   height: 430px;
@@ -62,7 +66,7 @@
   border-radius: 20px;
 }
 
-.profile-account-details {
+.update-profile-account-details {
   display: inline-block;
   position: absolute;
   width: 799px;
@@ -81,7 +85,8 @@
   color: #000000;
 }
 
-.profile-account-organisation {
+.update-profile-account-organisation {
+  position: absolute;
   width: 320px;
   height: 40px;
   left: 35px;
@@ -91,7 +96,7 @@
   border-radius: 10px;
 }
 
-.profile-account-email {
+.update-profile-account-email {
   position: absolute;
   width: 320px;
   height: 40px;
@@ -100,8 +105,17 @@
   border: 3px solid rgba(0, 0, 0, 0.2);
   border-radius: 10px;
 }
+.update-profile-account-password {
+  position: absolute;
+  width: 200px;
+  height: 40px;
+  left: 400px;
+  top: 124px;
+  border: 3px solid rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
 
-.profile-account-phone {
+.update-profile-account-phone {
   position: absolute;
   width: 320px;
   height: 40px;
@@ -112,9 +126,9 @@
   border-radius: 10px;
 }
 
-.profile-account-taxID {
+.update-profile-account-taxID {
   position: absolute;
-  width: 180px;
+  width: 200px;
   height: 40px;
   left: 400px;
   top: 179px;
@@ -123,7 +137,7 @@
   border-radius: 10px;
 }
 
-.profile-account-adress {
+.update-profile-account-adress {
   position: absolute;
   width: 300px;
   height: 40px;
@@ -134,9 +148,9 @@
   border-radius: 10px;
 }
 
-.profile-account-postcode {
+.update-profile-account-postcode {
   position: absolute;
-  width: 189px;
+  width: 200px;
   height: 40px;
   left: 400px;
   top: 236px;
@@ -145,7 +159,7 @@
   border-radius: 10px;
 }
 
-.profile-account-country {
+.update-profile-account-country {
   position: absolute;
   width: 154px;
   height: 40px;
@@ -156,7 +170,7 @@
   border-radius: 10px;
 }
 
-.profile-account-state {
+.update-profile-account-state {
   position: absolute;
   width: 126px;
   height: 40px;
@@ -167,7 +181,7 @@
   border-radius: 10px;
 }
 
-.profile-account-city {
+.update-profile-account-city {
   position: absolute;
   width: 120px;
   height: 40px;
@@ -178,7 +192,7 @@
   border-radius: 10px;
 }
 
-.profile-button {
+.update-profile-button {
   position: absolute;
   width: 195px;
   height: 40px;
@@ -197,20 +211,33 @@
   color: #ffffff;
 }
 
-.profile-style {
+.return-to-profile-button {
+  position: absolute;
+  width: 195px;
+  height: 40px;
+  left: 350px;
+  top: 374px;
+  background: #f17b22;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 8px;
   font-family: "Tajawal";
   font-style: normal;
-  font-weight: 700;
+  font-weight: 500;
+  font-size: 25px;
+  line-height: 30px;
+  /*identicaltoboxheight*/
+  color: #ffffff;
+}
+
+.update-profile-style {
+  font-family: "Tajawal";
+  font-style: normal;
+  font-weight: 500;
   font-size: 15px;
   line-height: 30px;
   /* identical to box height */
 
   letter-spacing: 0.04em;
 
-  color: #474141;
-}
-
-a {
-  color: white;
-  text-decoration: double;
+  color: #000000;
 }

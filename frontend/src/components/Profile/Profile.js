@@ -1,36 +1,21 @@
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import "./Profile.css";
-// import axios from "axios";
-import { useEffect, useState } from "react";
-
-
+import { userProfileAction } from "../../redux/actions/users/userActions";
+import { Link } from 'react-router-dom';
 
 const Profile = () => {
-  //testing
-      const userData = JSON.parse(localStorage.getItem('user')) || {} ;
-      const [user, setUser] = useState(userData);
-      
+  const dispatch = useDispatch();
 
-    // const getProfile = async()=>{
-    //   console.log('get profile');
-    //   const res =  axios.get('http://localhost:5000/users/Profile' , {
-    //       "Authorization" : "Bearer "+localStorage.getItem("token"),
-    //       withCredentials:true,
-    //   })
-    //   // const data = await res.json()    
-       
-    //     console.log('get profile response ',res);
-    //     // return data
-    // }
+  useEffect(() => {
+    dispatch(userProfileAction());
+  }, [dispatch]);
 
-    // useEffect(() => {
-    //   // getProfile().then((data)=>setUser(data))
-    // }, [])
-    
-   
-   
+  const user = useSelector((store) => store.userLogin.userInfo);
+  // const user = useSelector((store) => store.userProfile.user);
+  console.log(user);
 
-
-  //////////////////////////////////////////////
+  document.body.style = "background-color: white";
 
   return (
     <div className="profile">
@@ -42,29 +27,50 @@ const Profile = () => {
         />
         <div className="profile-name-frame">
           <label className="profile-Name  profile-style " htmlFor="inputName">
-            name : {user.name}
+            {user.name}
           </label>
         </div>
       </div>
       <div className="profile-details-frame">
         <div className="profile-account-details"> Account Details </div>
         <div className="profile-account-organisation profile-style">
-        
-          Organisation Name :
+          Organisation Name : {user.organistaion}
         </div>
-        <div className="profile-account-email profile-style"> Email : </div>
-        <div className="profile-account-phone profile-style "> phone : </div>
-        <div className="profile-account-taxID profile-style "> taxID :</div>
-        <div className="profile-account-adress profile-style "> adress : </div>
+        <div className="profile-account-email profile-style">
+    
+          Email : {user.email}
+        </div>
+        <div className="profile-account-phone profile-style ">
+          
+          phone : {user.phone}
+        </div>
+        <div className="profile-account-taxID profile-style ">
+          
+          taxID : {user.taxID}
+        </div>
+        <div className="profile-account-adress profile-style ">
+          
+          adress : {user.adress}
+        </div>
         <div className="profile-account-postcode  profile-style">
-        
-          postcode:
+          postcode: {user.postcode}
         </div>
-        <div className="profile-account-country profile-style "> country :</div>
-        <div className="profile-account-state profile-style "> state :</div>
-        <div className="profile-account-city profile-style "> city :</div>
+        <div className="profile-account-country profile-style ">
+          
+          country : {user.country}
+        </div>
+        <div className="profile-account-state profile-style ">
+          
+          state : {user.state}
+        </div>
+        <div className="profile-account-city profile-style ">
+          
+          city : {user.city}
+        </div>
         <button className="profile-button" type="button">
+        <Link to="/update" className='change-details' >
           Change details
+          </Link>
         </button>
       </div>
     </div>

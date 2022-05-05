@@ -8,6 +8,7 @@ router.get('/', AnnonceController.allAnnonces);
 
 router.get('/:id', AnnonceController.annonceById)
 
+// router.post('/', authMiddleware , AnnonceController.createAnnonce);
 router.post('/' , AnnonceController.createAnnonce);
 
 router.put('/:id', AnnonceController.updateAnnonce);

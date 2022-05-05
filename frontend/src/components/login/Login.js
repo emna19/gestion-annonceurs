@@ -1,73 +1,76 @@
-import React from 'react'
-import './Login.css'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
-const Login = () => {
+import { useDispatch, useSelector} from 'react-redux'
+import './Login.css'
+import { loginUserAction } from '../../redux/actions/users/userActions';
+import { useNavigate } from "react-router-dom";
 
+const Login = () => {
   const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
+  
+  const dispatch=useDispatch();
 
-  async function loginUser(event) {
-		event.preventDefault()
+  //  fetching user login from store
+  const userLogin = useSelector((store) => store.userLogin);
+  // console.log(userLogin.userInfo);
+  const  userInfo = userLogin.userInfo;
+  // console.log(userInfo);
+  const navigate = useNavigate();
 
-		const response = await fetch('http://localhost:5000/users/login', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-        
-			},
-			body: JSON.stringify({
-				email,
-				password,
-			}),
-		})
+    //  redirecting if user is logged in
+  useEffect(() => {
+    if (userInfo) {
 
-		const data = await response.json()
-		if (data) {
-      //save user into local storage
-			localStorage.setItem('user', JSON.stringify(data))
-      localStorage.setItem('token',data.token)
-      console.log(data);
-			alert('Login successful')
-			window.location.href = '/Profile'
-		} else {
-			alert('Please check your Email and password')
-		}
-	}
-
-  document.body.style = 'background-color: #114A71';
+       navigate('/Profile');
 
 
-  return (
-   <div >
-     <form onSubmit={loginUser}>
-       <div className='container position-absolute top-50 start-50 translate-middle'>
-           <div className='artify-logo'/> 
-           <img  className='artify-logo' src={require("../../assets/artifyLogo.png")} alt="Artify Logo" height="80" width="90" loading="lazy"></img>
-           <h1 className='artify-ads-log-in'>ArtifyAds LogIn</h1>
-           
-           <h2 className='email'>Email</h2>
-           <input className='input' 
-                value={email}
-               onChange={(e) => setEmail(e.target.value)}
-               type= 'email'
-              placeholder='Enter your email'/>
+      }
+    });
 
-           <h2 className='password'>Password</h2>
-           <input className='input'
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              type='password'
-              placeholder='Enter your password'/>
 
-           <input className='login-button' type='submit' value='LogIn'/>
 
-            <p className='forgot-password-frame'><Link to="/RestPassword" className='forgot-password'>Forgot your Password ?</Link></p>
-            <p className='new-here'>New Here? <Link to="/signup" className="signup">SignUp</Link></p>
-       </div>
-       </form>
-   </div>
-  )
-}
+    const loginUser = (event) => {
+      event.preventDefault()
+      //send login params to loginuser action 
+      dispatch(loginUserAction(email,password));
+    
+    }
 
-export default Login
+    document.body.style = 'background-color: #114A71';
+
+
+    return (
+    <div >
+      <form onSubmit={loginUser}>
+        <div className='container position-absolute top-50 start-50 translate-middle'>
+            <div className='artify-logo'/> 
+            <img  className='artify-logo' src={require("../../assets/artifyLogo.png")} alt="Artify Logo" height="80" width="90" loading="lazy"></img>
+            <h1 className='artify-ads-log-in'>ArtifyAds LogIn</h1>
+            
+            <h2 className='email'>Email</h2>
+            <input className='input' 
+                  value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                type= 'email'
+                placeholder='Enter your email'/>
+
+            <h2 className='password'>Password</h2>
+            <input className='input'
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                type='password'
+                placeholder='Enter your password'/>
+
+            <input className='login-button' type='submit' value='LogIn'/>
+
+              <p className='forgot-password-frame'><Link to="/RestPassword" className='forgot-password'>Forgot your Password ?</Link></p>
+              <p className='new-here'>New Here? <Link to="/signup" className="signup">SignUp</Link></p>
+        </div>
+        </form>
+    </div>
+    )
+  }
+
+  export default Login

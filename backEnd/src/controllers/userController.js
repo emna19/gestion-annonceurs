@@ -1,9 +1,6 @@
-
 const User = require("../models/user");
-const expressAsyncHandler = require('express-async-handler')
-const asynHandler = require("express-async-handler");
 const generateToken = require("../utils/generateToken");
-
+const jwt = require ('jsonwebtoken')
 const allUsers = async (req, res) => {
   try {
     await User.find({}).then((result) => {
@@ -26,32 +23,24 @@ const userById = async (req, res) => {
   }
 };
 
-
-
 //adding login api find by email and password
 const login = async (req, res) => {
-  console.log('login get ');
   try {
     const user = await User.findOne({
       email: req.body.email,
       password: req.body.password,
     });
-
-    if (user) return res.json({ 
-      ...user._doc, 
-      token : generateToken(user._id)
-    });
+    if (user)
+      return res.json({
+        ...user._doc,
+        token: generateToken(user._id),
+      });
     return res.status(404).send({ status: "error", user: false });
   } catch (err) {
     console.log(err);
     res.status(400).send(`couldn't login, Something is wrong`);
   }
 };
-
-
-
-
-
 
 //create user
 const createUser = async (req, res) => {
@@ -73,7 +62,7 @@ const createUser = async (req, res) => {
       photo: user.photo,
     });
     await new_user.save();
-    res.status(201).json({ 
+    res.status(201).json({
       name: new_user.name,
       organistaion: new_user.organistaion,
       email: new_user.email,
@@ -85,8 +74,9 @@ const createUser = async (req, res) => {
       codePostal: new_user.codePostal,
       isAdmin: new_user.isAdmin,
       taxID: new_user.taxID,
-      photo: new_user.photo, 
-      token : generateToken(new_user._id) ,
+      photo: new_user.photo,
+      // ...user._doc,
+      token: generateToken(new_user._id),
     });
   } catch (err) {
     console.log(err);
@@ -94,47 +84,51 @@ const createUser = async (req, res) => {
   }
 };
 
-
-
 // Profile
-const profile = asynHandler(async (req, res) => {
+const profile = async (req, res) => {
   // find the logged in user
-  const user = await User.findById(req.user._id).populate('annonces');
+  const user = await User.findById(req.user._id);
+  console.log("USER IS HERE :" , user);
   try {
     if (user) {
-      return  res.status(200).json({user});}
-    return res.status(404).send({status:'error', user:false});
-   
+      return res.status(200).json({ user });
+    }
+    return res.status(404).send({ status: "error", user: false });
   } catch (err) {
     console.log(err);
   }
-  
-});
+};
 
-// update user profile 
+// update user profile
+const updateProfile = async (req, res) => {
+  //Find the login user by ID
+  const user = await User.findById(req.user.id);
 
-  const updateProfile = expressAsyncHandler(async (req, res) => {
-    //Find the login user by ID
-    const user = await User.findById(req.user._id);
+  if (user) {
+    user.name = req.body.name || user.name;
+    user.email = req.body.email || user.email;
+    user.organistaion = req.body.organistaion || user.organistaion;
+    user.adress = req.body.adress || user.adress;
+    user.phone = req.body.phone || user.phone;
+    user.country = req.body.country || user.country;
+    user.city = req.body.city || user.city;
+    user.codePostal = req.body.codePostal || user.codePostal;
+    user.isAdmin = req.body.isAdmin || user.isAdmin;
+    user.taxID = req.body.taxID || user.taxID;
+    user.photo = req.body.photo || user.photo;
 
-    if (user) {
-      user.name = req.body.name || user.name;
-      user.email = req.body.email || user.email;
-      if (req.body.password) {
-        user.password = req.body.password || user.password;
-      }
-
-      const updatedUser = await user.save();
-
-      res.json({
-        ...updatedUser._doc,
-        token: generateToken(updatedUser._id),
-      });
+    if (req.body.password) {
+      user.password = req.body.password || user.password;
     }
-  })
 
+    const updatedUser = await user.save();
 
-
+    res.json({
+      ...updatedUser._doc,
+      token: generateToken(updatedUser._id),
+    });
+  }
+};
 
 module.exports = {
   allUsers,
