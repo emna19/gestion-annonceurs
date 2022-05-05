@@ -48,8 +48,39 @@ const createAudience = async(req,res) => {
     }
 }
 
+// update Audience 
+
+const updateAudience = async (req, res) => {
+    try{
+        await Audience.findByIdAndUpdate(req.params.id, req.body).
+        then(
+            res.json({...req.body})
+          )
+    }
+    catch (err) {
+        console.log(err);
+        res.status(400).send("creation failed")
+    }
+}
+
+// Delete Audience 
+const deleteAudience = async (req, res) => {
+    try{
+        await Audience.findByIdAndDelete(req.params.id).
+        then(
+            res.send("annonce deleted")
+          )
+    }
+    catch (err) {
+        console.log(err);
+        res.status(400).send("creation failed")
+    }
+}
+
 module.exports = {
     allAudiences,
     audienceById,
-    createAudience
+    createAudience,
+    updateAudience,
+    deleteAudience
 }
