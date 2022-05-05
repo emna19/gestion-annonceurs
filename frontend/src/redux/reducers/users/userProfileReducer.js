@@ -24,4 +24,4 @@ const userProfileReducer = (state = {}, action) => {
   }
 };
 
-export { userProfileReducer };
+export  { userProfileReducer };

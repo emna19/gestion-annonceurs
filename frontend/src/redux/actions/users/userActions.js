@@ -9,6 +9,7 @@ import {
   USER_PROFILE_REQUEST,
   USER_PROFILE_SUCCESS,
   USER_PROFILE_FAIL,
+  USER_UPDATE_REQUEST,
 } from "../actionTypes";
 /// create user action
 // name,photo,email,password,organistaion,phone,country,city,codePostal,taxID,adress
@@ -25,14 +26,17 @@ const createUserAction = (user) => {
         },
       };
 
-      const { data } = await axios.post("http://localhost:5000/users", user, config);
+      const { data } = await axios.post(
+        "http://localhost:5000/users",
+        user,
+        config
+      );
 
       dispatch({
         //user register succeess
         type: USER_REGISTER_SUCCESS,
         payload: data,
       });
-      
 
       //save user into local storage
       localStorage.setItem("userAuth", JSON.stringify(data));
@@ -85,11 +89,10 @@ const loginUserAction = (email, password) => {
 };
 
 ////Profile Action
-
 const userProfileAction = () => {
   return async (dispatch, getState) => {
     //get user token from store
-    const {userInfo} = getState().userLogin;
+    const { userInfo } = getState().userLogin;
 
     try {
       //get profile request
@@ -100,28 +103,102 @@ const userProfileAction = () => {
       //set header auth
       const config = {
         headers: {
+          "Content-Type": "application/json",
           Authorization: `Bearer ${userInfo.token}`,
         },
       };
 
       //making request to endpoint
-      const { data } = await axios.get('http://localhost:5000/users/profile', config);
-    
+      const { data } = await axios.get(
+        "http://localhost:5000/users/profile",
+        config
+      );
+
       //request profile success
       dispatch({
         type: USER_PROFILE_SUCCESS,
         payload: data,
       });
-      
     } catch (error) {
       //request profile fail
       dispatch({
         type: USER_PROFILE_FAIL,
         payload: error.message,
       });
-
     }
   };
 };
 
-export { createUserAction, loginUserAction, userProfileAction };
+//// Update Profile Action
+const updateProfileAction = (
+  name,
+  email,
+  password,
+  organisation,
+  phone,
+  country,
+  city,
+  codePostal,
+  taxID,
+  adress,
+  state
+  // photo
+) => {
+  return async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: USER_UPDATE_REQUEST,
+      });
+
+      //get user token from store
+      const { userInfo } = getState().userLogin;
+      //set header auth
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      };
+
+      const { data } = await axios.put(
+        "http://localhost:5000/users/update",
+        {
+          name,
+          email,
+          password,
+          organisation,
+          phone,
+          country,
+          city,
+          codePostal,
+          taxID,
+          adress,
+          state,
+          // photo
+        },
+        config
+      );
+      //request  success
+      dispatch({
+        type: USER_PROFILE_SUCCESS,
+        payload: data,
+      });
+
+      //save user into local storage
+      localStorage.setItem("userAuth", JSON.stringify(data));
+    } catch (error) {
+      //request  fail
+      dispatch({
+        type: USER_PROFILE_FAIL,
+        payload: error.message,
+      });
+    }
+  };
+};
+
+export {
+  createUserAction,
+  loginUserAction,
+  userProfileAction,
+  updateProfileAction,
+};

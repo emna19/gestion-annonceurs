@@ -12,7 +12,6 @@ const Profile = () => {
   }, [dispatch]);
 
   const user = useSelector((store) => store.userLogin.userInfo);
-  console.log(user);
 
   document.body.style = "background-color: white";
 
