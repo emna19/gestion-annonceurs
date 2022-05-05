@@ -7,6 +7,10 @@ router.post('/', AudienceController.createAudience);
   //get all types of audience
 router.get('/', AudienceController.allAudiences);
   //get audience by id 
-router.get('/:id', AudienceController.audienceById)
+router.get('/:id', AudienceController.audienceById);
+
+router.put('/:id', AudienceController.updateAudience);
+
+router.delete('/:id', AudienceController.deleteAudience);
 
 module.exports = router;

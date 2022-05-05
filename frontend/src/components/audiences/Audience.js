@@ -37,7 +37,6 @@ export default function Audience() {
 
     function submit(e) {
         e.preventDefault();
-        console.log(e)
         Axios.post(url, {
             name: audience.name,
             minAge: audience.minAge,

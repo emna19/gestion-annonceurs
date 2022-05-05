@@ -40,7 +40,7 @@ const annonceSchema = mongoose.Schema({
     },
     isValid:{
         type:Date,
-        required:true
+        required:false
     },
     User: { 
         type: mongoose.Schema.Types.ObjectId, 

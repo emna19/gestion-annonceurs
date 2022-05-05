@@ -47,7 +47,7 @@ export default function Annonce() {
     console.log(annonce.audience)
 
     useEffect(() => {
-        // GET request using axios inside useEffect React hook
+       
         fetch('http://localhost:5000/audiences')
             .then(res => res.json())
             .then(data => setAudience(data))
@@ -100,7 +100,7 @@ export default function Annonce() {
                                             <option key={index} value={item._id}>{item.name}</option>
                                         ))}
                                     </select>
-                                    <Link to="/Audience" >or create an audience</Link>
+                                    <Link to="/home/audience/create" >or create an audience</Link>
                                 </div>
                                 <div className="col-2 text-center form-label countries-text">Sector:</div>
                                 <div className="col-3">
