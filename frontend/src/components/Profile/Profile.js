@@ -11,9 +11,26 @@ const Profile = () => {
     dispatch(userProfileAction());
   }, [dispatch]);
 
-  const user = useSelector((store) => store.userLogin.userInfo);
+  let user = null 
+  const userAfterLogin = useSelector((store) => store.userLogin.userInfo);
+  console.log("login" , userAfterLogin);
   // const user = useSelector((store) => store.userProfile.user);
+  const userAfterUpdate = useSelector((store) => store.updateProfile.user);
+  console.log("update" , userAfterUpdate);
+
+  if (userAfterUpdate !== null ){
+    user = userAfterUpdate
+    console.log('i picked update ');
+  }
+  else{
+    user = userAfterLogin
+    console.log('i picked login ');
+
+  }
+
   console.log(user);
+
+
 
   document.body.style = "background-color: white";
 
@@ -26,7 +43,7 @@ const Profile = () => {
           alt=""
         />
         <div className="profile-name-frame">
-          <label className="profile-Name  profile-style " htmlFor="inputName">
+          <label className="profile-Name  profile-style " >
             {user.name}
           </label>
         </div>

@@ -10,6 +10,8 @@ import {
   USER_PROFILE_SUCCESS,
   USER_PROFILE_FAIL,
   USER_UPDATE_REQUEST,
+  USER_UPDATE_SUCCESS,
+  USER_UPDATE_FAIL,
 } from "../actionTypes";
 /// create user action
 // name,photo,email,password,organistaion,phone,country,city,codePostal,taxID,adress
@@ -113,11 +115,11 @@ const userProfileAction = () => {
         "http://localhost:5000/users/profile",
         config
       );
-
+      console.log(data.user);
       //request profile success
       dispatch({
         type: USER_PROFILE_SUCCESS,
-        payload: data,
+        payload: data.user,
       });
     } catch (error) {
       //request profile fail
@@ -180,7 +182,7 @@ const updateProfileAction = (
       );
       //request  success
       dispatch({
-        type: USER_PROFILE_SUCCESS,
+        type: USER_UPDATE_SUCCESS,
         payload: data,
       });
 
@@ -189,7 +191,7 @@ const updateProfileAction = (
     } catch (error) {
       //request  fail
       dispatch({
-        type: USER_PROFILE_FAIL,
+        type: USER_UPDATE_FAIL,
         payload: error.message,
       });
     }
