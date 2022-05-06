@@ -115,7 +115,6 @@ const userProfileAction = () => {
         "http://localhost:5000/users/profile",
         config
       );
-      console.log(data.user);
       //request profile success
       dispatch({
         type: USER_PROFILE_SUCCESS,
