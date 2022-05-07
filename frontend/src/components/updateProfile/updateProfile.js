@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateProfileAction } from "../../redux/actions/users/userActions";
-// import { useNavigate } from "@reach/router";
 import { Link } from 'react-router-dom';
 import "./updateProfile.css";
-import { useNavigate } from "@reach/router";
+import { useNavigate } from "react-router-dom";
 
 
 const UpdateProfile = () => {
@@ -16,7 +15,7 @@ const UpdateProfile = () => {
   const [name, setname] = useState(user.name);
   const [email, setemail] = useState(user.email);
   const [password, setpassword] = useState(user.password);
-  const [organisation, setorganisation] = useState(user.organistaion);
+  const [organisation, setorganisation] = useState(user.organisation);
   const [phone, setphone] = useState(user.phone);
   const [country, setcountry] = useState(user.country);
   const [city, setcity] = useState(user.city);
@@ -30,7 +29,7 @@ const UpdateProfile = () => {
   const dispatch = useDispatch();
 
   //navigate to profile 
-// const navigate = useNavigate();
+const navigate = useNavigate();
 
 
 
@@ -56,13 +55,11 @@ const UpdateProfile = () => {
         // photo
       )
     );
+        ///navigate after updating the user
+           navigate('/Profile');
+           console.log(navigate);
   };
 
-  // useEffect(() => {
-  //   if (user) {
-  //      navigate('/Profile');
-  //     }
-  //   });
 
   return (
     <form onSubmit={SubmitHandler}>
@@ -167,11 +164,11 @@ const UpdateProfile = () => {
           <button className="update-profile-button" type="submit">
             Save Changes
           </button>
-          <button className="return-to-profile-button" type="submit">
-            <Link to="/Profile" className='save-changes' >
+          {/* <button className="return-to-profile-button" type="submit">
+             <Link to="/Profile" className='save-changes' >
             Return to profile
-            </Link>
-          </button>
+            </Link> 
+          </button> */}
         </div>
       </div>
     </form>

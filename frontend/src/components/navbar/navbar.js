@@ -9,10 +9,9 @@ import "./navbar.css";
 export default function Navbar(props) {
   const dispatch = useDispatch();
   const navigate = useNavigate()
-    console.log(navigate);
   const logoutHandler = () => {
     dispatch(logoutAction())
-    navigate('/logout')
+    navigate('/login')
   };
 
   return (

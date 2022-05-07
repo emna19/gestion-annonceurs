@@ -180,14 +180,17 @@ const updateProfileAction = (
         },
         config
       );
+      console.log(data.organisation);
+      //save user into local storage
+      localStorage.setItem("userAuth", JSON.stringify(data));
+
       //request  success
       dispatch({
         type: USER_UPDATE_SUCCESS,
         payload: data,
       });
 
-      //save user into local storage
-      localStorage.setItem("userAuth", JSON.stringify(data));
+
     } catch (error) {
       //request  fail
       dispatch({
@@ -202,14 +205,12 @@ const updateProfileAction = (
 
 const logoutAction = () => async (dispatch) => {
   try {
-    //remove user 
-    localStorage.removeItem('userAuth');
+    //remove user
+    localStorage.removeItem("userAuth");
     dispatch({
-      type : USER_LOGOUT_SUCCESS,
-    })
-  } catch (error) {
-    
-  }
+      type: USER_LOGOUT_SUCCESS,
+    });
+  } catch (error) {}
 };
 
 export {

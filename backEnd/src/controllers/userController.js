@@ -88,7 +88,7 @@ const createUser = async (req, res) => {
 const profile = async (req, res) => {
   // find the logged in user
   const user = await User.findById(req.user._id);
-  console.log("USER IS HERE :" , user);
+  // console.log("USER IS HERE :" , user);
   try {
     if (user) {
       return res.status(200).json({ user });
@@ -103,7 +103,7 @@ const profile = async (req, res) => {
 const updateProfile = async (req, res) => {
   //Find the login user by ID
   const user = await User.findById(req.user.id);
-
+  console.log("USER update IS HERE :" , user);
   if (user) {
     user.name = req.body.name || user.name;
     user.email = req.body.email || user.email;
