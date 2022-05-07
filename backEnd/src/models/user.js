@@ -6,9 +6,9 @@ const userSchema = mongoose.Schema({
         type: String,
         required: true,
     },
-    organistaion: {
+    organisation: {
         type: String,
-        required: true,
+        required: false,
     },
     email: {
         type: String,

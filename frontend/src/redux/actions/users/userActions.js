@@ -10,6 +10,9 @@ import {
   USER_PROFILE_SUCCESS,
   USER_PROFILE_FAIL,
   USER_UPDATE_REQUEST,
+  USER_UPDATE_SUCCESS,
+  USER_UPDATE_FAIL,
+  USER_LOGOUT_SUCCESS,
 } from "../actionTypes";
 /// create user action
 // name,photo,email,password,organistaion,phone,country,city,codePostal,taxID,adress
@@ -32,14 +35,16 @@ const createUserAction = (user) => {
         config
       );
 
+    //save user into local storage
+    localStorage.setItem("userAuth", JSON.stringify(data));
+
       dispatch({
         //user register succeess
         type: USER_REGISTER_SUCCESS,
         payload: data,
       });
 
-      //save user into local storage
-      localStorage.setItem("userAuth", JSON.stringify(data));
+  
     } catch (error) {
       dispatch({
         type: USER_REGISTER_FAIL,
@@ -113,11 +118,10 @@ const userProfileAction = () => {
         "http://localhost:5000/users/profile",
         config
       );
-
       //request profile success
       dispatch({
         type: USER_PROFILE_SUCCESS,
-        payload: data,
+        payload: data.user,
       });
     } catch (error) {
       //request profile fail
@@ -178,22 +182,37 @@ const updateProfileAction = (
         },
         config
       );
+      console.log(data.organisation);
+      //save user into local storage
+      localStorage.setItem("userAuth", JSON.stringify(data));
+
       //request  success
       dispatch({
-        type: USER_PROFILE_SUCCESS,
+        type: USER_UPDATE_SUCCESS,
         payload: data,
       });
 
-      //save user into local storage
-      localStorage.setItem("userAuth", JSON.stringify(data));
+
     } catch (error) {
       //request  fail
       dispatch({
-        type: USER_PROFILE_FAIL,
+        type: USER_UPDATE_FAIL,
         payload: error.message,
       });
     }
   };
+};
+
+//// logout action
+
+const logoutAction = () => async (dispatch) => {
+  try {
+    //remove user
+    localStorage.removeItem("userAuth");
+    dispatch({
+      type: USER_LOGOUT_SUCCESS,
+    });
+  } catch (error) {}
 };
 
 export {
@@ -201,4 +220,5 @@ export {
   loginUserAction,
   userProfileAction,
   updateProfileAction,
+  logoutAction,
 };

@@ -6,6 +6,9 @@ import AudView from '../audiences/AudView';
 import AnnView from '../annonce/AnnView';
 import BarChart from '../charts/BarChart';
 
+import { useDispatch, useSelector } from 'react-redux';
+import { userProfileAction } from "../../redux/actions/users/userActions";
+
 export default function Home() {
 
   // const isActive= "carousel-item active card text-center"
@@ -142,8 +145,18 @@ export default function Home() {
   }
 
   let labels=[]
+  let user={}
   let name=[]
   
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(userProfileAction());
+  }, [dispatch]);
+
+  user = useSelector((store) => store.userLogin.userInfo);
+  console.log(user.name)
+
+  document.body.style = "background-color: white";
 
   useEffect(() => {
     // GET request using axios inside useEffect React hook

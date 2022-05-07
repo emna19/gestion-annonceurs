@@ -1,31 +1,32 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateProfileAction } from "../../redux/actions/users/userActions";
-// import { useNavigate } from "@reach/router";
-import { Link } from 'react-router-dom';
 import "./updateProfile.css";
+import { useNavigate } from "react-router-dom";
 
 const UpdateProfile = () => {
   // get user from store
-  const userLogin = useSelector((state) => state.userLogin);
-  const { userInfo } = userLogin;
+  const user = useSelector((state) => state.userProfile.user);
 
   // update user
-  const [name, setname] = useState(userInfo.name);
-  const [email, setemail] = useState(userInfo.email);
-  const [password, setpassword] = useState(userInfo.password);
-  const [organisation, setorganisation] = useState(userInfo.organistaion);
-  const [phone, setphone] = useState(userInfo.phone);
-  const [country, setcountry] = useState(userInfo.country);
-  const [city, setcity] = useState(userInfo.city);
-  const [codePostal, setcodePostal] = useState(userInfo.codePostal);
-  const [taxID, settaxID] = useState(userInfo.taxID);
-  const [adress, setadress] = useState(userInfo.adress);
-  const [state, setstate] = useState(userInfo.state);
-  //  const [photo, setphoto] = useState(userInfo.photo)
+  const [name, setname] = useState(user.name);
+  const [email, setemail] = useState(user.email);
+  const [password, setpassword] = useState(user.password);
+  const [organisation, setorganisation] = useState(user.organisation);
+  const [phone, setphone] = useState(user.phone);
+  const [country, setcountry] = useState(user.country);
+  const [city, setcity] = useState(user.city);
+  const [codePostal, setcodePostal] = useState(user.codePostal);
+  const [taxID, settaxID] = useState(user.taxID);
+  const [adress, setadress] = useState(user.adress);
+  const [state, setstate] = useState(user.state);
+  //  const [photo, setphoto] = useState(user.photo)
 
   //dispatch  update action
   const dispatch = useDispatch();
+
+  //navigate to profile
+  const navigate = useNavigate();
 
   //Submit handler
   const SubmitHandler = (e) => {
@@ -46,6 +47,10 @@ const UpdateProfile = () => {
         // photo
       )
     );
+
+    console.log(setorganisation(e.target.value));
+    ///navigate after updating the user
+    navigate("/Profile");
   };
 
   return (
@@ -151,11 +156,11 @@ const UpdateProfile = () => {
           <button className="update-profile-button" type="submit">
             Save Changes
           </button>
-          <button className="return-to-profile-button" type="submit">
-            <Link to="/Profile" className='save-changes' >
+          {/* <button className="return-to-profile-button" type="submit">
+             <Link to="/Profile" className='save-changes' >
             Return to profile
-            </Link>
-          </button>
+            </Link> 
+          </button> */}
         </div>
       </div>
     </form>
