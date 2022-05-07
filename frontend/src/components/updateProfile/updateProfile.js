@@ -1,14 +1,12 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateProfileAction } from "../../redux/actions/users/userActions";
-import { Link } from "react-router-dom";
 import "./updateProfile.css";
 import { useNavigate } from "react-router-dom";
 
 const UpdateProfile = () => {
   // get user from store
   const user = useSelector((state) => state.userProfile.user);
-  console.log(user);
 
   // update user
   const [name, setname] = useState(user.name);

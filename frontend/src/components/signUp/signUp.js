@@ -1,6 +1,6 @@
 import "./signUp.css";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import {  useState } from "react";
+import { useDispatch } from "react-redux";
 import { createUserAction } from "../../redux/actions/users/userActions";
 import { useNavigate } from "react-router-dom";
 
