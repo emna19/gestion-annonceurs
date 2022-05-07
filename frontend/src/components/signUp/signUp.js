@@ -36,11 +36,9 @@ export default function SignUp() {
     const newUser = {...user};
     newUser[e.target.id] = e.target.value;
     setUser(newUser);
-    console.log('new',newUser);
 
   }
 
- console.log('old', user);
 
   function formSubmitHandler(e) {
     e.preventDefault();

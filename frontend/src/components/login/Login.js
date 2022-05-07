@@ -14,9 +14,8 @@ const Login = () => {
 
   //  fetching user login from store
   const userLogin = useSelector((store) => store.userLogin);
-  // console.log(userLogin.userInfo);
   const userInfo = userLogin.userInfo;
-  // console.log(userInfo);
+
   const navigate = useNavigate();
 
   //  redirecting if user is logged in
