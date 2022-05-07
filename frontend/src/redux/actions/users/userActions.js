@@ -35,14 +35,16 @@ const createUserAction = (user) => {
         config
       );
 
+    //save user into local storage
+    localStorage.setItem("userAuth", JSON.stringify(data));
+
       dispatch({
         //user register succeess
         type: USER_REGISTER_SUCCESS,
         payload: data,
       });
 
-      //save user into local storage
-      localStorage.setItem("userAuth", JSON.stringify(data));
+  
     } catch (error) {
       dispatch({
         type: USER_REGISTER_FAIL,

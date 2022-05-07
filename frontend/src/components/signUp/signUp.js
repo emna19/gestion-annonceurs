@@ -5,7 +5,7 @@ import { createUserAction } from "../../redux/actions/users/userActions";
 import { useNavigate } from "react-router-dom";
 
 
-export default function SignUp({ history }) {
+export default function SignUp() {
   //add background color to signup
   document.body.style = "background-color:  #114a71";
 
@@ -15,7 +15,7 @@ export default function SignUp({ history }) {
     photo: "",
     email: "",
     password: "",
-    organisation: "hh",
+    organisation: "",
     phone: "",
     country: "",
     city: "",
@@ -27,33 +27,26 @@ export default function SignUp({ history }) {
   //dispatching
   const dispatch = useDispatch();
 
-    //  fetching user login from store
-    const userLogin = useSelector((store) => store.userLogin);
-    // console.log(userLogin.userInfo);
-    const userInfo = userLogin.userInfo;
-    // console.log(userInfo);
     const navigate = useNavigate();
-    //  redirecting if user is logged in
-    useEffect(() => {
-      if (userInfo) {
-        navigate("/login");
-      }
-    });
+
+
 
   // entering user data
   function handle(e) {
-    const newUser = { ...user };
+    const newUser = {...user};
     newUser[e.target.id] = e.target.value;
     setUser(newUser);
+    console.log('new',newUser);
+
   }
 
-  console.log(user);
+ console.log('old', user);
 
   function formSubmitHandler(e) {
     e.preventDefault();
     //dispatch user create action
     dispatch(createUserAction(user)); 
-    //  navigate('/login');
+     navigate('/login');
   }
 
   //change the background-color of each body in component
@@ -114,7 +107,7 @@ export default function SignUp({ history }) {
                   type="text"
                   className="form-control"
                   onChange={handle}
-                  id="organistaion"
+                  id="organisation"
                   value={user.organisation}
                   placeholder="Organisation"
                   required
@@ -135,7 +128,7 @@ export default function SignUp({ history }) {
             <div className="input-elements row g-2">
               <div className="col-md-7">
                 <input
-                  type="text"
+                  type="number"
                   className="form-control"
                   onChange={handle}
                   id="phone"
@@ -146,7 +139,7 @@ export default function SignUp({ history }) {
               </div>
               <div className="col-md-5">
                 <input
-                  type="text"
+                  type="number"
                   className="form-control"
                   onChange={handle}
                   id="taxID"
@@ -170,7 +163,7 @@ export default function SignUp({ history }) {
               </div>
               <div className="col-md-5">
                 <input
-                  type="text"
+                  type="number"
                   className="form-control"
                   onChange={handle}
                   id="codePostal"
