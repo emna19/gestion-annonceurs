@@ -12,11 +12,11 @@ const Profile = () => {
     dispatch(userProfileAction());
   }, [dispatch]);
 
-  let user = null;
+  let user = {};
   // const user = useSelector((store) => store.userProfile.user);
 
   if (useSelector((store) => store.updateProfile.success) === true) {
-    console.log("i picked update ");
+    console.log("i picked update "  );
      user = useSelector((store) => store.updateProfile.user);
   } else {
     console.log("i picked login ");
@@ -41,7 +41,7 @@ const Profile = () => {
       <div className="profile-details-frame">
         <div className="profile-account-details"> Account Details </div>
         <div className="profile-account-organisation profile-style">
-          Organisation Name : {user.organistaion}
+          Organisation Name : {user.organisation}
         </div>
         <div className="profile-account-email profile-style">
           Email : {user.email}
@@ -56,7 +56,7 @@ const Profile = () => {
           adress : {user.adress}
         </div>
         <div className="profile-account-postcode  profile-style">
-          postcode: {user.postcode}
+          postcode: {user.codePostal}
         </div>
         <div className="profile-account-country profile-style ">
           country : {user.country}

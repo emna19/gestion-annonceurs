@@ -8,6 +8,7 @@ const reducer = {
   userLogin : UserReducer ,// contains login & signup reducer 
   userProfile : userProfileReducer ,
   updateProfile : updateProfileReducer,
+  
 };
 
 // get user from local storage to save it

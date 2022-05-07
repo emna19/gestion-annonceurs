@@ -1,7 +1,9 @@
 import "./signUp.css";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { createUserAction } from "../../redux/actions/users/userActions";
+import { useNavigate } from "react-router-dom";
+
 
 export default function SignUp({ history }) {
   //add background color to signup
@@ -13,7 +15,7 @@ export default function SignUp({ history }) {
     photo: "",
     email: "",
     password: "",
-    organistaion: "",
+    organisation: "hh",
     phone: "",
     country: "",
     city: "",
@@ -25,7 +27,19 @@ export default function SignUp({ history }) {
   //dispatching
   const dispatch = useDispatch();
 
- 
+    //  fetching user login from store
+    const userLogin = useSelector((store) => store.userLogin);
+    // console.log(userLogin.userInfo);
+    const userInfo = userLogin.userInfo;
+    // console.log(userInfo);
+    const navigate = useNavigate();
+    //  redirecting if user is logged in
+    useEffect(() => {
+      if (userInfo) {
+        navigate("/login");
+      }
+    });
+
   // entering user data
   function handle(e) {
     const newUser = { ...user };
@@ -33,10 +47,13 @@ export default function SignUp({ history }) {
     setUser(newUser);
   }
 
+  console.log(user);
+
   function formSubmitHandler(e) {
     e.preventDefault();
     //dispatch user create action
-    dispatch(createUserAction(user));
+    dispatch(createUserAction(user)); 
+    //  navigate('/login');
   }
 
   //change the background-color of each body in component
@@ -98,7 +115,7 @@ export default function SignUp({ history }) {
                   className="form-control"
                   onChange={handle}
                   id="organistaion"
-                  value={user.organistaion}
+                  value={user.organisation}
                   placeholder="Organisation"
                   required
                 />

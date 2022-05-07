@@ -1,10 +1,9 @@
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateProfileAction } from "../../redux/actions/users/userActions";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import "./updateProfile.css";
 import { useNavigate } from "react-router-dom";
-
 
 const UpdateProfile = () => {
   // get user from store
@@ -28,13 +27,8 @@ const UpdateProfile = () => {
   //dispatch  update action
   const dispatch = useDispatch();
 
-  //navigate to profile 
-const navigate = useNavigate();
-
-
-
-
-
+  //navigate to profile
+  const navigate = useNavigate();
 
   //Submit handler
   const SubmitHandler = (e) => {
@@ -55,11 +49,11 @@ const navigate = useNavigate();
         // photo
       )
     );
-        ///navigate after updating the user
-           navigate('/Profile');
-           console.log(navigate);
-  };
 
+    console.log(setorganisation(e.target.value));
+    ///navigate after updating the user
+    navigate("/Profile");
+  };
 
   return (
     <form onSubmit={SubmitHandler}>
