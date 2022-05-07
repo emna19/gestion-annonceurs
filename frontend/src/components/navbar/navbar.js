@@ -13,6 +13,9 @@ export default function Navbar(props) {
     dispatch(logoutAction())
     navigate('/login')
   };
+  const Edit = () => {
+    navigate('/profile')
+  };
 
   return (
     <nav className="navbar">
@@ -30,6 +33,9 @@ export default function Navbar(props) {
           Logout
         </Link>
       </p>
+      <Link  onClick={Edit} to="/Profile" className="logout">
+          Profile
+        </Link>
     </nav>
   );
 }

@@ -21,7 +21,7 @@ const Login = () => {
   //  redirecting if user is logged in
   useEffect(() => {
     if (userInfo) {
-      navigate("/Profile");
+      navigate("/home");
     }
   });
 
