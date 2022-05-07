@@ -12,6 +12,7 @@ import {
   USER_UPDATE_REQUEST,
   USER_UPDATE_SUCCESS,
   USER_UPDATE_FAIL,
+  USER_LOGOUT_SUCCESS,
 } from "../actionTypes";
 /// create user action
 // name,photo,email,password,organistaion,phone,country,city,codePostal,taxID,adress
@@ -197,9 +198,24 @@ const updateProfileAction = (
   };
 };
 
+//// logout action
+
+const logoutAction = () => async (dispatch) => {
+  try {
+    //remove user 
+    localStorage.removeItem('userAuth');
+    dispatch({
+      type : USER_LOGOUT_SUCCESS,
+    })
+  } catch (error) {
+    
+  }
+};
+
 export {
   createUserAction,
   loginUserAction,
   userProfileAction,
   updateProfileAction,
+  logoutAction,
 };
