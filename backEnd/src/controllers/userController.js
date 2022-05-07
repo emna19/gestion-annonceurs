@@ -1,6 +1,7 @@
 const User = require("../models/user");
 const generateToken = require("../utils/generateToken");
-const jwt = require ('jsonwebtoken')
+const jwt = require("jsonwebtoken");
+
 const allUsers = async (req, res) => {
   try {
     await User.find({}).then((result) => {
@@ -49,7 +50,7 @@ const createUser = async (req, res) => {
     let new_user = new User({
       id: user._id,
       name: user.name,
-      organistaion: user.organistaion,
+      organisation: user.organisation,
       email: user.email,
       password: user.password,
       adress: user.adress,
@@ -64,7 +65,7 @@ const createUser = async (req, res) => {
     await new_user.save();
     res.status(201).json({
       name: new_user.name,
-      organistaion: new_user.organistaion,
+      organisation: new_user.organisation,
       email: new_user.email,
       password: new_user.password,
       adress: new_user.adress,
@@ -88,10 +89,12 @@ const createUser = async (req, res) => {
 const profile = async (req, res) => {
   // find the logged in user
   const user = await User.findById(req.user._id);
-  console.log("USER IS HERE :" , user);
+  // console.log("USER IS HERE :" , user);
   try {
     if (user) {
-      return res.status(200).json({ user });
+      return res
+        .status(200)
+        .json({ user, token: generateToken(user._id) });
     }
     return res.status(404).send({ status: "error", user: false });
   } catch (err) {
@@ -103,11 +106,11 @@ const profile = async (req, res) => {
 const updateProfile = async (req, res) => {
   //Find the login user by ID
   const user = await User.findById(req.user.id);
-
+  console.log("USER update IS HERE :", user);
   if (user) {
     user.name = req.body.name || user.name;
     user.email = req.body.email || user.email;
-    user.organistaion = req.body.organistaion || user.organistaion;
+    user.organisation = req.body.organisation || user.organisation;
     user.adress = req.body.adress || user.adress;
     user.phone = req.body.phone || user.phone;
     user.country = req.body.country || user.country;

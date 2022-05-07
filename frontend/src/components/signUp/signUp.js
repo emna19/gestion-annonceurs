@@ -1,9 +1,11 @@
 import "./signUp.css";
-import { useState } from "react";
+import {  useState } from "react";
 import { useDispatch } from "react-redux";
 import { createUserAction } from "../../redux/actions/users/userActions";
+import { useNavigate } from "react-router-dom";
 
-export default function SignUp({ history }) {
+
+export default function SignUp() {
   //add background color to signup
   document.body.style = "background-color:  #114a71";
 
@@ -13,7 +15,7 @@ export default function SignUp({ history }) {
     photo: "",
     email: "",
     password: "",
-    organistaion: "",
+    organisation: "",
     phone: "",
     country: "",
     city: "",
@@ -25,18 +27,24 @@ export default function SignUp({ history }) {
   //dispatching
   const dispatch = useDispatch();
 
- 
+    const navigate = useNavigate();
+
+
+
   // entering user data
   function handle(e) {
-    const newUser = { ...user };
+    const newUser = {...user};
     newUser[e.target.id] = e.target.value;
     setUser(newUser);
+
   }
+
 
   function formSubmitHandler(e) {
     e.preventDefault();
     //dispatch user create action
-    dispatch(createUserAction(user));
+    dispatch(createUserAction(user)); 
+     navigate('/login');
   }
 
   //change the background-color of each body in component
@@ -97,8 +105,8 @@ export default function SignUp({ history }) {
                   type="text"
                   className="form-control"
                   onChange={handle}
-                  id="organistaion"
-                  value={user.organistaion}
+                  id="organisation"
+                  value={user.organisation}
                   placeholder="Organisation"
                   required
                 />
@@ -118,7 +126,7 @@ export default function SignUp({ history }) {
             <div className="input-elements row g-2">
               <div className="col-md-7">
                 <input
-                  type="text"
+                  type="number"
                   className="form-control"
                   onChange={handle}
                   id="phone"
@@ -129,7 +137,7 @@ export default function SignUp({ history }) {
               </div>
               <div className="col-md-5">
                 <input
-                  type="text"
+                  type="number"
                   className="form-control"
                   onChange={handle}
                   id="taxID"
@@ -153,7 +161,7 @@ export default function SignUp({ history }) {
               </div>
               <div className="col-md-5">
                 <input
-                  type="text"
+                  type="number"
                   className="form-control"
                   onChange={handle}
                   id="codePostal"
