@@ -12,9 +12,7 @@ const reducer = {
 };
 
 // get user from local storage to save it
-const userAuthFromStorage = localStorage.getItem("userAuth")
-  ? JSON.parse(localStorage.getItem("userAuth"))
-  : null;
+const userAuthFromStorage = localStorage.getItem("userAuth") !== null ? JSON.parse(localStorage.getItem("userAuth")) : null;
 
 // save user for login
 const initialState = {

@@ -49,7 +49,11 @@ const userSchema = mongoose.Schema({
     photo:{
         type : String,
         required:false
-    }
+    },
+    token: {
+        type : String,
+        required : false
+    } 
     //missing photo and one other
 },{timestamps: true});//timestamp for updated at and created at
 

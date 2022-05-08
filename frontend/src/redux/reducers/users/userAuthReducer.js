@@ -8,7 +8,7 @@ import {
   USER_REGISTER_SUCCESS,
 } from "../../actions/actionTypes";
 
-const UserReducer = (state = {}, action) => {
+const UserReducer = (state, action) => {
   switch (action.type) {
     //REGISTER
     case USER_REGISTER_REQUEST:
@@ -41,9 +41,9 @@ const UserReducer = (state = {}, action) => {
 
     //LOGOUT
     case USER_LOGOUT_SUCCESS:
-      return {};
+      return (localStorage.setItem("userAuth", null))
     default:
-      return state;
+      return state={};
   }
 };
 

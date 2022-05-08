@@ -83,10 +83,24 @@ const deleteAnnonce = async (req, res) => {
     }
 }
 
+const getAdvretisementsByUserId = async (req, res) => {
+    try {
+        await Annonce.find({"User": req.params.id})
+        .then(result => {
+            res.status(200).send(result);
+        })
+    }
+    catch (err) {
+        console.log(err)
+        res.status(404).send(`annonce not found`, err);
+    }
+}
+
 module.exports = {
     allAnnonces,
     annonceById,
     createAnnonce,
     updateAnnonce,
-    deleteAnnonce
+    deleteAnnonce,
+    getAdvretisementsByUserId
 }

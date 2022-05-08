@@ -8,6 +8,8 @@ import BarChart from '../charts/BarChart';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { userProfileAction } from "../../redux/actions/users/userActions";
+import {initialState} from '../../redux/store/store'
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
 
@@ -15,6 +17,7 @@ export default function Home() {
   // const nActive= "carousel-item card text-center"
 
   const [audience, setAudience] = useState([])
+  const [blah, setBlah] = useState([])
 
   
 
@@ -52,6 +55,8 @@ export default function Home() {
 
   const [chartAudience, setChartAudience] = useState({})
 
+  const navigate = useNavigate();
+
 
   const styles = {
     container_home: {
@@ -88,8 +93,12 @@ export default function Home() {
 
   }
 
+  const userLogin = useSelector((store) => store.userLogin);
+  const userInfo = userLogin.userInfo;
   function addAnnonce(e) {
-      window.location.href = '/home/annonce/create'
+    if (localStorage.getItem("userAuth") !== null) {
+      navigate('/home/annonce/create')
+    }
   }
 
   function deleteAnnonce() {
@@ -152,19 +161,21 @@ export default function Home() {
   useEffect(() => {
     dispatch(userProfileAction());
   }, [dispatch]);
-
-  user = useSelector((store) => store.userLogin.userInfo);
+  
+  user = JSON.parse(localStorage.getItem("userAuth"));
   console.log(user.name)
 
   document.body.style = "background-color: white";
 
+  
   useEffect(() => {
-    // GET request using axios inside useEffect React hook
-    fetch('http://localhost:5000/audiences')
-      .then(res => res.json())
-      .then(data => {
-        setAudience(data)
-        for(const dataObj of data){
+  if (annonce.length !==0) {
+  Promise.all([
+    Axios.get('http://localhost:5000/audiences/'+annonce[0].audience),
+    Axios.get('http://localhost:5000/audiences/'+annonce[1].audience)  ])
+      .then((values) => {
+        setAudience(values.map(item =>item.data))
+        for(const dataObj of values.map(item =>item.data)){
           labels.push(parseInt(dataObj.minAge))
           labels.push(parseInt(dataObj.maxAge))
           name.push(dataObj.name)
@@ -176,9 +187,15 @@ export default function Home() {
             data: labels
           }]
         })
+        
       })
+      }
+    },[annonce])
+      
+
+  useEffect(() => {
     
-    fetch('http://localhost:5000/annonces')
+    fetch('http://localhost:5000/annonces/user/'+user._id)
       .then(res => res.json())
       .then(data => setAnnonce(data))
       
@@ -186,9 +203,11 @@ export default function Home() {
 // empty dependency array means this effect will only run once (like componentDidMount in classes)
   }, []);
 
+  console.log(audience)
   console.log(annonce)
+  if (annonce.length!==0) console.log(annonce[0].audience)
 
-  if (annonce.length !== 0) console.log(format( parseISO(annonce[2].startDate), 'yyyy/MM/dd kk:mm:ss'));
+  if (annonce.length !== 0) {console.log(format( parseISO(annonce[0].startDate), 'yyyy/MM/dd kk:mm:ss')); console.log(annonce[0].audience)}
 
     return(
       <div className="home" style={styles.home}> 
