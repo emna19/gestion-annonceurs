@@ -51,6 +51,8 @@ export default function Home() {
 
   const [componentName, setComponentName] = useState()
 
+  const [impression, setImpression] = useState([])
+
   const [item, setItem] = useState({})
 
   const [chartAudience, setChartAudience] = useState({})
@@ -167,26 +169,28 @@ export default function Home() {
 
   document.body.style = "background-color: white";
 
-  
+  // to not display same audience in different advertisements
+  let audienceInAnnonce = annonce.map(item => item.audience)
+  let uniqAudience = [...new Set(audienceInAnnonce)];
+
   useEffect(() => {
   if (annonce.length !==0) {
-  Promise.all([
-    Axios.get('http://localhost:5000/audiences/'+annonce[0].audience),
-    Axios.get('http://localhost:5000/audiences/'+annonce[1].audience)  ])
+    const promises = uniqAudience.map(item => Axios.get('http://localhost:5000/audiences/'+item))
+    Promise.all( promises)
       .then((values) => {
         setAudience(values.map(item =>item.data))
-        for(const dataObj of values.map(item =>item.data)){
-          labels.push(parseInt(dataObj.minAge))
-          labels.push(parseInt(dataObj.maxAge))
-          name.push(dataObj.name)
-        }
-        setChartAudience({
-          labels: name,
-          datasets: [{
-            label:'Audience Age',
-            data: labels
-          }]
-        })
+        // for(const dataObj of values.map(item =>item.data)){
+        //   labels.push(parseInt(dataObj.minAge))
+        //   labels.push(parseInt(dataObj.maxAge))
+        //   name.push(dataObj.name)
+        // }
+        // setChartAudience({
+        //   labels: name,
+        //   datasets: [{
+        //     label:'Audience Age',
+        //     data: labels
+        //   }]
+        // })
         
       })
       }
@@ -203,7 +207,32 @@ export default function Home() {
 // empty dependency array means this effect will only run once (like componentDidMount in classes)
   }, []);
 
-  console.log(audience)
+  
+  useEffect(() => {
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id: annonce.map(item =>item._id)})
+  };
+    fetch("http://localhost:5000/impressions/annonces/",requestOptions).then(res => res.json())
+    .then(data => setImpression(data))
+  },[annonce])
+
+  useEffect(() => {
+    let count={}
+    impression.forEach(function(x) {
+        count[x.annonce] = (count[x.annonce] || 0) + 1 ;
+    })
+    setChartAudience({
+        labels: annonce.map(item =>item.name),
+        datasets: [{
+            label:'Impression Date',
+            data: Object.values(count)
+        }]
+    })
+},[impression])
+
+  console.log(impression)
   console.log(annonce)
   if (annonce.length!==0) console.log(annonce[0].audience)
 
