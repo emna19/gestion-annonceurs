@@ -9,6 +9,7 @@ import Home from './components/home/home'
 import Navbar from './components/navbar/navbar'
 import Audience from './components/audiences/Audience';
 import CreateAnnonce from './components/annonce/Annonce'
+import Admin from './components/Admin/Admin';
 // import AudView from './components/audiences/AudView'
 // import AnnView from './components/annonce/AnnView'
 
@@ -21,6 +22,7 @@ function App() {
     <Router>
       <Routes>
         <Route  exact path="/signup" element={  <SignUp/>} />
+        <Route  exact path="/Admin" element={ <div> <Navbar /> <Admin/> </div> } />
         <Route  exact path="/login" element={ <Login/>} />
         <Route exact path="/Profile" element={ <div> <Navbar /><br/> <Profile/></div> }/>
         <Route  exact path="/update" element={  <div> <Navbar /><br/> <UpdateProfile/> </div>} />

@@ -1,24 +1,18 @@
 import {useEffect , useState} from 'react'
-import  Axios  from 'axios';
 import { parseISO, format } from 'date-fns';
-import BarChart from '../charts/BarChart';
+import  Axios  from 'axios';
 
+export default function AnnViewAdmin(props) {
 
-export default function AudView(props) {
-
-    const url = "http://localhost:5000/annonces/"+props.infos._id
+    const [aud, setAud] = useState([]);
 
     const [clicked, setClicked] = useState(false)
 
-    const [verifyClicked, setVerifyClicked] = useState(false)
+    const [updatedAt, setUpdatedAt] = useState()
 
     const [audience, setAudience] = useState([])
 
-    const [impression, setImpression] = useState([])
-
-    const [updatedAt, setUpdatedAt] = useState()
-
-    const [chartAudience, setChartAudience] = useState({})
+    const url = "http://localhost:5000/annonces/"+props.infos._id
 
     const [annonce, setAnnonce] = useState({
         name : 'Name',
@@ -43,7 +37,6 @@ export default function AudView(props) {
         paddingTop: "5px"
         }
     }
-    // console.log(new Date(annonce.startDate).toISOString())
 
     function handle(e) {
         const newAnnonce = {...annonce}
@@ -53,18 +46,26 @@ export default function AudView(props) {
         setAnnonce(newAnnonce)
     }
 
+    function validate(e) {
+        Axios.put(url, {"isValid": true})
+            .then(response => {return (setUpdatedAt(response.data.updatedAt))});
+    }
+
     function submit(e) {
         e.preventDefault()
+        console.log(annonce)
         Axios.put(url, annonce)
             .then(response => {return (setUpdatedAt(response.data.updatedAt), setClicked(!clicked))});
     }
 
-    
-    
-
     useEffect(() => {
         setAnnonce(props.infos)
     }, [props.infos])
+
+    useEffect(() => {
+        Axios.get('http://localhost:5000/audiences/'+props.infos.audience)
+        .then(res => setAud(res.data))
+    },[])
 
     useEffect(() => {
        
@@ -75,56 +76,9 @@ export default function AudView(props) {
     // empty dependency array means this effect will only run once (like componentDidMount in classes)
       }, []);
 
-    useEffect(() => {
-        if(annonce._id!==undefined){
-            Axios.get('http://localhost:5000/impressions/annonce/'+annonce._id)
-            .then(res => {
-            setImpression(res.data)
-            console.log(impression)
-             
-        })
-        }
-        
-    },[annonce])
-
-    useEffect(() => {
-        let count={}
-        impression.forEach(function(x) {
-            count[x.date] = (count[x.date] || 0) + 1 ;
-        })
-        setChartAudience({
-            labels: Object.keys(count),
-            datasets: [{
-                label:'Impression Date',
-                data: Object.values(count)
-            }]
-        })
-    },[impression])
-
-    console.log(verifyClicked)
-
-    return (
-        <>
-        { verifyClicked && 
-        <div>
-            <svg onClick={() => {return (setVerifyClicked(!verifyClicked))} } xmlns="http://www.w3.org/2000/svg" style={{margin:"12px 0px 0px 22px"}} width="25" height="25" fill="currentColor" className="bi bi-arrow-left" viewBox="0 0 16 16">
-                <path fillRule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
-            </svg>
-            <div style={{height: "304px",width: "608px"}} >
-            
-                {impression.length!== 0 && <div style={{textAlign: "center",
-                    margin: "15px",
-                    marginTop: 0,
-                    position: "absolute",
-                    left: "1%",
-                    right: "1%"}}>
-                    <BarChart chartData={chartAudience}/>
-                    </div>
-                } 
-            </div>
-        </div>
-        }
-        { (!clicked && !verifyClicked) && <div className="card text-center" style={ styles.card }>
+    return( 
+    <>
+        { !clicked && <div className="card text-center" style={ styles.card }>
         <div className=" card-body" style={ styles.cardBody }>
            <div className="row mb-3 justify-content-between align-items-center">
             <div className='col-auto' onClick={() => {setClicked(!clicked)}}>
@@ -178,24 +132,26 @@ export default function AudView(props) {
                 <span className="col-4 text-start card-text fw-bold">Type:</span>
                 <div className='col-8 text-start movieIds'>{ annonce.type}</div>
             </div> 
-            <div className="row mb-1 px-3">
-                <div className='text-center'>
-                <button type="button" className="home-container-Add"
-                style={{height: "38px", width: "78px", letterSpacing: "0.1em", fontSize: "17px"}}
-                 onClick={() => {return ( 
-                            setVerifyClicked(!verifyClicked)
-                           )} }>
-                          Verify
-                </button>
-                </div>
-            </div>
+            {annonce.isValid ?  
+                <i style={{color: "green"}} className="material-icons">check</i> :
+            
+                <div className="row px-3">
+                    <div className='text-center'>
+                    <button id="isValid" type="button" className="home-container-Add"
+                    style={{height: "38px"}}
+                    onClick={() =>  {return(validate())}}>
+                            Validate
+                    </button>
+                    </div>
+                </div>   
+            }
+            
         </div>
         
         </div>
         }
-        {/* { audience.length!== 0 && <BarChart chartData={chartAudience}/>} */}
-        
-        
+
+
         { clicked && <div className="Annonce edit card text-center" style={ styles.card }>
         <div className=" card-body" style={ styles.cardBody }>
            <div className="row justify-content-between align-items-center">
@@ -276,6 +232,5 @@ export default function AudView(props) {
         </div>
         </div>
         }
-        </>
-        )
+    </>)
 }

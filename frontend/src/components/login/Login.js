@@ -18,10 +18,12 @@ const Login = () => {
 
   const navigate = useNavigate();
 
+  console.log(userInfo)
+
   //  redirecting if user is logged in
   useEffect(() => {
     if (userInfo) {
-      navigate("/home");
+      (userInfo.isAdmin ? navigate("/Admin") : navigate("/home"))
     }
   });
 

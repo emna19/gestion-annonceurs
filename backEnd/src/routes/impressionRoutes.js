@@ -13,7 +13,7 @@ router.post('/annonces/', ImpressionController.getImpressionsByAdvretisementsId)
 // //get impression by id 
 router.get('/:id', ImpressionController.impressionById);
 
-//create audience 
+//create impression 
 router.post('/', ImpressionController.createImpression);
 
 

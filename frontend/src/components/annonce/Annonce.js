@@ -34,7 +34,6 @@ export default function Annonce() {
 
     function submit(e) {
         e.preventDefault();
-        console.log(e)
         Axios.post(url, {
             name: annonce.name,
             startDate: annonce.startDate,

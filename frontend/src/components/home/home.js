@@ -5,6 +5,8 @@ import  Axios  from 'axios';
 import AudView from '../audiences/AudView';
 import AnnView from '../annonce/AnnView';
 import BarChart from '../charts/BarChart';
+import Film from '../film/film';
+
 
 import { useDispatch, useSelector } from 'react-redux';
 import { userProfileAction } from "../../redux/actions/users/userActions";
@@ -17,7 +19,6 @@ export default function Home() {
   // const nActive= "carousel-item card text-center"
 
   const [audience, setAudience] = useState([])
-  const [blah, setBlah] = useState([])
 
   
 
@@ -226,7 +227,7 @@ export default function Home() {
     setChartAudience({
         labels: annonce.map(item =>item.name),
         datasets: [{
-            label:'Impression Date',
+            label:'Impressions',
             data: Object.values(count)
         }]
     })
@@ -241,12 +242,25 @@ export default function Home() {
     return(
       <div className="home" style={styles.home}> 
         <main className="container-home" style={styles.container_home}>
-          <div className="home-container-head">
+          <div className="home-container-head" style={{marginBottom: 0}}>
             <h5 className="home-container-title">Statistics</h5>
           </div>
-          <div className="statics login-container">
-            <div style={{width: 400}}>{ audience.length!== 0 && <BarChart chartData={chartAudience}/>} </div>
-          </div>
+          
+            <div className="login-container" style={{width: "700px", 
+              height: "400px", 
+              backgroundImage: "none",
+              padding: 0, 
+              marginBottom: 0}}
+            >
+              { audience.length!== 0 && <div style={{textAlign: "center",
+                      
+                      position: "absolute",
+                      left: "1%",
+                      right: "1%",}}><BarChart chartData={chartAudience}/>
+                    </div>
+              } 
+            </div>
+          
           <div className="home-container-head">
             <h5 className="home-container-title">Advertisements</h5>
             <div className='row mb-2 justify-content-between align-items-center'>
@@ -274,12 +288,21 @@ export default function Home() {
               {annonce.map((item, index) =>(
                   <div key={index} className="card text-center">
                   <div className="card-body">
-                    <div className='row mb-2 justify-content-between'>
+                    <div className='row mb-4 justify-content-between'>
                       <div className="col-auto form-check">
                         <input className="form-check-input" type="checkbox" value="" id={item._id} onChange={handleChangeAnnonce} checked={isCheckedAnnonce.includes(item._id)}/>
                         <label className="form-check-label" htmlFor="flexCheckDefault"></label>
                       </div>
-                      <div className="col-auto" style={{padding:"0px"}}>
+               
+            
+                      <div className="col-auto" style={{padding:"0px", display:"flex", gap: "8px"}}>
+                      
+                        <button type="button" className="home-container-Add"
+                        style={{width: "65px"}}
+                        onClick={() => {return (navigate("/film", {state: {item}})) } }>
+                                  Verify
+                        </button>
+                
                         <button type="button" className="home-container-Delete" onClick={() => {return (
                             setViewClicked(!viewClicked),
                             setComponentName("Annonce"),
@@ -299,13 +322,14 @@ export default function Home() {
                       <span className="col-auto text-start card-text">End date:</span>
                       <div className='col-auto'>{format( parseISO(item.startDate), 'yyyy/MM/dd kk:mm:ss')}</div>
                     </div>
-                    {item.isValid ?  null: <div className='row mb-2 validation'>
+                    {item.isValid ?  null: <div className='row mb-3 validation'>
                       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="red" className="col-auto bi bi-x-circle" viewBox="0 0 16 16">
                         <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
                         <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
                       </svg>
                       <div className='col-auto'>Waiting for validation</div>
                     </div> }
+                    
                   </div>
                 </div>
                 ))}
