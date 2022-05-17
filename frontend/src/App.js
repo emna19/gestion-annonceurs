@@ -10,6 +10,7 @@ import Navbar from './components/navbar/navbar'
 import Audience from './components/audiences/Audience';
 import CreateAnnonce from './components/annonce/Annonce'
 import Admin from './components/Admin/Admin';
+import Film from './components/film/film'
 // import AudView from './components/audiences/AudView'
 // import AnnView from './components/annonce/AnnView'
 
@@ -23,6 +24,7 @@ function App() {
       <Routes>
         <Route  exact path="/signup" element={  <SignUp/>} />
         <Route  exact path="/Admin" element={ <div> <Navbar /> <Admin/> </div> } />
+        <Route  exact path="/film" element={  <Film/>} />
         <Route  exact path="/login" element={ <Login/>} />
         <Route exact path="/Profile" element={ <div> <Navbar /><br/> <Profile/></div> }/>
         <Route  exact path="/update" element={  <div> <Navbar /><br/> <UpdateProfile/> </div>} />
