@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import Axios from 'axios'
 
+import { useDispatch, useSelector } from 'react-redux';
+import { userProfileAction } from "../../redux/actions/users/userActions";
+
 export default function Annonce() {
 
     const url = "http://localhost:5000/annonces"
@@ -19,6 +22,7 @@ export default function Annonce() {
         clickUrl : '',
         sourceUrl : '',
         type : '',
+        User: ''
     }) 
     // still not complete
 
@@ -30,7 +34,6 @@ export default function Annonce() {
 
     function submit(e) {
         e.preventDefault();
-        console.log(e)
         Axios.post(url, {
             name: annonce.name,
             startDate: annonce.startDate,
@@ -40,11 +43,21 @@ export default function Annonce() {
             audience: annonce.audience,
             clickUrl: annonce.clickUrl,
             sourceUrl: annonce.sourceUrl,
-            type: annonce.type
+            type: annonce.type,
+            User: user._id
         })
         .then(res => {window.location.href = '/Home'})
     }
     console.log(annonce.audience)
+
+    const dispatch = useDispatch();
+    useEffect(() => {
+      dispatch(userProfileAction());
+    }, [dispatch]);
+
+    let user={}
+    user = JSON.parse(localStorage.getItem("userAuth"));
+    console.log(user._id)
 
     useEffect(() => {
        
