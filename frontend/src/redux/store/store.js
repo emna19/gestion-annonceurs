@@ -14,6 +14,7 @@ import {
   REGISTER,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage'
+import { SignUpReducer } from "../reducers/users/userSignupReducer";
 
 const persistConfig ={
   key : 'persist-key',
@@ -22,7 +23,8 @@ const persistConfig ={
 
 
 const reducer = combineReducers({
-  userLogin : UserReducer ,// contains login & signup reducer 
+  userSignUp : SignUpReducer,//signup reducer 
+  userLogin : UserReducer ,// contains login 
   userProfile : userProfileReducer ,
   updateProfile : updateProfileReducer,
   

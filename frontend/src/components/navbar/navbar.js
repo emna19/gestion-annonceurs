@@ -25,12 +25,10 @@ export default function Navbar(props) {
      //  fetching user
      const userLogin = useSelector((store) => store.userLogin);
      const user = userLogin.userInfo;
-    console.log(user.isAdmin);
-
+  // if Admin goes to Amdmin page else to user home
   const home = ()=>{
     if (user) {
       if (user.isAdmin === true ) {
-        console.log("am here");
         navigate("/Admin")
       } 
       else {
