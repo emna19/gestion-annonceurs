@@ -1,7 +1,8 @@
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { logoutAction } from "../../redux/actions/users/userActions";
+
 
 import "./navbar.css";
 
@@ -12,13 +13,33 @@ export default function Navbar(props) {
     dispatch(logoutAction());
     navigate("/login");
   };
-  const Edit = () => {
+
+
+
+
+  const profile = () => {
     navigate("/profile");
   };
 
+
+     //  fetching user
+     const userLogin = useSelector((store) => store.userLogin);
+     const user = userLogin.userInfo;
+    console.log(user.isAdmin);
+
   const home = ()=>{
-    navigate("/home")
+    if (user) {
+      if (user.isAdmin === true ) {
+        console.log("am here");
+        navigate("/Admin")
+      } 
+      else {
+        navigate("/home")
+      }
+    }
   }
+
+
 
   return (
     <nav className="navbar">
@@ -30,10 +51,10 @@ export default function Navbar(props) {
         ></img>
         <span className="navbar-title">rtify Ads</span>
       </span>
-      <Link onClick ={home} to="/Home" className="path">
+      <a onClick ={home} className="path">
       Home
-      </Link>
-      <Link onClick={Edit} to="/Profile" className="path">
+      </a>
+      <Link onClick={profile} to="/Profile" className="path">
         Profile
       </Link>
       <Link onClick={logoutHandler} to="/login" className="path">
