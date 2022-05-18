@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import {useEffect , useState} from 'react'
 import  Axios  from 'axios';
 
@@ -8,6 +9,7 @@ export default function AudView(props) {
 
     const [clicked, setClicked] = useState(false)
 
+    // eslint-disable-next-line no-unused-vars
     const [updatedAt, setUpdatedAt] = useState()
 
     const [audience, setAudience] = useState({

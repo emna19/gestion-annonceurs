@@ -10,7 +10,7 @@ import BarChart from '../charts/BarChart';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { userProfileAction } from "../../redux/actions/users/userActions";
-import {initialState} from '../../redux/store/store'
+// import {initialState} from '../../redux/store/store'
 import { useNavigate } from "react-router-dom";
 
 export default function Home() {
@@ -98,6 +98,9 @@ export default function Home() {
 
   const userLogin = useSelector((store) => store.userLogin);
   const userInfo = userLogin.userInfo;
+  console.log('userfrom store',userInfo);
+
+
   function addAnnonce(e) {
     if (localStorage.getItem("userAuth") !== null) {
       navigate('/home/annonce/create')
@@ -156,9 +159,9 @@ export default function Home() {
     return aud.name}
   }
 
-  let labels=[]
+  // let labels=[]
   let user={}
-  let name=[]
+  // let name=[]
   
   const dispatch = useDispatch();
   useEffect(() => {
@@ -166,7 +169,7 @@ export default function Home() {
   }, [dispatch]);
   
   user = JSON.parse(localStorage.getItem("userAuth"));
-  console.log(user.name)
+  // console.log(user.name)
 
   document.body.style = "background-color: white";
 
@@ -195,6 +198,7 @@ export default function Home() {
         
       })
       }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[annonce])
       
 
@@ -206,6 +210,7 @@ export default function Home() {
       
 
 // empty dependency array means this effect will only run once (like componentDidMount in classes)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   
@@ -231,6 +236,7 @@ export default function Home() {
             data: Object.values(count)
         }]
     })
+// eslint-disable-next-line react-hooks/exhaustive-deps
 },[impression])
 
   console.log(impression)
