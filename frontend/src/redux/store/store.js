@@ -36,10 +36,6 @@ const userAuthFromStorage = localStorage.getItem("userAuth")
   ? JSON.parse(localStorage.getItem("userAuth"))
   : null;
 
-// save user for login
-const initialState = {
-  userLogin: { userInfo: userAuthFromStorage },
-};
 
 
 const store = configureStore({
@@ -50,7 +46,7 @@ const store = configureStore({
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
     }),
-  initialState,
+
 });
 
 const persistor = persistStore(store)
