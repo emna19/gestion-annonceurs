@@ -3,19 +3,22 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { logoutAction } from "../../redux/actions/users/userActions";
 
-
 import "./navbar.css";
 
 export default function Navbar(props) {
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const logoutHandler = () => {
-    dispatch(logoutAction())
-    navigate('/login')
+    dispatch(logoutAction());
+    navigate("/login");
   };
   const Edit = () => {
-    navigate('/profile')
+    navigate("/profile");
   };
+
+  const home = ()=>{
+    navigate("/home")
+  }
 
   return (
     <nav className="navbar">
@@ -27,15 +30,17 @@ export default function Navbar(props) {
         ></img>
         <span className="navbar-title">rtify Ads</span>
       </span>
+      <Link onClick ={home} to="/Home" className="path">
+      Home
+      </Link>
+      <Link onClick={Edit} to="/Profile" className="path">
+        Profile
+      </Link>
+      <Link onClick={logoutHandler} to="/login" className="path">
+        Logout
+      </Link>
 
-      <p className="logout-nav">
-        <Link  onClick={logoutHandler} to="/login" className="logout">
-          Logout
-        </Link>
-      </p>
-      <Link  onClick={Edit} to="/Profile" className="logout">
-          Profile
-        </Link>
+
     </nav>
   );
 }
