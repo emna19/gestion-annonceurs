@@ -50,7 +50,7 @@ export default function AudView(props) {
         setAudience(props.infos)
     }, [props.infos])
 
-    console.log(updatedAt)
+  
 
     console.log(audience)   
     return (

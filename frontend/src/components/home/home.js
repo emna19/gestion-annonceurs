@@ -10,7 +10,7 @@ import BarChart from '../charts/BarChart';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { userProfileAction } from "../../redux/actions/users/userActions";
-// import {initialState} from '../../redux/store/store'
+import {initialState} from '../../redux/store/store'
 import { useNavigate } from "react-router-dom";
 
 export default function Home() {
