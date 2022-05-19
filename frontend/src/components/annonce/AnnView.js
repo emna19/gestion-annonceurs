@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Axios from "axios";
-import { parseISO, format } from "date-fns";
+import { parseISO, format, getDay } from "date-fns";
 import BarChart from "../charts/BarChart";
 
 export default function AudView(props) {
@@ -86,11 +86,19 @@ export default function AudView(props) {
 
   useEffect(() => {
     let count = {};
+    var weekdays = new Array(7);
+        weekdays[0] = "Sunday";
+        weekdays[1] = "Monday";
+        weekdays[2] = "Tuesday";
+        weekdays[3] = "Wednesday";
+        weekdays[4] = "Thursday";
+        weekdays[5] = "Friday";
+        weekdays[6] = "Saturday";
     impression.forEach(function (x) {
-      count[x.date] = (count[x.date] || 0) + 1;
+      count[weekdays[getDay( parseISO(x.date), 'yyyy/MM/dd kk:mm:ss')]] = (count[weekdays[getDay( parseISO(x.date), 'yyyy/MM/dd kk:mm:ss')]] || 0) + 1;
     });
     setChartAudience({
-      labels: Object.keys(count),
+      labels: weekdays,
       datasets: [
         {
           label: "Impression Date",
