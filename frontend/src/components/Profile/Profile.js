@@ -13,15 +13,16 @@ const Profile = () => {
   }, [dispatch]);
 
   let user = {};
+  user = JSON.parse(localStorage.getItem("userAuth"))
   // const user = useSelector((store) => store.userProfile.user);
 
-  if (useSelector((store) => store.updateProfile.success) === true) {
-    console.log("i picked update "  );
-     user = useSelector((store) => store.updateProfile.user);
-  } else {
-    console.log("i picked login ");
-    user = useSelector((store) => store.userLogin.userInfo);
-  }
+  // if (useSelector((store) => store.updateProfile.success) === true) {
+  //   console.log("i picked update "  );
+  //    user = useSelector((store) => store.updateProfile.user);
+  // } else {
+  //   console.log("i picked login ");
+  //   user = useSelector((store) => store.userLogin.userInfo);
+  // }
 
 
   document.body.style = "background-color: white";

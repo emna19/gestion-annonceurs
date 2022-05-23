@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import './Admin.css'
 import {useEffect , useState} from 'react'
 import { parseISO, format } from 'date-fns';

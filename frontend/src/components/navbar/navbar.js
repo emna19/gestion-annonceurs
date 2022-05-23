@@ -41,24 +41,26 @@ export default function Navbar(props) {
 
   return (
     <nav className="navbar">
-      <span className="brand-navbar navbar-brand mb-0 h1">
+      <div className="brand-navbar navbar-brand mb-0 h1">
         <img
           className="navbar-logo"
           src={require("../../assets/artifyLogo.png")}
           alt="Artify Logo"
         ></img>
         <span className="navbar-title">rtify Ads</span>
-      </span>
+
+      </div>
+
+      
       <a onClick ={home} className="path">
       Home
       </a>
-      <Link onClick={profile} to="/Profile" className="path">
+      <Link onClick={profile} to="/Profile" className="path ( logout )">
         Profile
       </Link>
-      <Link onClick={logoutHandler} to="/login" className="path">
+      <Link onClick={logoutHandler} to="/login" className="path ( logout )">
         Logout
       </Link>
-
 
     </nav>
   );

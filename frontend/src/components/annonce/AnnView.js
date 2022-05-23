@@ -1,34 +1,37 @@
+
 import { useEffect, useState } from "react";
 import Axios from "axios";
 import { parseISO, format, getDay } from "date-fns";
 import BarChart from "../charts/BarChart";
 
+
 export default function AudView(props) {
   const url = "http://localhost:5000/annonces/" + props.infos._id;
+
 
   const [clicked, setClicked] = useState(false);
 
   const [verifyClicked, setVerifyClicked] = useState(false);
 
-  const [audience, setAudience] = useState([]);
+    const [audience, setAudience] = useState([])
 
-  const [impression, setImpression] = useState([]);
+    const [impression, setImpression] = useState([])
 
-  const [updatedAt, setUpdatedAt] = useState();
+    const [updatedAt, setUpdatedAt] = useState()
 
-  const [chartAudience, setChartAudience] = useState({});
+    const [chartAudience, setChartAudience] = useState({})
 
-  const [annonce, setAnnonce] = useState({
-    name: "Name",
-    startDate: "Start Date",
-    endtDate: "End Date",
-    sector: "Sector",
-    budget: "Budget",
-    audience: "Audience",
-    clickUrl: "Page url",
-    sourceUrl: "Source url",
-    type: "Type",
-  });
+    const [annonce, setAnnonce] = useState({
+        name : 'Name',
+        startDate : 'Start Date',
+        endtDate : 'End Date',
+        sector : 'Sector',
+        budget : 'Budget',
+        audience : 'Audience',
+        clickUrl : 'Page url',
+        sourceUrl : 'Source url',
+        type : 'Type'
+    })
 
   const styles = {
     card: {
@@ -44,26 +47,22 @@ export default function AudView(props) {
   // console.log(new Date(annonce.startDate).toISOString())
 
   function handle(e) {
-    const newAnnonce = { ...annonce };
-    if (e.target.id === "startDate" || e.target.id === "endtDate") {
-      newAnnonce[e.target.id] = new Date(e.target.value).toISOString();
-    } else {
-      newAnnonce[e.target.id] = e.target.value;
-    }
+    const newAnnonce = {...annonce}
+    if (e.target.id === "startDate" || e.target.id === "endtDate" ) {newAnnonce[e.target.id] = new Date(e.target.value).toISOString()}
+    else {newAnnonce[e.target.id] = e.target.value}
     // newAnnonce[e.target.id] = e.target.value
-    setAnnonce(newAnnonce);
+    setAnnonce(newAnnonce)
   }
 
   function submit(e) {
-    e.preventDefault();
-    Axios.put(url, annonce).then((response) => {
-      return setUpdatedAt(response.data.updatedAt), setClicked(!clicked);
-    });
+    e.preventDefault()
+    Axios.put(url, annonce)
+        .then(response => {return (setUpdatedAt(response.data.updatedAt), setClicked(!clicked))});
   }
 
   useEffect(() => {
     setAnnonce(props.infos);
-  }, [props.infos]);
+  }, [props.infos])
 
   useEffect(() => {
     fetch("http://localhost:5000/audiences")
@@ -73,17 +72,18 @@ export default function AudView(props) {
     // empty dependency array means this effect will only run once (like componentDidMount in classes)
   }, []);
 
-  useEffect(() => {
-    if (annonce._id !== undefined) {
-      Axios.get(
-        "http://localhost:5000/impressions/annonce/" + annonce._id
-      ).then((res) => {
-        setImpression(res.data);
-        console.log(impression);
-      });
-    }
-  }, [annonce]);
-
+    useEffect(() => {
+        if(annonce._id!==undefined){
+            Axios.get('http://localhost:5000/impressions/annonce/'+annonce._id)
+            .then(res => {
+            setImpression(res.data)
+            console.log(impression)
+             
+        })
+        }
+        
+    },[annonce])
+  
   useEffect(() => {
     let count = {};
     var weekdays = new Array(7);
@@ -94,9 +94,15 @@ export default function AudView(props) {
         weekdays[4] = "Thursday";
         weekdays[5] = "Friday";
         weekdays[6] = "Saturday";
+        
+    for (var i=0; i < weekdays.length; i++) {
+      count[weekdays[i]]=0
+    }
+
     impression.forEach(function (x) {
       count[weekdays[getDay( parseISO(x.date), 'yyyy/MM/dd kk:mm:ss')]] = (count[weekdays[getDay( parseISO(x.date), 'yyyy/MM/dd kk:mm:ss')]] || 0) + 1;
     });
+  
     setChartAudience({
       labels: weekdays,
       datasets: [
@@ -108,57 +114,38 @@ export default function AudView(props) {
     });
   }, [impression]);
 
-  console.log(verifyClicked);
+    console.log(impression)
 
-  return (
-    <>
-      {verifyClicked && (
+    return (
+        <>
+        { verifyClicked && 
         <div>
-          <svg
-            onClick={() => {
-              return setVerifyClicked(!verifyClicked);
-            }}
-            xmlns="http://www.w3.org/2000/svg"
-            style={{ margin: "12px 0px 0px 22px" }}
-            width="25"
-            height="25"
-            fill="currentColor"
-            className="bi bi-arrow-left"
-            viewBox="0 0 16 16"
-          >
-            <path
-              fillRule="evenodd"
-              d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"
-            />
-          </svg>
-          <div style={{ height: "304px", width: "608px" }}>
-            {impression.length !== 0 && (
-              <div
-                style={{
-                  textAlign: "center",
-                  margin: "15px",
-                  marginTop: 0,
-                  position: "absolute",
-                  left: "1%",
-                  right: "1%",
-                }}
-              >
-                <BarChart chartData={chartAudience} />
-              </div>
-            )}
-          </div>
+            <svg 
+              onClick={() => {return (setVerifyClicked(!verifyClicked))} } 
+              xmlns="http://www.w3.org/2000/svg" 
+              style={{margin:"12px 0px 0px 22px"}} 
+              width="25" height="25" fill="currentColor" className="bi bi-arrow-left" viewBox="0 0 16 16">
+              <path fillRule="evenodd" 
+              d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+            </svg>
+            <div style={{height: "304px",width: "608px"}} >
+            
+                {impression.length!== 0 && <div style={{textAlign: "center",
+                    margin: "15px",
+                    marginTop: 0,
+                    position: "absolute",
+                    left: "1%",
+                    right: "1%"}}>
+                    <BarChart chartData={chartAudience}/>
+                    </div>
+                } 
+            </div>
         </div>
-      )}
-      {!clicked && !verifyClicked && (
-        <div className="card text-center" style={styles.card}>
-          <div className=" card-body" style={styles.cardBody}>
-            <div className="row mb-3 justify-content-between align-items-center">
-              <div
-                className="col-auto"
-                onClick={() => {
-                  setClicked(!clicked);
-                }}
-              >
+        }
+        { (!clicked && !verifyClicked) && <div className="card text-center" style={ styles.card }>
+        <div className=" card-body" style={ styles.cardBody }>
+           <div className="row mb-3 justify-content-between align-items-center">
+            <div className='col-auto' onClick={() => {setClicked(!clicked)}}>
                 <a>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -246,32 +233,25 @@ export default function AudView(props) {
               </div>
             </div>
             <div className="row mb-4 px-3">
-              <span className="col-4 text-start card-text fw-bold">Type:</span>
-              <div className="col-8 text-start movieIds">{annonce.type}</div>
-            </div>
+                <span className="col-4 text-start card-text fw-bold">Type:</span>
+                <div className='col-8 text-start movieIds'>{ annonce.type}</div>
+            </div> 
             <div className="row mb-1 px-3">
-              <div className="text-center">
-                <button
-                  type="button"
-                  className="home-container-Add"
-                  style={{
-                    height: "38px",
-                    width: "78px",
-                    letterSpacing: "0.1em",
-                    fontSize: "17px",
-                  }}
-                  onClick={() => {
-                    return setVerifyClicked(!verifyClicked);
-                  }}
-                >
-                  Verify
+                <div className='text-center'>
+                <button type="button" className="home-container-Add"
+                style={{height: "38px", width: "78px", letterSpacing: "0.1em", fontSize: "17px"}}
+                 onClick={() => {return ( 
+                            setVerifyClicked(!verifyClicked)
+                           )} }>
+                          Verify
                 </button>
-              </div>
+                </div>
             </div>
-          </div>
         </div>
-      )}
-      {/* { audience.length!== 0 && <BarChart chartData={chartAudience}/>} */}
+        
+        </div>
+        }
+        {/* { audience.length!== 0 && <BarChart chartData={chartAudience}/>} */}
 
       {clicked && (
         <div className="Annonce edit card text-center" style={styles.card}>

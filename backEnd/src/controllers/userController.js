@@ -32,10 +32,13 @@ const login = async (req, res) => {
       password: req.body.password,
     });
     if (user)
-      return res.json({
+      return (
+        user.token = generateToken(user._id),
+        user.save(),
+        res.json({
         ...user._doc,
         token: generateToken(user._id),
-      });
+      }))
     return res.status(404).send({ status: "error", user: false });
   } catch (err) {
     console.log(err);

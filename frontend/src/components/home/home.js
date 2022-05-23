@@ -5,11 +5,11 @@ import  Axios  from 'axios';
 import AudView from '../audiences/AudView';
 import AnnView from '../annonce/AnnView';
 import BarChart from '../charts/BarChart';
-// import Film from '../film/film';
-
+import Film from '../film/film';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { userProfileAction } from "../../redux/actions/users/userActions";
+
 // import {initialState} from '../../redux/store/store'
 import { useNavigate } from "react-router-dom";
 import { getDay } from 'date-fns/esm';
@@ -99,8 +99,8 @@ export default function Home() {
 
   const userLogin = useSelector((store) => store.userLogin);
   const userInfo = userLogin.userInfo;
-  console.log('userfrom store',userInfo);
 
+  console.log('userfrom store',userInfo);
 
   function addAnnonce(e) {
     if (localStorage.getItem("userAuth") !== null) {
@@ -170,7 +170,7 @@ export default function Home() {
   }, [dispatch]);
   
   user = JSON.parse(localStorage.getItem("userAuth"));
-  // console.log(user.name)
+  console.log(user.name)
 
   document.body.style = "background-color: white";
 
@@ -199,7 +199,6 @@ export default function Home() {
         
       })
       }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[annonce])
       
 
@@ -235,6 +234,11 @@ export default function Home() {
         weekdays[4] = "Thursday";
         weekdays[5] = "Friday";
         weekdays[6] = "Saturday";
+
+    for (var i=0; i < weekdays.length; i++) {
+      count[weekdays[i]]=0
+    }
+
     impression.forEach(function(x) {
         count[weekdays[getDay( parseISO(x.date), 'yyyy/MM/dd kk:mm:ss')]] = (count[weekdays[getDay( parseISO(x.date), 'yyyy/MM/dd kk:mm:ss')]] || 0) + 1 ;
     })

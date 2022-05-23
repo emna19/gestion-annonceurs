@@ -18,6 +18,8 @@ const Login = () => {
 
   const navigate = useNavigate();
 
+  console.log(userInfo)
+
   //  redirecting if user is logged in
   useEffect(() => {
     if (userInfo) {
