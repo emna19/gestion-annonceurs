@@ -238,7 +238,7 @@ export default function Home() {
     impression.forEach(function(x) {
         count[weekdays[getDay( parseISO(x.date), 'yyyy/MM/dd kk:mm:ss')]] = (count[weekdays[getDay( parseISO(x.date), 'yyyy/MM/dd kk:mm:ss')]] || 0) + 1 ;
     })
-    console.log(count)
+    // console.log(count)
     setChartAudience({
         labels: weekdays,
         datasets: [{
