@@ -48,8 +48,36 @@ const createImpression = async(req,res) => {
     }
 }
 
+const getImpressionsByAdvretisementId = async (req, res) => {
+    try {
+        await Impression.find({"annonce": req.params.id})
+        .then(result => {
+            res.status(200).send(result);
+        })
+    }
+    catch (err) {
+        console.log(err)
+        res.status(404).send(`annonce not found`, err);
+    }
+}
+
+const getImpressionsByAdvretisementsId = async (req, res) => {
+    try {
+        await Impression.find({"annonce": {$in:req.body.id}})
+        .then(result => {
+            res.status(200).send(result);
+        })
+    }
+    catch (err) {
+        console.log(err)
+        res.status(404).send(`annonce not found`, err);
+    }
+}
+
 module.exports = {
     allImpressions,
     impressionById,
-    createImpression
+    createImpression,
+    getImpressionsByAdvretisementId,
+    getImpressionsByAdvretisementsId
 }

@@ -29,13 +29,12 @@
 } */
 
 .home .card {
-    width: 309px
+    width: 329px
 }
 
 .home .audiences {
     height: fit-content;
     gap: 5px 24px;
-    padding-top: 6px;
 }
 
 .home .audiences .card-body {
@@ -122,4 +121,3 @@
 .Annonce .card-text {
     width: 116px
 }
-

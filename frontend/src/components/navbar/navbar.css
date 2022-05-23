@@ -33,4 +33,6 @@
     font-weight: 600;
     font-size: 19px;
     top: 7px;
+    float: left;
+    margin: 5px;
 }

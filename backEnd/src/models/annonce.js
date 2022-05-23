@@ -39,12 +39,13 @@ const annonceSchema = mongoose.Schema({
         required:true
     },
     isValid:{
-        type:Date,
+        type:Boolean,
         required:false
     },
     User: { 
         type: mongoose.Schema.Types.ObjectId, 
-        ref: 'user' 
+        ref: 'user',
+        required:true 
     }
 },{timestamps: true});//timestamp for updated at and created at
 
