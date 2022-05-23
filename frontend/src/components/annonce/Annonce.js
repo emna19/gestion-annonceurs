@@ -115,7 +115,7 @@ export default function Annonce() {
                                             <option key={index} value={item._id}>{item.name}</option>
                                         ))}
                                     </select>
-                                    <Link to="/home/audience/create" >or create an audience</Link>
+                                    <Link to="/home/audience/create" style={{color: "#0d6efd"}}>or create an audience</Link>
                                 </div>
                                 <div className="col-2 text-center form-label countries-text">Sector:</div>
                                 <div className="col-3">
