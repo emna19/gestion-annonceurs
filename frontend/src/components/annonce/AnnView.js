@@ -13,8 +13,6 @@ export default function AudView(props) {
 
   const [verifyClicked, setVerifyClicked] = useState(false);
 
-    const [verifyClicked, setVerifyClicked] = useState(false)
-
     const [audience, setAudience] = useState([])
 
     const [impression, setImpression] = useState([])
@@ -49,26 +47,22 @@ export default function AudView(props) {
   // console.log(new Date(annonce.startDate).toISOString())
 
   function handle(e) {
-    const newAnnonce = { ...annonce };
-    if (e.target.id === "startDate" || e.target.id === "endtDate") {
-      newAnnonce[e.target.id] = new Date(e.target.value).toISOString();
-    } else {
-      newAnnonce[e.target.id] = e.target.value;
-    }
+    const newAnnonce = {...annonce}
+    if (e.target.id === "startDate" || e.target.id === "endtDate" ) {newAnnonce[e.target.id] = new Date(e.target.value).toISOString()}
+    else {newAnnonce[e.target.id] = e.target.value}
     // newAnnonce[e.target.id] = e.target.value
-    setAnnonce(newAnnonce);
+    setAnnonce(newAnnonce)
   }
 
   function submit(e) {
-    e.preventDefault();
-    Axios.put(url, annonce).then((response) => {
-      return setUpdatedAt(response.data.updatedAt), setClicked(!clicked);
-    });
+    e.preventDefault()
+    Axios.put(url, annonce)
+        .then(response => {return (setUpdatedAt(response.data.updatedAt), setClicked(!clicked))});
   }
 
   useEffect(() => {
     setAnnonce(props.infos);
-  }, [props.infos]);
+  }, [props.infos])
 
   useEffect(() => {
     fetch("http://localhost:5000/audiences")
@@ -89,20 +83,6 @@ export default function AudView(props) {
         }
         
     },[annonce])
-
-    useEffect(() => {
-        let count={}
-        impression.forEach(function(x) {
-            count[x.date] = (count[x.date] || 0) + 1 ;
-        })
-        setChartAudience({
-            labels: Object.keys(count),
-            datasets: [{
-                label:'Impression Date',
-                data: Object.values(count)
-            }]
-        })
-    },[impression])
   
   useEffect(() => {
     let count = {};
