@@ -209,9 +209,11 @@ const logoutAction = () => async (dispatch) => {
   try {
     //remove user
     localStorage.removeItem("userAuth");
+  
     dispatch({
       type: USER_LOGOUT_SUCCESS,
     });
+    
   } catch (error) {}
 };
 

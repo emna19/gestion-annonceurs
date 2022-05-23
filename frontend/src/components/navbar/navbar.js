@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { logoutAction } from "../../redux/actions/users/userActions";
 
@@ -8,14 +8,36 @@ import "./navbar.css";
 
 export default function Navbar(props) {
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const logoutHandler = () => {
-    dispatch(logoutAction())
-    navigate('/login')
+    dispatch(logoutAction());
+    navigate("/login");
   };
-  const Edit = () => {
-    navigate('/profile')
+
+
+
+
+  const profile = () => {
+    navigate("/profile");
   };
+
+
+     //  fetching user
+     const userLogin = useSelector((store) => store.userLogin);
+     const user = userLogin.userInfo;
+  // if Admin goes to Amdmin page else to user home
+  const home = ()=>{
+    if (user) {
+      if (user.isAdmin === true ) {
+        navigate("/Admin")
+      } 
+      else {
+        navigate("/home")
+      }
+    }
+  }
+
+
 
   return (
     <nav className="navbar">
@@ -26,19 +48,20 @@ export default function Navbar(props) {
           alt="Artify Logo"
         ></img>
         <span className="navbar-title">rtify Ads</span>
+
       </div>
 
       
-        
-      
-      <Link  onClick={Edit} to="/Profile" className="logout">
-          Profile
-        </Link>
-        <Link  onClick={logoutHandler} to="/login" className="logout">
-          Logout
-        </Link>
-        
-        
+      <a onClick ={home} className="path">
+      Home
+      </a>
+      <Link onClick={profile} to="/Profile" className="path ( logout )">
+        Profile
+      </Link>
+      <Link onClick={logoutHandler} to="/login" className="path ( logout )">
+        Logout
+      </Link>
+
     </nav>
   );
 }

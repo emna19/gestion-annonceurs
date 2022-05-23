@@ -7,11 +7,12 @@ import AnnView from '../annonce/AnnView';
 import BarChart from '../charts/BarChart';
 import Film from '../film/film';
 
-
 import { useDispatch, useSelector } from 'react-redux';
 import { userProfileAction } from "../../redux/actions/users/userActions";
-import {initialState} from '../../redux/store/store'
+
+// import {initialState} from '../../redux/store/store'
 import { useNavigate } from "react-router-dom";
+import { getDay } from 'date-fns/esm';
 
 export default function Home() {
 
@@ -98,6 +99,9 @@ export default function Home() {
 
   const userLogin = useSelector((store) => store.userLogin);
   const userInfo = userLogin.userInfo;
+
+  console.log('userfrom store',userInfo);
+
   function addAnnonce(e) {
     if (localStorage.getItem("userAuth") !== null) {
       navigate('/home/annonce/create')
@@ -156,9 +160,9 @@ export default function Home() {
     return aud.name}
   }
 
-  let labels=[]
+  // let labels=[]
   let user={}
-  let name=[]
+  // let name=[]
   
   const dispatch = useDispatch();
   useEffect(() => {
@@ -206,6 +210,7 @@ export default function Home() {
       
 
 // empty dependency array means this effect will only run once (like componentDidMount in classes)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   
@@ -221,20 +226,28 @@ export default function Home() {
 
   useEffect(() => {
     let count={}
+    var weekdays = new Array(7);
+        weekdays[0] = "Sunday";
+        weekdays[1] = "Monday";
+        weekdays[2] = "Tuesday";
+        weekdays[3] = "Wednesday";
+        weekdays[4] = "Thursday";
+        weekdays[5] = "Friday";
+        weekdays[6] = "Saturday";
     impression.forEach(function(x) {
-        count[x.annonce] = (count[x.annonce] || 0) + 1 ;
+        count[weekdays[getDay( parseISO(x.date), 'yyyy/MM/dd kk:mm:ss')]] = (count[weekdays[getDay( parseISO(x.date), 'yyyy/MM/dd kk:mm:ss')]] || 0) + 1 ;
     })
+    console.log(count)
     setChartAudience({
-        labels: annonce.map(item =>item.name),
+        labels: weekdays,
         datasets: [{
             label:'Impressions',
             data: Object.values(count)
         }]
     })
+// eslint-disable-next-line react-hooks/exhaustive-deps
 },[impression])
 
-  console.log(impression)
-  console.log(annonce)
   if (annonce.length!==0) console.log(annonce[0].audience)
 
   if (annonce.length !== 0) {console.log(format( parseISO(annonce[0].startDate), 'yyyy/MM/dd kk:mm:ss')); console.log(annonce[0].audience)}

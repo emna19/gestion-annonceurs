@@ -4,9 +4,13 @@ import  Axios  from 'axios';
 
 export default function AnnViewAdmin(props) {
 
+
+    // eslint-disable-next-line no-unused-vars
+
     const [aud, setAud] = useState([]);
 
     const [clicked, setClicked] = useState(false)
+
 
     const [updatedAt, setUpdatedAt] = useState()
 
@@ -65,6 +69,7 @@ export default function AnnViewAdmin(props) {
     useEffect(() => {
         Axios.get('http://localhost:5000/audiences/'+props.infos.audience)
         .then(res => setAud(res.data))
+
     },[])
 
     useEffect(() => {
