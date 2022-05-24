@@ -12,7 +12,7 @@ const impressionSchema = mongoose.Schema({
     },
     clientID:{
         type:Number,
-        required:true
+        required:false
     },
     country:{
         type:String,
@@ -20,7 +20,7 @@ const impressionSchema = mongoose.Schema({
     },
     age:{
         type:Number,
-        required :true
+        required :false
     },
 
 },{timestamps: true})
