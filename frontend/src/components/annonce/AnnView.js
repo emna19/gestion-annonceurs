@@ -94,6 +94,11 @@ export default function AudView(props) {
         weekdays[4] = "Thursday";
         weekdays[5] = "Friday";
         weekdays[6] = "Saturday";
+
+    for (var i=0; i < weekdays.length; i++) {
+      count[weekdays[i]]=0
+    }
+
     impression.forEach(function (x) {
       count[weekdays[getDay( parseISO(x.date), 'yyyy/MM/dd kk:mm:ss')]] = (count[weekdays[getDay( parseISO(x.date), 'yyyy/MM/dd kk:mm:ss')]] || 0) + 1;
     });
