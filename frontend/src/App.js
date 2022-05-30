@@ -25,6 +25,7 @@ function App() {
         <Route  exact path="/signup" element={  <SignUp/>} />
         <Route  exact path="/Admin" element={ <div> <Navbar /> <Admin/> </div> } />
         <Route  exact path="/film" element={ <div><Film/></div>} />
+        <Route exact path="/" element={ <Login/>} />
         <Route  exact path="/login" element={ <Login/>} />
         <Route exact path="/Profile" element={ <div> <Navbar /><br/> <Profile/></div> }/>
         <Route  exact path="/update" element={  <div> <Navbar /><br/> <UpdateProfile/> </div>} />

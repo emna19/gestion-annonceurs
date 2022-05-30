@@ -25,6 +25,11 @@ const audienceSchema = mongoose.Schema({
         type: [Number] , 
         required : true
     },
+    User: { 
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'user',
+        required:true 
+    }
     
     //timestamp for updated at and created at
 },{timestamps: true})

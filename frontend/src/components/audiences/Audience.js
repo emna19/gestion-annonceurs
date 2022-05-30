@@ -17,6 +17,10 @@ export default function Audience() {
 
     const [country, setCountry] = useState([])
 
+    let user={}
+    user = JSON.parse(localStorage.getItem("userAuth"));
+    console.log(user.name)
+
     function ShowSelect() {
         setComponent([...component,"sample text"])
     }
