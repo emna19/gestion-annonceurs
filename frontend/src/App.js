@@ -11,8 +11,6 @@ import Audience from './components/audiences/Audience';
 import CreateAnnonce from './components/annonce/Annonce';
 import Admin from './components/Admin/Admin';
 import Film from './components/film/film';
-// import AudView from './components/audiences/AudView'
-// import AnnView from './components/annonce/AnnView'
 
 
 

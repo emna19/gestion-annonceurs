@@ -1,8 +1,13 @@
 import './Audience.css'
 import { useState } from 'react'
 import Axios from 'axios';
+import countries from "countries-list";
 
 export default function Audience() {
+
+    let user={}
+    user = JSON.parse(localStorage.getItem("userAuth"));
+    console.log(user._id)
 
     const url = "http://localhost:5000/audiences"
     const [audience, setAudience] = useState({
@@ -11,15 +16,19 @@ export default function Audience() {
         maxAge : '',
         keywords : '',
         videoIDs : '',
+        User: user._id,
+        countries: ''
     })
 
     const [component, setComponent] = useState(["sample text"])
 
     const [country, setCountry] = useState([])
 
-    let user={}
-    user = JSON.parse(localStorage.getItem("userAuth"));
-    console.log(user.name)
+    const countryCodes = Object.keys(countries.countries);
+    const countryNames = countryCodes.map(code => countries.countries[code].name);
+    console.log(user._id);
+
+    
 
     function ShowSelect() {
         setComponent([...component,"sample text"])
@@ -39,6 +48,7 @@ export default function Audience() {
         setAudience(newAudience)
     }
 
+
     function submit(e) {
         e.preventDefault();
         Axios.post(url, {
@@ -48,6 +58,7 @@ export default function Audience() {
             countries: country,
             keywords: audience.keywords.split(",").map(item => item.trim()),
             videoIDs: audience.videoIDs.split(",").map(item => item.trim()),
+            User: user._id.toString()
         })
         .then(res => {window.location.href = '/Home'})
     }
@@ -89,11 +100,11 @@ export default function Audience() {
                         <div className="select-row row mb-5">
                             <div className="col-5 form-label countries-text">Countries:</div>
                             {component.map((item, i) => (
-                                <select key={i} className="form-select form-control countries-select" onChange={handleCountry} value={country.name} id="countries" aria-label="Default select example">
-                                    <option value="" disabled>Choose...</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
+                                <select key={i} className="form-select form-control countries-select" onChange={handleCountry}  value={country.name} id="countries" aria-label="Default select example">
+                                    {countryNames.map((item, j) => (
+                                        <option key={j} value={item}>{item}</option>
+                                    ))} 
+                                    
                                 </select>
                             ))}
                             <div className="for-add-btn"><button type="button" className="add btn" onClick={ShowSelect}>+</button></div>

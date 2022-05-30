@@ -254,6 +254,17 @@ export default function Home() {
 // eslint-disable-next-line react-hooks/exhaustive-deps
 },[impression])
 
+  const state = {
+    reload: false
+  };
+
+  const refreshPage = () => {
+    this.setState(
+      {reload: true},
+      () => this.setState({reload: false})
+    )
+  }
+
   if (annonce.length!==0) console.log(annonce[0].audience)
 
   if (annonce.length !== 0) {console.log(format( parseISO(annonce[0].startDate), 'yyyy/MM/dd kk:mm:ss')); console.log(annonce[0].audience)}
@@ -417,7 +428,7 @@ export default function Home() {
 
         {viewClicked && <div className="overlay">
             <div >
-              {componentName === "Annonce" ? <AnnView audienceID={<GetAudienceById id = {item.audience}/>} onClick={() => {setViewClicked(!viewClicked)}} infos= {item}/> : <AudView onClick={() => {setViewClicked(!viewClicked)}} infos= {item}/>}
+              {componentName === "Annonce" ? <AnnView audienceID={<GetAudienceById id = {item.audience}/>} onClick={() => {setViewClicked(!viewClicked)}} infos= {item}/> : <AudView onClick={() => { return(setViewClicked(!viewClicked),refreshPage)}} infos= {item}/>}
             </div>
           </div>
         }

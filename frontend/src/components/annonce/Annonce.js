@@ -99,11 +99,11 @@ export default function Annonce() {
                         <div className="row mb">
                             <div className="col-2 form-label">Date:</div>
                             <div className="col-2">
-                                <input type="text" className="age-input form-control" placeholder="Start" onChange={handle} value={annonce.startDate} id="startDate" aria-label="First name"/>
+                                <input type="date" className="age-input form-control" placeholder="Start" onChange={handle} value={annonce.startDate} id="startDate" aria-label="First name"/>
                             </div>
                             <p className='form-label' style={{display: "contents"}}>-</p>
                             <div className="col-2">
-                                <input type="text" className="age-input form-control" placeholder="End" onChange={handle} value={annonce.endtDate} id="endtDate" aria-label="Last name"/>
+                                <input type="date" className="age-input form-control" placeholder="End" onChange={handle} value={annonce.endtDate} id="endtDate" aria-label="Last name"/>
                             </div>
                         </div>
                         <div className="row mb-3">

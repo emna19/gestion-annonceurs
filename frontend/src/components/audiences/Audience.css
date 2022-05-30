@@ -56,12 +56,12 @@
     gap: 12px 0px;
 }
 
-.audience .for-add-btn {
+.audience .for-add-btn, .edit-country-for-add {
     padding: 0;
     width: 42px;
 }
 
-.audience .add {
+.audience .add, .edit-country-add {
     border-radius: 50%;
     height: 25px;
     padding: 0;
@@ -91,14 +91,14 @@
     width: 104px;
 }
 
-.audience .form-control {
+.audience .form-control, .edit-country {
     border: 1px solid rgba(17, 75, 113, 0.473);
     box-sizing: border-box;
     border-radius: 12px;
     
 }
 
-.audience .countries-select {
+.audience .countries-select, .edit-country {
     margin-right: 12px;
 }
 
@@ -107,7 +107,7 @@
     height: 38px;
 }
 
-.audience .form-select {
+.audience .form-select, .edit-country {
     width: 139px;
 }
 
@@ -131,7 +131,7 @@
     text-align: center;
 }
 
-.audience .buttons .btn {
+.audience .buttons .btn, .edit-country-add {
     width: 100px;
     border: 1px solid #F17B22;
     box-sizing: border-box;
