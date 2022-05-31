@@ -138,14 +138,6 @@ const UpdateProfile = () => {
           />
 
           <input
-            className="update-profile-account-state update-profile-style"
-            value={state}
-            onChange={(e) => setstate(e.target.value)}
-            type="text"
-            placeholder="state"
-          />
-
-          <input
             className="update-profile-account-city update-profile-style"
             value={city}
             onChange={(e) => setcity(e.target.value)}
