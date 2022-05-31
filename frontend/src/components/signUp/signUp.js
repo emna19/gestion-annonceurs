@@ -52,9 +52,19 @@ export default function SignUp() {
 
   return (
     <div className="signup-real">
-      <div className="card col-5 text-center position-absolute top-50 start-50 translate-middle">
+      <div className="card text-center position-absolute top-50 start-50 translate-middle">
         <div className="card-body">
-          <h5 className="card-title">Sign up to Artify Ads</h5>
+        <div className="artify-logo" >
+          <img
+            className="artify-logo"
+            src={require("../../assets/artifyLogo.png")}
+            alt="Artify Logo"
+            height="80"
+            width="90"
+            loading="lazy"
+            style={{marginTop: 0}}
+          ></img></div>
+          <h5 className="mb-2 card-title">Sign up to Artify Ads</h5>
           <form className="row g-2" onSubmit={formSubmitHandler}>
             <div className="input-elements row g-2">
               <div className="col-md-7">
@@ -70,13 +80,13 @@ export default function SignUp() {
               </div>
               <div className="col-md-5">
                 <input
-                  type="text"
+                  type="file"
                   className="form-control"
                   onChange={handle}
                   id="photo"
                   value={user.photo}
                   placeholder="Photo"
-                  required
+                  
                 />
               </div>
             </div>
