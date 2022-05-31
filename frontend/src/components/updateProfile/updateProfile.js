@@ -5,8 +5,21 @@ import "./updateProfile.css";
 import { useNavigate } from "react-router-dom";
 
 const UpdateProfile = () => {
+  let user = {};
+
+  if (useSelector((store) => store.updateProfile.success) === true) {
+     // eslint-disable-next-line react-hooks/rules-of-hooks
+     user = useSelector((store) => store.updateProfile.user);
+  } else {
+     // eslint-disable-next-line react-hooks/rules-of-hooks
+     user = useSelector((state) => state.userProfile.user);
+
+  }
+
+
+
   // get user from store
-  const user = useSelector((state) => state.userProfile.user);
+  // const user = useSelector((state) => state.userProfile.user);
 
   // update user
   const [name, setname] = useState(user.name);
@@ -19,7 +32,7 @@ const UpdateProfile = () => {
   const [codePostal, setcodePostal] = useState(user.codePostal);
   const [taxID, settaxID] = useState(user.taxID);
   const [adress, setadress] = useState(user.adress);
-  const [state, setstate] = useState(user.state);
+  const [state] = useState(user.state);
   //  const [photo, setphoto] = useState(user.photo)
 
   //dispatch  update action
