@@ -115,8 +115,9 @@
 .profile-account-taxID {
   position: absolute;
   width: 180px;
-  height: 40px;
   left: 400px;
+  height: 40px;
+
   top: 179px;
 
   border: 3px solid rgba(0, 0, 0, 0.2);
@@ -125,7 +126,7 @@
 
 .profile-account-adress {
   position: absolute;
-  width: 300px;
+  width: 320px;
   height: 40px;
   left: 35px;
   top: 236px;
@@ -136,9 +137,9 @@
 
 .profile-account-postcode {
   position: absolute;
-  width: 189px;
-  height: 40px;
+  width: 180px;
   left: 400px;
+  height: 40px;
   top: 236px;
 
   border: 3px solid rgba(0, 0, 0, 0.2);
@@ -147,7 +148,7 @@
 
 .profile-account-country {
   position: absolute;
-  width: 154px;
+  width: 320px;
   height: 40px;
   left: 35px;
   top: 302px;
@@ -156,22 +157,11 @@
   border-radius: 10px;
 }
 
-.profile-account-state {
-  position: absolute;
-  width: 126px;
-  height: 40px;
-  left: 282px;
-  top: 302px;
-
-  border: 3px solid rgba(0, 0, 0, 0.2);
-  border-radius: 10px;
-}
-
 .profile-account-city {
   position: absolute;
-  width: 120px;
+  width: 180px;
+  left: 400px;
   height: 40px;
-  left: 466px;
   top: 302px;
 
   border: 3px solid rgba(0, 0, 0, 0.2);

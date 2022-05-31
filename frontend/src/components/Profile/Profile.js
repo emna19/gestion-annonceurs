@@ -61,9 +61,6 @@ const Profile = () => {
         <div className="profile-account-country profile-style ">
           country : {user.country}
         </div>
-        <div className="profile-account-state profile-style ">
-          state : {user.state}
-        </div>
         <div className="profile-account-city profile-style ">
           city : {user.city}
         </div>
