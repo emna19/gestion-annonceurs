@@ -106,8 +106,11 @@ export default function AudView(props) {
       labels: weekdays,
       datasets: [
         {
-          label: "Impression Date",
-          data: Object.values(count),
+          label:'Impression Date',
+            fill: false,
+            backgroundColor: "#114a71",
+            borderColor: "#114a71",
+            data: Object.values(count)
         },
       ],
     });

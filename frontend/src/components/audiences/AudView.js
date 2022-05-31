@@ -1,11 +1,32 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import {useEffect , useState} from 'react'
 import  Axios  from 'axios';
+import countries from "countries-list";
+import './AudView.css';
 
 export default function AudView(props) {
 
     const url = "http://localhost:5000/audiences/"+props.infos._id
-    console.log(url)
+    
+    
+    const [component, setComponent] = useState(["sample text"])
+
+    const [country, setCountry] = useState([])
+
+    const countryCodes = Object.keys(countries.countries);
+    const countryNames = countryCodes.map(code => countries.countries[code].name);
+
+    function handleCountry(e) {
+        setCountry(prevCountry => ([
+            ...prevCountry,
+            e.target.value
+        ]))
+        
+    }
+
+    function ShowSelect() {
+        setComponent([...component,"sample text"])
+    }
 
     const [clicked, setClicked] = useState(false)
 
@@ -16,7 +37,7 @@ export default function AudView(props) {
         name:"Name",
         minAge: "minAge",
         maxAge: "maxAge",
-        countries: ["countries"],
+        countries: [],
         keywords: ["keywords"],
         videoIDs: ["Show IDs"]
     })
@@ -37,11 +58,13 @@ export default function AudView(props) {
         const newAudience = {...audience}
         if (e.target.id === "countries" || e.target.id === "keywords" || e.target.id === "videoIDs"){
             newAudience[e.target.id] = [e.target.value]
+            console.log(newAudience)
         }else
         {newAudience[e.target.id] = e.target.value}
         setAudience(newAudience)
     }
-
+    console.log(country)
+    console.log(audience.countries)
     function submit(e) {
         e.preventDefault()
         Axios.put(url, {...audience,keywords: (audience.keywords.toString()).split(",").map(item => item.trim()),
@@ -51,10 +74,34 @@ export default function AudView(props) {
     useEffect(() => {
         setAudience(props.infos)
     }, [props.infos])
-
+    
+    const state = {
+        reload: false
+      };
+    
+    const refreshPage = () => {
+        this.setState(
+          {reload: true},
+          () => this.setState({reload: false})
+        )
+      }
   
+    let displayCountries = audience.countries.map((element) => element+',')
+    displayCountries = displayCountries.filter(displayCountry => displayCountry !== "null,")
+    console.log(displayCountries)
+    if (displayCountries.length !== 0)  displayCountries[displayCountries.length-1]=displayCountries[displayCountries.length-1].replace(",","")
+    console.log(displayCountries)
+    
+    let keywords = audience.keywords.map((element) => element+',')
+    keywords = keywords.filter(keyword => keyword !== "null,")
+    console.log(keywords)
+    if (keywords.length !== 0)  keywords[keywords.length-1]=keywords[keywords.length-1].replace(",","")
+    console.log(keywords)
 
-    console.log(audience)   
+    let videoIDs = audience.videoIDs.map((element) => element+',')
+    videoIDs = videoIDs.filter(videoID => videoID !== "null,")
+    if (videoIDs.length !== 0)  videoIDs[videoIDs.length-1]=videoIDs[videoIDs.length-1].replace(",","")
+
     return (
         <>
         { !clicked && <div className="card text-center" style={ styles.card }>
@@ -84,15 +131,15 @@ export default function AudView(props) {
             </div>
             <div className="row mb-4 px-3">
                 <span className="col-auto card-text fw-bold">Countries:</span>
-                <div className='col-8 text-start countries'>{audience.countries != null && audience.countries.map((element, i) => (<a key={i}>{element},</a>)) }</div>
+                <div className='col-8 text-start countries'>{displayCountries.length === 0 ? <a>None</a> : displayCountries }</div>
             </div>
             <div className="row mb-4 px-3">
                 <span className="col-auto card-text fw-bold">Keywords:</span>
-                <div className='col-8 text-start keywords'>{ audience.keywords != null && audience.keywords.map((element, i) => (<a key={i}>{element},</a>)) }</div>
+                <div className='col-8 text-start keywords'>{ keywords.length === 0 ? <a>None</a> : keywords  }</div>
             </div>
             <div className="row mb-4 px-3">
                 <span className="col-auto card-text fw-bold">Show IDs:</span>
-                <div className='col-8 text-start movieIds'>{ audience.videoIDs != null && audience.videoIDs.map((element, i) => (<a key={i}>{element},</a>)) }</div>
+                <div className='col-8 text-start movieIds'>{ videoIDs.length === 0 ? <a>None</a> : videoIDs }</div>
             </div>  
         </div>
         </div>
@@ -128,11 +175,31 @@ export default function AudView(props) {
                         </div>
                     </div>
                 </div>
-                <div className="row mb-4 px-3 align-items-center">
+                <div className="row mb-4 px-3 align-items-center" style={{rowGap: "12px"}}>
                     <span className="col-auto card-text fw-bold">Countries:</span>
-                    <div className="col-auto">
-                        <input type="text" style={{fontSize: "18px"}} className="AudView form-control"  id="countries" onChange={handle} value={audience.countries } placeholder= "Countries" />
-                    </div>
+                        {/* <input type="text" style={{fontSize: "18px"}} className="AudView form-control"  id="countries" onChange={handle} value={audience.countries } placeholder= "Countries" /> */}
+                        {audience.countries.length !== 0 ? audience.countries.map((item, i) => (
+                            <select key={i} className="edit-country form-select form-control countries-select" onChange={handleCountry}  value={country.name} id="countries" aria-label="Default select example">
+                                <option value={item}>{item}</option>
+                                    {countryNames.map((item, j) => (
+                                        <option key={j} value={item}>{item}</option>
+                                    ))} 
+                                    
+                            </select>
+                        )):null}
+                        {component.map((item, i) => (
+                                <select key={i} className="edit-country form-select form-control countries-select" onChange={handleCountry}  value={country.name} id="countries" aria-label="Default select example">
+                                    {countryNames.map((item, j) => (
+                                        <option key={j} value={item}>{item}</option>
+                                    ))} 
+                                    
+                                </select>
+                        ))}
+
+                    
+                    <div className="edit-country-for-add"><button type="button" className="edit-country-add" onClick={ShowSelect}>+</button></div>
+
+                    
                 </div>
                 <div className="row mb-4 px-3 align-items-center">
                     <span className="col-auto card-text fw-bold">Keywords:</span>
@@ -147,7 +214,7 @@ export default function AudView(props) {
                     </div>
                 </div> 
                 <div className="row mb-2 px-3 align-items-center justify-content-end" style={{gap: "12px"}}>
-                    <button type="reset" className="home-container-Delete col-auto" onClick={() => {return (setClicked(!clicked), setAudience(props.infos))}} style={{height: "35px"}}>Cancel</button>
+                    <button type="reset" className="home-container-Delete col-auto" onClick={() => {return (setClicked(!clicked), setAudience(props.infos), refreshPage)}} style={{height: "35px"}}>Cancel</button>
                     <button type="submit" className="home-container-Add" style={{height: "35px", fontSize:"17px"}}>Save</button>
                 </div> 
             </form> 

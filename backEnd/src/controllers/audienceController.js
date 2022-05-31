@@ -36,7 +36,8 @@ const createAudience = async(req,res) => {
           maxAge : audience.maxAge,
           countries : audience.countries,
           keywords : audience.keywords,
-          videoIDs : audience.videoIDs
+          videoIDs : audience.videoIDs,
+          User : audience.User
 
         });
         await new_audience.save();

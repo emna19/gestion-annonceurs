@@ -201,6 +201,7 @@ export default function Home() {
       }
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[annonce])
+    console.log(audience)
       
 
   useEffect(() => {
@@ -248,12 +249,35 @@ export default function Home() {
         labels: weekdays,
         datasets: [{
             label:'Impressions',
+            fill: false,
+            backgroundColor: "#114a71",
+            borderColor: "#114a71",
             data: Object.values(count)
         }]
+        
     })
 // eslint-disable-next-line react-hooks/exhaustive-deps
-},[impression])
+    },[impression])
 
+  const state = {
+    reload: false
+  };
+
+  const refreshPage = () => {
+    this.setState(
+      {reload: true},
+      () => this.setState({reload: false})
+    )
+  }
+
+
+let displayCountries =[]
+  if (audience.countries !== undefined){
+  let displayCountries = audience.countries.map((element) => element+',')
+    displayCountries = displayCountries.filter(displayCountry => displayCountry !== "null,")
+    console.log(displayCountries)
+    if (displayCountries.length !== 0)  displayCountries[displayCountries.length-1]=displayCountries[displayCountries.length-1].replace(",","")
+  }
   if (annonce.length!==0) console.log(annonce[0].audience)
 
   if (annonce.length !== 0) {console.log(format( parseISO(annonce[0].startDate), 'yyyy/MM/dd kk:mm:ss')); console.log(annonce[0].audience)}
@@ -262,14 +286,15 @@ export default function Home() {
       <div className="home" style={styles.home}> 
         <main className="container-home" style={styles.container_home}>
           <div className="home-container-head" style={{marginBottom: 0}}>
-            <h5 className="home-container-title">Statistics</h5>
+            
           </div>
           
-            <div className="login-container" style={{width: "700px", 
+            <div className="login-container" style={{width: "867px", 
               height: "400px", 
               backgroundImage: "none",
-              padding: 0, 
-              marginBottom: 0}}
+              padding: 0,
+              marginLeft: "230px", 
+              marginBottom: "40px"}}
             >
               { audience.length!== 0 && <div style={{textAlign: "center",
                       
@@ -399,7 +424,16 @@ export default function Home() {
                         </button>
                     </div>
                   </div>
-                  <h5 className="card-title">{ item.name }</h5>
+                  <h5 className="card-title mb-4">{ item.name }</h5>
+                  <div className='row mb-3'>
+                      <span className="col-auto text-start card-text">Age:</span>
+                      <div className='col-auto'>{ item.minAge }</div>-
+                      <div className='col-auto'>{ item.maxAge }</div>
+                    </div>
+                    <div className='row mb-3'>
+                      <span className="col-auto text-start card-text">Countries:</span>
+                      <div className='col-auto'>{ displayCountries.length === 0 ? <a>None</a> : displayCountries }</div>
+                    </div>
                 </div>
               </div>
               ))}
@@ -417,7 +451,7 @@ export default function Home() {
 
         {viewClicked && <div className="overlay">
             <div >
-              {componentName === "Annonce" ? <AnnView audienceID={<GetAudienceById id = {item.audience}/>} onClick={() => {setViewClicked(!viewClicked)}} infos= {item}/> : <AudView onClick={() => {setViewClicked(!viewClicked)}} infos= {item}/>}
+              {componentName === "Annonce" ? <AnnView audienceID={<GetAudienceById id = {item.audience}/>} onClick={() => {setViewClicked(!viewClicked)}} infos= {item}/> : <AudView onClick={() => { return(setViewClicked(!viewClicked),refreshPage)}} infos= {item}/>}
             </div>
           </div>
         }
