@@ -58,7 +58,7 @@ const createUser = async (req, res) => {
       country: user.country,
       city: user.city,
       codePostal: user.codePostal,
-      isAdmin: user.isAdmin,
+      isAdmin: false,
       taxID: user.taxID,
       photo: user.photo,
     });
