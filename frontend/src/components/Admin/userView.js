@@ -3,6 +3,8 @@ import countries from "countries-list";
 
 export default function UserView(props) {
 
+    const [user, setUser] = useState(props.infos)
+
     const [clicked, setClicked] = useState(false)
 
     const styles={
@@ -17,7 +19,7 @@ export default function UserView(props) {
         }
     }
 
-    console.log(props.infos)
+    console.log(user)
 
     const countryCodes = Object.keys(countries.countries);
     const countryNames = countryCodes.map(code => countries.countries[code].name);
@@ -53,39 +55,39 @@ export default function UserView(props) {
                 </svg> 
             </div>
            </div>
-           <h2 className="mb-5 card-title fw-bold">{props.infos.name}</h2>
+           <h2 className="mb-5 card-title fw-bold">{user.name}</h2>
 
             <div className="row mb-4 px-3">
                 <span className="col-4 text-start card-text fw-bold">Email:</span>
-                <div className='col-8 text-start countries'>{ props.infos.email }</div>
+                <div className='col-8 text-start countries'>{ user.email }</div>
             </div>
             <div className="row mb-4 px-3">
                 <span className="col-4 text-start card-text fw-bold">Phone:</span>
-                <div className='col-8 text-start countries'>{ props.infos.phone }</div>
+                <div className='col-8 text-start countries'>{ user.phone }</div>
             </div>
 
             <div className="row mb-4 px-3">
                 <span className="col-4 text-start card-text fw-bold">Organisation:</span>
-                <div className='col-8 text-start countries'>{ props.infos.organistaion }</div>
+                <div className='col-8 text-start countries'>{ user.organistaion }</div>
 
                 
             </div>
 
             <div className="row mb-4 px-3">
                 <span className="col-4 text-start card-text fw-bold">Country:</span>
-                <div className='col-8 text-start countries'>{ props.infos.country }</div>
+                <div className='col-8 text-start countries'>{ user.country }</div>
             </div>
             <div className="row mb-4 px-3">
                 <span className="col-4 text-start card-text fw-bold">City:</span>
-                <div className='col-8 text-start keywords'>{ props.infos.city }</div>
+                <div className='col-8 text-start keywords'>{ user.city }</div>
             </div>
             <div className="row mb-4 px-3">
                 <span className="col-4 text-start card-text fw-bold">Adress:</span>
-                <div className='col-7 text-start movieIds'>{ props.infos.adress }</div>
+                <div className='col-7 text-start movieIds'>{ user.adress }</div>
             </div> 
             <div className="row mb-4 px-3">
                 <span className="col-4 text-start card-text fw-bold">Postal Code:</span>
-                <div className='col-7 text-start movieIds'>{ props.infos.codePostal }</div>
+                <div className='col-7 text-start movieIds'>{ user.codePostal }</div>
             </div>
             
         </div>
@@ -107,30 +109,30 @@ export default function UserView(props) {
            </div>
            <form onSubmit={submit} className="row g-2" >
                 <div className="col-md-5 mb-5" style={{margin: "38px auto"}}>
-                    <input type="text" style={{fontSize: "25px"}} className="AudView form-control fw-bold text-center"  id="name" onChange={handle} value={props.infos.name} placeholder= "Name" />
+                    <input type="text" style={{fontSize: "25px"}} className="AudView form-control fw-bold text-center"  id="name" onChange={handle} value={user.name} placeholder= "Name" />
                 </div>
             
                 <div className="row mb-4 px-3 align-items-center">
                     <span className="col-4 text-start card-text fw-bold">Email:</span>
                     <div className="col-4">
-                        <input type="text" style={{fontSize: "18px"}} className="AudView form-control"  id="email" onChange={handle} value={props.infos.email} placeholder= "Email" />
+                        <input type="text" style={{fontSize: "18px"}} className="AudView form-control"  id="email" onChange={handle} value={user.email} placeholder= "Email" />
                     </div>
                 
                     <span className="col-4 text-start card-text fw-bold">Phone:</span>
                     <div className="col-3">
-                        <input type="text" style={{fontSize: "18px"}} className="AudView form-control"  id="phone" onChange={handle} value={props.infos.phone} placeholder= "Phone" />
+                        <input type="text" style={{fontSize: "18px"}} className="AudView form-control"  id="phone" onChange={handle} value={user.phone} placeholder= "Phone" />
                     </div>
                 
                 </div>
                 <div className="row mb-4 px-3 align-items-center">
                     <span className="col-4 text-start card-text fw-bold">Organisation:</span>
                     <div className="col-4">
-                        <input type="text" style={{fontSize: "18px"}} className="AudView form-control"  id="organisation" onChange={handle} value={props.infos.organistaion} placeholder= "Organisation" />
+                        <input type="text" style={{fontSize: "18px"}} className="AudView form-control"  id="organisation" onChange={handle} value={user.organistaion} placeholder= "Organisation" />
                     </div>          
                 
                     <span className="col-4 text-start card-text fw-bold">Country:</span>
                     <div className="col-3">
-                        <select className="form-select form-control countries-select" onChange={handle}  value={props.infos.country} id="countries" aria-label="Default select example">
+                        <select className="form-select form-control countries-select" onChange={handle}  value={user.country} id="countries" aria-label="Default select example">
                             {countryNames.map((item, j) => (
                                 <option key={j} value={item}>{item}</option>
                             ))} 
@@ -141,18 +143,18 @@ export default function UserView(props) {
                 <div className="row mb-4 px-3 align-items-center">
                     <span className="col-4 text-start card-text fw-bold">City:</span>
                     <div className="col-4">
-                        <input type="text" style={{fontSize: "18px"}} className="AudView form-control"  id="city" onChange={handle} value={props.infos.city } placeholder= "City" />
+                        <input type="text" style={{fontSize: "18px"}} className="AudView form-control"  id="city" onChange={handle} value={user.city } placeholder= "City" />
                     </div>
                     <span className="col-4 text-start card-text fw-bold">Postal Code:</span>
                     <div className="col-3">
-                        <input type="text" style={{fontSize: "18px"}} className="AudView form-control"  id="codePostal" onChange={handle} value={ props.infos.codePostal } placeholder= "Postal Code" />
+                        <input type="text" style={{fontSize: "18px"}} className="AudView form-control"  id="codePostal" onChange={handle} value={ user.codePostal } placeholder= "Postal Code" />
                     </div>
                     
                 </div>
                 <div className="row mb-4 px-3 align-items-center">
                     <span className="col-4 card-text fw-bold text-start">Adress:</span>
                     <div className="col-6">
-                        <input type="text" style={{fontSize: "18px"}} className="AudView form-control"  id="type" onChange={handle} value={props.infos.adress } placeholder= "Adress" />
+                        <input type="text" style={{fontSize: "18px"}} className="AudView form-control"  id="type" onChange={handle} value={user.adress } placeholder= "Adress" />
                     </div>
                 </div>
                      
