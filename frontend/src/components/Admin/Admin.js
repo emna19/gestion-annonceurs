@@ -71,7 +71,6 @@ export default function Admin() {
                         <a onClick={
                             ()=>{ 
                         const  user = props.user._id
-                        console.log(user)
                         Axios.delete(usersUrl+user).then(res => {window.location.href = '/admin'})  }} 
                          id={props.user.id} className="delete" title="Delete" data-toggle="tooltip"><i className="material-icons">&#xE5C9;</i></a>
                         {/* gerer annonce */}
