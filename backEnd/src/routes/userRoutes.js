@@ -21,6 +21,10 @@ router.get('/:id', UserController.userById)
   
 router.post('/', UserController.createUser);
 
+// user delete route 
+router.delete('/:id', UserController.deleteUser);
+
+
 
 
 module.exports = router;

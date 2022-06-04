@@ -11,9 +11,7 @@ import { userProfileAction } from "../../redux/actions/users/userActions";
 export default function Admin() {
 
     const [users, setUsers] = useState([]);
-
     const [viewClicked, setViewClicked] = useState(false)
-
     const [ad, setAd] = useState([]);
 
     const [ads, setAds] = useState([]);
@@ -21,6 +19,8 @@ export default function Admin() {
     const admin = JSON.parse(localStorage.getItem("userAuth"));
 
     const annonceUrl = "http://localhost:5000/annonces/"
+    /// users Url
+    const usersUrl = 'http://localhost:5000/users/' ;
 
     const styles = {
 
@@ -39,6 +39,7 @@ export default function Admin() {
           },
     }
     
+
     function deleteAnnonce(e) {
         Axios.delete(annonceUrl+e.target.id).then(res => {window.location.href = '/admin'})
       }
@@ -50,7 +51,6 @@ export default function Admin() {
         let i =0;
 
         const tab = ads.map((ad, index) =>(ad.User=== props.user._id ? true: null)).filter(item => item === true)
-
         document.body.style = "background-color: white";
 
         return(
@@ -65,8 +65,17 @@ export default function Admin() {
                         <td><span className="status text-danger">&bull;</span> Inactive</td>
                     }
                     <td>
+                        {/* settings annonceur */}
                         <a href="#" className="settings" title="Settings" data-toggle="tooltip"><i className="material-icons">&#xE8B8;</i></a>
-                        <a href="#" className="delete" title="Delete" data-toggle="tooltip"><i className="material-icons">&#xE5C9;</i></a>
+                        {/* delete annonceur */}
+                        <a onClick={()=>{ 
+                        const  user = props.user._id
+                        console.log(user)
+                        Axios.delete(usersUrl+user).then(res => {window.location.href = '/admin'})  
+
+        }} 
+        name={props.user.id} id={props.user.id} className="delete" title="Delete" data-toggle="tooltip"><i className="material-icons">&#xE5C9;</i></a>
+                        {/* gerer annonce */}
                         <a onClick={() => { return (setExpand(!expand))}} style={{cursor: "pointer"}} className="settings" title="Settings" data-toggle="tooltip">
                             {expand ? <i className="material-icons">expand_less</i> :
                             <i className="material-icons">expand_more</i>
