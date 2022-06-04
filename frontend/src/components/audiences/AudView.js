@@ -34,12 +34,12 @@ export default function AudView(props) {
     const [updatedAt, setUpdatedAt] = useState()
 
     const [audience, setAudience] = useState({
-        name:"Name",
-        minAge: "minAge",
-        maxAge: "maxAge",
+        name:"",
+        minAge: "",
+        maxAge: "",
         countries: [],
-        keywords: ["keywords"],
-        videoIDs: ["Show IDs"]
+        keywords: [],
+        videoIDs: []
     })
 
     const styles={
@@ -63,13 +63,14 @@ export default function AudView(props) {
         {newAudience[e.target.id] = e.target.value}
         setAudience(newAudience)
     }
+
     console.log(country)
-    console.log(audience.countries)
+    console.log(audience)
     function submit(e) {
         e.preventDefault()
         Axios.put(url, {...audience,keywords: (audience.keywords.toString()).split(",").map(item => item.trim()),
-        videoIDs: (audience.videoIDs.toString()).split(",").map(item => item.trim()),})
-            .then(response => {return (setUpdatedAt(response.data.updatedAt), setClicked(!clicked))});
+        videoIDs: (audience.videoIDs.toString()).split(",").map(item => item.trim()),countries: country})
+            .then(response => {return (setUpdatedAt(response.data.updatedAt), setClicked(!clicked),refreshPage)});
     }
     useEffect(() => {
         setAudience(props.infos)
@@ -82,25 +83,31 @@ export default function AudView(props) {
     const refreshPage = () => {
         this.setState(
           {reload: true},
-          () => this.setState({reload: false})
+          () => (this.setState({reload: false}))
         )
       }
   
-    let displayCountries = audience.countries.map((element) => element+',')
+    let displayCountries = []
+    let keywords = []
+    let videoIDs = []
+
+    if (audience !== undefined) {
+    displayCountries = audience.countries.map((element) => element+',')
     displayCountries = displayCountries.filter(displayCountry => displayCountry !== "null,")
     console.log(displayCountries)
     if (displayCountries.length !== 0)  displayCountries[displayCountries.length-1]=displayCountries[displayCountries.length-1].replace(",","")
     console.log(displayCountries)
     
-    let keywords = audience.keywords.map((element) => element+',')
+    keywords = audience.keywords.map((element) => element+',')
     keywords = keywords.filter(keyword => keyword !== "null,")
     console.log(keywords)
     if (keywords.length !== 0)  keywords[keywords.length-1]=keywords[keywords.length-1].replace(",","")
     console.log(keywords)
 
-    let videoIDs = audience.videoIDs.map((element) => element+',')
+    videoIDs = audience.videoIDs.map((element) => element+',')
     videoIDs = videoIDs.filter(videoID => videoID !== "null,")
     if (videoIDs.length !== 0)  videoIDs[videoIDs.length-1]=videoIDs[videoIDs.length-1].replace(",","")
+    }
 
     return (
         <>
@@ -214,7 +221,7 @@ export default function AudView(props) {
                     </div>
                 </div> 
                 <div className="row mb-2 px-3 align-items-center justify-content-end" style={{gap: "12px"}}>
-                    <button type="reset" className="home-container-Delete col-auto" onClick={() => {return (setClicked(!clicked), setAudience(props.infos), refreshPage)}} style={{height: "35px"}}>Cancel</button>
+                    <button type="reset" className="home-container-Delete col-auto" onClick={() => {return (setClicked(!clicked))}} style={{height: "35px"}}>Cancel</button>
                     <button type="submit" className="home-container-Add" style={{height: "35px", fontSize:"17px"}}>Save</button>
                 </div> 
             </form> 

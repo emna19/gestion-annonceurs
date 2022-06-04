@@ -78,10 +78,24 @@ const deleteAudience = async (req, res) => {
     }
 }
 
+const getAudiencesByUserId = async (req, res) => {
+    try {
+        await Audience.find({"User": req.params.id})
+        .then(result => {
+            res.status(200).send(result);
+        })
+    }
+    catch (err) {
+        console.log(err)
+        res.status(404).send(`annonce not found`, err);
+    }
+}
+
 module.exports = {
     allAudiences,
     audienceById,
     createAudience,
     updateAudience,
-    deleteAudience
+    deleteAudience,
+    getAudiencesByUserId
 }
