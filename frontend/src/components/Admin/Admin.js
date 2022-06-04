@@ -4,6 +4,7 @@ import {useEffect , useState} from 'react'
 import { parseISO, format } from 'date-fns';
 import  Axios  from 'axios';
 import AnnViewAdmin from './AnnViewAdmin';
+import UserView from './userView';
 
 import { useDispatch } from 'react-redux';
 import { userProfileAction } from "../../redux/actions/users/userActions";
@@ -11,8 +12,12 @@ import { userProfileAction } from "../../redux/actions/users/userActions";
 export default function Admin() {
 
     const [users, setUsers] = useState([]);
+
     const [viewClicked, setViewClicked] = useState(false)
-    const [ad, setAd] = useState([]);
+
+    const [item, setItem] = useState([]);
+
+    const [componentName, setComponentName] = useState()
 
     const [ads, setAds] = useState([]);
 
@@ -66,7 +71,14 @@ export default function Admin() {
                     }
                     <td>
                         {/* settings annonceur */}
-                        <a href="#" className="settings" title="Settings" data-toggle="tooltip"><i className="material-icons">&#xE8B8;</i></a>
+                        <a onClick={() => {return (
+                                    setViewClicked(!viewClicked),
+                                    setComponentName("User"),
+                                    setItem(props.user)
+                            )}}
+                         href="#" className="settings" title="Settings" data-toggle="tooltip">
+                         <i className="material-icons">&#xE8B8;</i>
+                         </a>
                         {/* delete annonceur */}
                         <a onClick={
                             ()=>{ 
@@ -109,7 +121,8 @@ export default function Admin() {
                             <td>
                                 <a onClick={() => {return (
                                     setViewClicked(!viewClicked),
-                                    setAd(ad)
+                                    setComponentName("Annonce"),
+                                    setItem(ad)
                                     )}}
                                  className="settings" title="Settings" data-toggle="tooltip">
                                  <i className="material-icons">&#xE8B8;</i></a>
@@ -130,8 +143,7 @@ export default function Admin() {
             </>
         )
     }
-    
-
+    console.log(viewClicked)
     useEffect(() => {
         Axios.get('http://localhost:5000/users/')
         .then(res => setUsers(res.data))
@@ -191,7 +203,9 @@ export default function Admin() {
         </div></main>
         {viewClicked && <div className="overlay">
             <div >
-              {viewClicked ? <AnnViewAdmin onClick={() => {setViewClicked(!viewClicked)}} infos= {ad}/> : null}
+              {componentName === "Annonce" ? 
+              <AnnViewAdmin onClick={() => {setViewClicked(!viewClicked)}} infos= {item}/> : 
+              <UserView onClick={() => {setViewClicked(!viewClicked)}} infos= {item}/>}
             </div>
           </div>
         }        
