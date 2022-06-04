@@ -31,7 +31,7 @@ const Profile = () => {
       <div className="profile-picture-frame">
         <img
           className="profile-image"
-          src="http://bootdey.com/img/Content/avatar/avatar1.png"
+          src={require("../../assets/avatar.png")}
           alt=""
         />
         <div className="profile-name-frame">

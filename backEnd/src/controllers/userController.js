@@ -133,6 +133,21 @@ const updateProfile = async (req, res) => {
   }
 };
 
+// Delete Annonce 
+const deleteUser = async (req, res) => {
+  try{
+      await User.findByIdAndDelete(req.params.id).
+      then(
+          res.send("User deleted")
+        )
+  }
+  catch (err) {
+      console.log(err);
+      res.status(400).send("user Delete failed")
+  }
+}
+
+
 module.exports = {
   allUsers,
   userById,
@@ -140,4 +155,5 @@ module.exports = {
   login,
   profile,
   updateProfile,
+  deleteUser,
 };

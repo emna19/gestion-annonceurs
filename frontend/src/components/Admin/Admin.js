@@ -11,9 +11,7 @@ import { userProfileAction } from "../../redux/actions/users/userActions";
 export default function Admin() {
 
     const [users, setUsers] = useState([]);
-
     const [viewClicked, setViewClicked] = useState(false)
-
     const [ad, setAd] = useState([]);
 
     const [ads, setAds] = useState([]);
@@ -21,6 +19,8 @@ export default function Admin() {
     const admin = JSON.parse(localStorage.getItem("userAuth"));
 
     const annonceUrl = "http://localhost:5000/annonces/"
+    /// users Url
+    const usersUrl = 'http://localhost:5000/users/' ;
 
     const styles = {
 
@@ -39,6 +39,7 @@ export default function Admin() {
           },
     }
     
+
     function deleteAnnonce(e) {
         Axios.delete(annonceUrl+e.target.id).then(res => {window.location.href = '/admin'})
       }
@@ -50,7 +51,6 @@ export default function Admin() {
         let i =0;
 
         const tab = ads.map((ad, index) =>(ad.User=== props.user._id ? true: null)).filter(item => item === true)
-
         document.body.style = "background-color: white";
 
         return(
@@ -65,8 +65,15 @@ export default function Admin() {
                         <td><span className="status text-danger">&bull;</span> Inactive</td>
                     }
                     <td>
+                        {/* settings annonceur */}
                         <a href="#" className="settings" title="Settings" data-toggle="tooltip"><i className="material-icons">&#xE8B8;</i></a>
-                        <a href="#" className="delete" title="Delete" data-toggle="tooltip"><i className="material-icons">&#xE5C9;</i></a>
+                        {/* delete annonceur */}
+                        <a onClick={
+                            ()=>{ 
+                        const  user = props.user._id
+                        Axios.delete(usersUrl+user).then(res => {window.location.href = '/admin'})  }} 
+                         id={props.user.id} className="delete" title="Delete" data-toggle="tooltip"><i className="material-icons">&#xE5C9;</i></a>
+                        {/* gerer annonce */}
                         <a onClick={() => { return (setExpand(!expand))}} style={{cursor: "pointer"}} className="settings" title="Settings" data-toggle="tooltip">
                             {expand ? <i className="material-icons">expand_less</i> :
                             <i className="material-icons">expand_more</i>
@@ -144,7 +151,7 @@ export default function Admin() {
         <main className="container-home" style={styles.container_home}>
         <div className='welcome-section text-center mb-3'>
             <img className="rounded-circle" height="152"
-            width="152" style={{marginBottom:"10px"}} alt="100x100" src={require("../../assets/kmar.jfif")}
+            width="152" style={{marginBottom:"10px"}} alt="100x100" src={require("../../assets/avatar.png")}
             data-holder-rendered="true"></img>
 
             <h2 style={{color: "#114a71"}}><strong>Welcome, {admin.name}</strong></h2>
@@ -179,18 +186,7 @@ export default function Admin() {
                         
                     </tbody>
                 </table>
-                <div className="clearfix">
-                    <div className="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
-                    <ul className="pagination">
-                        <li className="page-item disabled"><a href="#">Previous</a></li>
-                        <li className="page-item"><a href="#" className="page-link">1</a></li>
-                        <li className="page-item"><a href="#" className="page-link">2</a></li>
-                        <li className="page-item active"><a href="#" className="page-link">3</a></li>
-                        <li className="page-item"><a href="#" className="page-link">4</a></li>
-                        <li className="page-item"><a href="#" className="page-link">5</a></li>
-                        <li className="page-item"><a href="#" className="page-link">Next</a></li>
-                    </ul>
-                </div>
+                
             </div>
         </div></main>
         {viewClicked && <div className="overlay">
