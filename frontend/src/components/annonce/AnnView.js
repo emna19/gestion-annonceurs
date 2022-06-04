@@ -4,9 +4,12 @@ import { parseISO, format, getDay } from "date-fns";
 import BarChart from "../charts/BarChart";
 
 export default function AudView(props) {
+
   const url = "http://localhost:5000/annonces/" + props.infos._id;
 
   const [clicked, setClicked] = useState(false);
+
+  const [audinAnn, setAudinAnn] = useState([])
 
   const [verifyClicked, setVerifyClicked] = useState(false);
 
@@ -66,7 +69,7 @@ export default function AudView(props) {
   }, [props.infos]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/audiences")
+    fetch("http://localhost:5000/audiences/user/"+props.userID)
       .then((res) => res.json())
       .then((data) => setAudience(data));
 
@@ -83,6 +86,7 @@ export default function AudView(props) {
       });
     }
   }, [annonce]);
+  console.log(annonce)
 
   useEffect(() => {
     let count = {};
@@ -117,6 +121,12 @@ export default function AudView(props) {
   }, [impression]);
 
   console.log(verifyClicked);
+
+  useEffect(()=>{
+    Axios.get('http://localhost:5000/audiences/'+props.audienceID)
+      .then(res => setAudinAnn(res.data))
+    
+  },[])
 
   return (
     <>
@@ -201,7 +211,7 @@ export default function AudView(props) {
               </span>
               <div className="col-8 text-start countries">
                 {annonce.startDate !== "Start Date"
-                  ? format(parseISO(annonce.startDate), "yyyy/MM/dd kk:mm:ss")
+                  ? format(parseISO(annonce.startDate), "yyyy/MM/dd")
                   : null}
               </div>
             </div>
@@ -211,7 +221,7 @@ export default function AudView(props) {
               </span>
               <div className="col-8 text-start countries">
                 {annonce.endtDate !== "End Date"
-                  ? format(parseISO(annonce.endtDate), "yyyy/MM/dd kk:mm:ss")
+                  ? format(parseISO(annonce.endtDate), "yyyy/MM/dd")
                   : null}
               </div>
             </div>
@@ -221,7 +231,7 @@ export default function AudView(props) {
                 Audience:
               </span>
               <div className="col-8 text-start countries">
-                {props.audienceID}
+                {audinAnn.name}
               </div>
             </div>
 
@@ -239,7 +249,7 @@ export default function AudView(props) {
             </div>
             <div className="row mb-4 px-3">
               <span className="col-4 text-start card-text fw-bold">
-                Page url:
+              Click url:
               </span>
               <div className="col-7 text-start movieIds">
                 {annonce.clickUrl}
@@ -264,7 +274,7 @@ export default function AudView(props) {
                   className="home-container-Add"
                   style={{
                     height: "38px",
-                    width: "78px",
+                    width: "150px",
                     letterSpacing: "0.1em",
                     fontSize: "17px",
                   }}
@@ -272,7 +282,7 @@ export default function AudView(props) {
                     return setVerifyClicked(!verifyClicked);
                   }}
                 >
-                  Verify
+                  View statistics
                 </button>
               </div>
             </div>
@@ -318,14 +328,14 @@ export default function AudView(props) {
                 </span>
                 <div className="col-4">
                   <input
-                    type="text"
+                    type="date"
                     style={{ fontSize: "18px" }}
                     className="AudView form-control"
                     id="startDate"
                     onChange={handle}
                     value={format(
                       parseISO(annonce.startDate),
-                      "yyyy/MM/dd kk:mm:ss"
+                      "yyyy-MM-dd"
                     )}
                     placeholder="Start date"
                   />
@@ -334,14 +344,14 @@ export default function AudView(props) {
                 <span className="col-4 card-text fw-bold">End date:</span>
                 <div className="col-4">
                   <input
-                    type="text"
+                    type="date"
                     style={{ fontSize: "18px" }}
                     className="AudView form-control"
                     id="endtDate"
                     onChange={handle}
                     value={format(
-                      parseISO(annonce.startDate),
-                      "yyyy/MM/dd kk:mm:ss"
+                      parseISO(annonce.endtDate),
+                      "yyyy-MM-dd"
                     )}
                     placeholder="End date"
                   />
@@ -420,7 +430,7 @@ export default function AudView(props) {
               </div>
               <div className="row mb-4 px-3 align-items-center">
                 <span className="col-4 text-start card-text fw-bold">
-                  Page url:
+                  Click url:
                 </span>
                 <div className="col-8">
                   <input

@@ -93,19 +93,19 @@ export default function AudView(props) {
 
     if (audience !== undefined) {
     displayCountries = audience.countries.map((element) => element+',')
-    displayCountries = displayCountries.filter(displayCountry => displayCountry !== "null,")
+    displayCountries = displayCountries.filter(displayCountry => displayCountry !== "null," && displayCountry !== ",")
     console.log(displayCountries)
     if (displayCountries.length !== 0)  displayCountries[displayCountries.length-1]=displayCountries[displayCountries.length-1].replace(",","")
     console.log(displayCountries)
     
     keywords = audience.keywords.map((element) => element+',')
-    keywords = keywords.filter(keyword => keyword !== "null,")
+    keywords = keywords.filter(keyword => keyword !== "null," && keyword !== ",")
     console.log(keywords)
     if (keywords.length !== 0)  keywords[keywords.length-1]=keywords[keywords.length-1].replace(",","")
     console.log(keywords)
 
     videoIDs = audience.videoIDs.map((element) => element+',')
-    videoIDs = videoIDs.filter(videoID => videoID !== "null,")
+    videoIDs = videoIDs.filter(videoID => videoID !== "null," && videoID !== ",")
     if (videoIDs.length !== 0)  videoIDs[videoIDs.length-1]=videoIDs[videoIDs.length-1].replace(",","")
     }
 

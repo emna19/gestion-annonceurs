@@ -30,7 +30,10 @@ export default function Film() {
       top: 0,
       overflow: "hidden",
       position: "fixed"}}>
-        <ReactPlayer width='100%' height='100%' url='https://www.youtube.com/watch?v=fRrWBVk_8_0' onPlay={handleImpression}/>
+        <ReactPlayer width='100%' height='100%' url={params.state.item.sourceUrl} onPlay={() => {return(
+          handleImpression,
+          window.open(params.state.item.clickUrl, '_blank', 'noopener,noreferrer')
+        )} }/>
       </div>
       )
 }
