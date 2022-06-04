@@ -17,7 +17,6 @@ const UpdateProfile = () => {
   }
 
 
-
   // get user from store
   // const user = useSelector((state) => state.userProfile.user);
 
@@ -32,7 +31,7 @@ const UpdateProfile = () => {
   const [codePostal, setcodePostal] = useState(user.codePostal);
   const [taxID, settaxID] = useState(user.taxID);
   const [adress, setadress] = useState(user.adress);
-  const [state] = useState(user.state);
+  const [isAdmin, setisAdmin] = useState(user.isAdmin);
   //  const [photo, setphoto] = useState(user.photo)
 
   //dispatch  update action
@@ -56,7 +55,7 @@ const UpdateProfile = () => {
         codePostal,
         taxID,
         adress,
-        state
+        // state
         // photo
       )
     );
@@ -66,110 +65,210 @@ const UpdateProfile = () => {
     navigate("/Profile");
   };
 
-  return (
-    <form onSubmit={SubmitHandler}>
-      <div className="update-profile">
-        <div className="update-profile-picture-frame">
-          <img
-            className="update-profile-image"
-            src="http://bootdey.com/img/Content/avatar/avatar1.png"
-            alt=""
-          />
-          <div className="update-profile-name-frame">
-            <input
-              className="update-profile-Name  update-profile-style"
-              value={name}
-              onChange={(e) => setname(e.target.value)}
-              type="text"
-              placeholder="Name"
+  if (isAdmin) {
+    return (
+      <form onSubmit={SubmitHandler}>
+        <div className="update-profile">
+          <div className="update-profile-picture-frame">
+            <img
+              className="update-profile-image"
+              src="http://bootdey.com/img/Content/avatar/avatar1.png"
+              alt=""
             />
+            <div className="update-profile-name-frame">
+              <input
+                className="update-profile-Name  update-profile-style"
+                value={name}
+                onChange={(e) => setname(e.target.value)}
+                type="text"
+                placeholder="Name"
+              />
+            </div>
+          </div>
+          <div className="update-profile-details-frame">
+            <div className="update-profile-account-details">Account Details</div>
+            <input
+              className="update-profile-account-email  update-profile-style"
+              value={email}
+              onChange={(e) => setemail(e.target.value)}
+              type="email"
+              placeholder=" Email "
+            />
+  
+            <input
+              className="update-profile-account-password  update-profile-style"
+              value={password}
+              onChange={(e) => setpassword(e.target.value)}
+              type="password"
+              placeholder=" Password "
+            />
+  
+            <input
+              className="update-profile-account-phone   update-profile-style"
+              value={phone}
+              onChange={(e) => setphone(e.target.value)}
+              type="number"
+              placeholder=" phone "
+            />
+
+  
+            <input
+              className="update-profile-account-adress update-profile-style"
+              value={adress}
+              onChange={(e) => setadress(e.target.value)}
+              type="text"
+              placeholder="adress"
+            />
+  
+            <input
+              className="update-profile-account-postcode update-profile-style"
+              value={codePostal}
+              onChange={(e) => setcodePostal(e.target.value)}
+              type="number"
+              placeholder="postcode"
+            />
+  
+            <input
+              className="update-profile-account-country update-profile-style"
+              value={country}
+              onChange={(e) => setcountry(e.target.value)}
+              type="text"
+              placeholder="country"
+            />
+  
+            <input
+              className="update-profile-account-city update-profile-style"
+              value={city}
+              onChange={(e) => setcity(e.target.value)}
+              type="text"
+              placeholder="city"
+            />
+  
+            <button className="update-profile-button" type="submit">
+              Save Changes
+            </button>
+            {/* <button className="return-to-profile-button" type="submit">
+               <Link to="/Profile" className='save-changes' >
+              Return to profile
+              </Link> 
+            </button> */}
           </div>
         </div>
-        <div className="update-profile-details-frame">
-          <div className="update-profile-account-details">Account Details</div>
-          <input
-            className="update-profile-account-organisation  update-profile-style"
-            value={organisation}
-            onChange={(e) => setorganisation(e.target.value)}
-            type="text"
-            placeholder="  Organisation Name"
-          />
-          <input
-            className="update-profile-account-email  update-profile-style"
-            value={email}
-            onChange={(e) => setemail(e.target.value)}
-            type="email"
-            placeholder=" Email "
-          />
-
-          <input
-            className="update-profile-account-password  update-profile-style"
-            value={password}
-            onChange={(e) => setpassword(e.target.value)}
-            type="password"
-            placeholder=" Password "
-          />
-
-          <input
-            className="update-profile-account-phone   update-profile-style"
-            value={phone}
-            onChange={(e) => setphone(e.target.value)}
-            type="number"
-            placeholder=" phone "
-          />
-
-          <input
-            className="update-profile-account-taxID update-profile-style"
-            value={taxID}
-            onChange={(e) => settaxID(e.target.value)}
-            type="Number"
-            placeholder=" taxID "
-          />
-
-          <input
-            className="update-profile-account-adress update-profile-style"
-            value={adress}
-            onChange={(e) => setadress(e.target.value)}
-            type="text"
-            placeholder="adress"
-          />
-
-          <input
-            className="update-profile-account-postcode update-profile-style"
-            value={codePostal}
-            onChange={(e) => setcodePostal(e.target.value)}
-            type="number"
-            placeholder="postcode"
-          />
-
-          <input
-            className="update-profile-account-country update-profile-style"
-            value={country}
-            onChange={(e) => setcountry(e.target.value)}
-            type="text"
-            placeholder="country"
-          />
-
-          <input
-            className="update-profile-account-city update-profile-style"
-            value={city}
-            onChange={(e) => setcity(e.target.value)}
-            type="text"
-            placeholder="city"
-          />
-
-          <button className="update-profile-button" type="submit">
-            Save Changes
-          </button>
-          {/* <button className="return-to-profile-button" type="submit">
-             <Link to="/Profile" className='save-changes' >
-            Return to profile
-            </Link> 
-          </button> */}
+      </form>
+    );
+ 
+  } else {
+    return (
+      <form onSubmit={SubmitHandler}>
+        <div className="update-profile">
+          <div className="update-profile-picture-frame">
+            <img
+              className="update-profile-image"
+              src="http://bootdey.com/img/Content/avatar/avatar1.png"
+              alt=""
+            />
+            <div className="update-profile-name-frame">
+              <input
+                className="update-profile-Name  update-profile-style"
+                value={name}
+                onChange={(e) => setname(e.target.value)}
+                type="text"
+                placeholder="Name"
+              />
+            </div>
+          </div>
+          <div className="update-profile-details-frame">
+            <div className="update-profile-account-details">Account Details</div>
+            <input
+              className="update-profile-account-organisation  update-profile-style"
+              value={organisation}
+              onChange={(e) => setorganisation(e.target.value)}
+              type="text"
+              placeholder="  Organisation Name"
+            />
+            <input
+              className="update-profile-account-email  update-profile-style"
+              value={email}
+              onChange={(e) => setemail(e.target.value)}
+              type="email"
+              placeholder=" Email "
+            />
+  
+            <input
+              className="update-profile-account-password  update-profile-style"
+              value={password}
+              onChange={(e) => setpassword(e.target.value)}
+              type="password"
+              placeholder=" Password "
+            />
+  
+            <input
+              className="update-profile-account-phone   update-profile-style"
+              value={phone}
+              onChange={(e) => setphone(e.target.value)}
+              type="number"
+              placeholder=" phone "
+            />
+  
+            <input
+              className="update-profile-account-taxID update-profile-style"
+              value={taxID}
+              onChange={(e) => settaxID(e.target.value)}
+              type="Number"
+              placeholder=" taxID "
+            />
+  
+            <input
+              className="update-profile-account-adress update-profile-style"
+              value={adress}
+              onChange={(e) => setadress(e.target.value)}
+              type="text"
+              placeholder="adress"
+            />
+  
+            <input
+              className="update-profile-account-postcode update-profile-style"
+              value={codePostal}
+              onChange={(e) => setcodePostal(e.target.value)}
+              type="number"
+              placeholder="postcode"
+            />
+  
+            <input
+              className="update-profile-account-country update-profile-style"
+              value={country}
+              onChange={(e) => setcountry(e.target.value)}
+              type="text"
+              placeholder="country"
+            />
+  
+            <input
+              className="update-profile-account-city update-profile-style"
+              value={city}
+              onChange={(e) => setcity(e.target.value)}
+              type="text"
+              placeholder="city"
+            />
+  
+            <button className="update-profile-button" type="submit">
+              Save Changes
+            </button>
+            {/* <button className="return-to-profile-button" type="submit">
+               <Link to="/Profile" className='save-changes' >
+              Return to profile
+              </Link> 
+            </button> */}
+          </div>
         </div>
-      </div>
-    </form>
-  );
+      </form>
+    );
+  }
+
 };
 
 export default UpdateProfile;
+
+
+   // user is not an admin
+
+  

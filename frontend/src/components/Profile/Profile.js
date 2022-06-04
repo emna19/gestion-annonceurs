@@ -26,52 +26,102 @@ const Profile = () => {
 
   document.body.style = "background-color: white";
 
-  return (
-    <div className="profile">
-      <div className="profile-picture-frame">
-        <img
-          className="profile-image"
-          src="http://bootdey.com/img/Content/avatar/avatar1.png"
-          alt=""
-        />
-        <div className="profile-name-frame">
-          <label className="profile-Name  profile-style ">{user.name}</label>
+  if (user.isAdmin) {      
+      //// user is admin
+     return( 
+      <div className="profile">
+        <div className="profile-picture-frame">
+          <img
+            className="profile-image"
+            src="http://bootdey.com/img/Content/avatar/avatar1.png"
+            alt=""
+          />
+          <div className="profile-name-frame">
+            <label className="profile-Name  profile-style ">{user.name}</label>
+          </div>
+        </div>
+        <div className="profile-details-frame">
+          <div className="profile-account-details"> Account Details </div>
+          <div className="profile-account-email profile-style">
+            Email : {user.email}
+          </div>
+          <div className="profile-account-phone profile-style ">
+            phone : {user.phone}
+          </div>
+          <div className="profile-account-adress profile-style ">
+            adress : {user.adress}
+          </div>
+          <div className="profile-account-postcode  profile-style">
+            postcode: {user.codePostal}
+          </div>
+          <div className="profile-account-country profile-style ">
+            country : {user.country}
+          </div>
+          <div className="profile-account-city profile-style ">
+            city : {user.city}
+          </div>
+          <button className="profile-button" type="button">
+            <Link to="/update" className="change-details">
+              Change details
+            </Link>
+          </button>
         </div>
       </div>
-      <div className="profile-details-frame">
-        <div className="profile-account-details"> Account Details </div>
-        <div className="profile-account-organisation profile-style">
-          Organisation Name : {user.organisation}
+    );
+
+    
+  } else {
+    //// user  not admin
+    return (
+      <div className="profile">
+        <div className="profile-picture-frame">
+          <img
+            className="profile-image"
+            src="http://bootdey.com/img/Content/avatar/avatar1.png"
+            alt=""
+          />
+          <div className="profile-name-frame">
+            <label className="profile-Name  profile-style ">{user.name}</label>
+          </div>
         </div>
-        <div className="profile-account-email profile-style">
-          Email : {user.email}
+        <div className="profile-details-frame">
+          <div className="profile-account-details"> Account Details </div>
+          <div className="profile-account-organisation profile-style">
+            Organisation Name : {user.organisation}
+          </div>
+          <div className="profile-account-email profile-style">
+            Email : {user.email}
+          </div>
+          <div className="profile-account-phone profile-style ">
+            phone : {user.phone}
+          </div>
+          <div className="profile-account-taxID profile-style ">
+            taxID : {user.taxID}
+          </div>
+          <div className="profile-account-adress profile-style ">
+            adress : {user.adress}
+          </div>
+          <div className="profile-account-postcode  profile-style">
+            postcode: {user.codePostal}
+          </div>
+          <div className="profile-account-country profile-style ">
+            country : {user.country}
+          </div>
+          <div className="profile-account-city profile-style ">
+            city : {user.city}
+          </div>
+          <button className="profile-button" type="button">
+            <Link to="/update" className="change-details">
+              Change details
+            </Link>
+          </button>
         </div>
-        <div className="profile-account-phone profile-style ">
-          phone : {user.phone}
-        </div>
-        <div className="profile-account-taxID profile-style ">
-          taxID : {user.taxID}
-        </div>
-        <div className="profile-account-adress profile-style ">
-          adress : {user.adress}
-        </div>
-        <div className="profile-account-postcode  profile-style">
-          postcode: {user.codePostal}
-        </div>
-        <div className="profile-account-country profile-style ">
-          country : {user.country}
-        </div>
-        <div className="profile-account-city profile-style ">
-          city : {user.city}
-        </div>
-        <button className="profile-button" type="button">
-          <Link to="/update" className="change-details">
-            Change details
-          </Link>
-        </button>
       </div>
-    </div>
-  );
+      );
+  }
+
 };
 
 export default Profile;
+
+
