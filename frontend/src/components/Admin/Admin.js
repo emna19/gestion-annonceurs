@@ -68,13 +68,12 @@ export default function Admin() {
                         {/* settings annonceur */}
                         <a href="#" className="settings" title="Settings" data-toggle="tooltip"><i className="material-icons">&#xE8B8;</i></a>
                         {/* delete annonceur */}
-                        <a onClick={()=>{ 
+                        <a onClick={
+                            ()=>{ 
                         const  user = props.user._id
                         console.log(user)
-                        Axios.delete(usersUrl+user).then(res => {window.location.href = '/admin'})  
-
-        }} 
-        name={props.user.id} id={props.user.id} className="delete" title="Delete" data-toggle="tooltip"><i className="material-icons">&#xE5C9;</i></a>
+                        Axios.delete(usersUrl+user).then(res => {window.location.href = '/admin'})  }} 
+                         id={props.user.id} className="delete" title="Delete" data-toggle="tooltip"><i className="material-icons">&#xE5C9;</i></a>
                         {/* gerer annonce */}
                         <a onClick={() => { return (setExpand(!expand))}} style={{cursor: "pointer"}} className="settings" title="Settings" data-toggle="tooltip">
                             {expand ? <i className="material-icons">expand_less</i> :
@@ -153,7 +152,7 @@ export default function Admin() {
         <main className="container-home" style={styles.container_home}>
         <div className='welcome-section text-center mb-3'>
             <img className="rounded-circle" height="152"
-            width="152" style={{marginBottom:"10px"}} alt="100x100" src={require("../../assets/kmar.jfif")}
+            width="152" style={{marginBottom:"10px"}} alt="100x100" src={require("../../assets/avatar.png")}
             data-holder-rendered="true"></img>
 
             <h2 style={{color: "#114a71"}}><strong>Welcome, {admin.name}</strong></h2>

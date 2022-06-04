@@ -72,7 +72,7 @@ const UpdateProfile = () => {
         <div className="update-profile-picture-frame">
           <img
             className="update-profile-image"
-            src="http://bootdey.com/img/Content/avatar/avatar1.png"
+            src={require("../../assets/avatar.png")}
             alt=""
           />
           <div className="update-profile-name-frame">
