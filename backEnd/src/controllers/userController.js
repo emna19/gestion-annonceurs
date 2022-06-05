@@ -133,6 +133,22 @@ const updateProfile = async (req, res) => {
   }
 };
 
+// update Annonce 
+
+const updateUserByAdmin = async (req, res) => {
+  try{
+      await User.findByIdAndUpdate(req.params.id, req.body).
+      then(
+          res.json({...req.body})
+        )
+  }
+  catch (err) {
+      console.log(err);
+      res.status(400).send("update failed")
+  }
+}
+
+
 // Delete Annonce 
 const deleteUser = async (req, res) => {
   try{
@@ -156,4 +172,5 @@ module.exports = {
   profile,
   updateProfile,
   deleteUser,
+  updateUserByAdmin,
 };

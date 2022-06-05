@@ -1,11 +1,15 @@
 import {useEffect , useState} from 'react'
 import countries from "countries-list";
+import Axios  from 'axios';
+
 
 export default function UserView(props) {
 
     const [user, setUser] = useState(props.infos)
 
     const [clicked, setClicked] = useState(false)
+    const [updatedAt, setUpdatedAt] = useState() ; 
+
 
     const styles={
         card:{
@@ -19,22 +23,22 @@ export default function UserView(props) {
         }
     }
 
-    console.log(user)
 
     const countryCodes = Object.keys(countries.countries);
     const countryNames = countryCodes.map(code => countries.countries[code].name);
 
     function handle(e) {
-        // const newAnnonce = {...annonce}
-        // if (e.target.id === "startDate" || e.target.id === "endtDate" ) {newAnnonce[e.target.id] = new Date(e.target.value).toISOString()}
-        // else {newAnnonce[e.target.id] = e.target.value}
-        // setAnnonce(newAnnonce)
+        const newUser = {...user}
+        newUser[e.target.id] = e.target.value
+        setUser(newUser)
     }
-
+    const urlUpdateUser = "http://localhost:5000/annonces/"+user._id
+    console.log(user);
     function submit(e) {
         e.preventDefault()
-        // Axios.put(url, annonce)
-        //     .then(response => {return (setUpdatedAt(response.data.updatedAt), setClicked(!clicked))});
+        Axios.put(urlUpdateUser,user).then(response => {return (setUpdatedAt(response.data.updatedAt), setClicked(!clicked))});
+
+        
     }
 
     return(
@@ -161,7 +165,7 @@ export default function UserView(props) {
                      
                 <div className="row mb-2 px-3 align-items-center justify-content-end" style={{gap: "12px"}}>
                     <button type="reset" className="home-container-Delete col-auto" onClick={() => {setClicked(!clicked)}} style={{height: "35px"}}>Cancel</button>
-                    <button type="submit" className="home-container-Add" style={{height: "35px", fontSize:"17px"}}>Save</button>
+                    <button type="submit" className="home-container-Add" style={{height: "35px", fontSize:"17px"}} >Save</button>
                 </div> 
             </form> 
         </div>
