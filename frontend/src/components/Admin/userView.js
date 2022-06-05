@@ -32,7 +32,7 @@ export default function UserView(props) {
         newUser[e.target.id] = e.target.value
         setUser(newUser)
     }
-    const urlUpdateUser = "http://localhost:5000/annonces/"+user._id
+    const urlUpdateUser = "http://localhost:5000/users/"+user._id
     console.log(user);
     function submit(e) {
         e.preventDefault()
@@ -137,7 +137,7 @@ export default function UserView(props) {
                 
                     <span className="col-4 text-start card-text fw-bold">Country:</span>
                     <div className="col-3">
-                        <select className="form-select form-control countries-select" onChange={handle}  value={user.country} id="countries" aria-label="Default select example">
+                        <select className="form-select form-control countries-select" onChange={handle}  value={user.country} id="country" aria-label="Default select example">
                             {countryNames.map((item, j) => (
                                 <option key={j} value={item}>{item}</option>
                             ))} 
@@ -159,7 +159,7 @@ export default function UserView(props) {
                 <div className="row mb-4 px-3 align-items-center">
                     <span className="col-4 card-text fw-bold text-start">Adress:</span>
                     <div className="col-6">
-                        <input type="text" style={{fontSize: "18px"}} className="AudView form-control"  id="type" onChange={handle} value={user.adress } placeholder= "Adress" />
+                        <input type="text" style={{fontSize: "18px"}} className="AudView form-control"  id="adress" onChange={handle} value={user.adress } placeholder= "Adress" />
                     </div>
                 </div>
                      

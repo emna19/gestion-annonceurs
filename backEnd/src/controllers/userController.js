@@ -133,7 +133,7 @@ const updateProfile = async (req, res) => {
   }
 };
 
-// update Annonce 
+// updateUserByAdmin
 
 const updateUserByAdmin = async (req, res) => {
   try{
