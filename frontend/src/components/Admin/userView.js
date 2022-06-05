@@ -68,7 +68,8 @@ export default function UserView(props) {
 
             <div className="row mb-4 px-3">
                 <span className="col-4 text-start card-text fw-bold">Organisation:</span>
-                <div className='col-8 text-start countries'>{ user.organistaion }</div>
+                
+                <div className='col-8 text-start countries'>{ user.organisation }</div>
 
                 
             </div>
@@ -127,7 +128,7 @@ export default function UserView(props) {
                 <div className="row mb-4 px-3 align-items-center">
                     <span className="col-4 text-start card-text fw-bold">Organisation:</span>
                     <div className="col-4">
-                        <input type="text" style={{fontSize: "18px"}} className="AudView form-control"  id="organisation" onChange={handle} value={user.organistaion} placeholder= "Organisation" />
+                        <input type="text" style={{fontSize: "18px"}} className="AudView form-control"  id="organisation" onChange={handle} value={user.organisation} placeholder= "Organisation" />
                     </div>          
                 
                     <span className="col-4 text-start card-text fw-bold">Country:</span>

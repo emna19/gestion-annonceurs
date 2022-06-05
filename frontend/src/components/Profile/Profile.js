@@ -13,15 +13,22 @@ const Profile = () => {
   }, [dispatch]);
 
   let user = {};
-  // const user = useSelector((store) => store.userProfile.user);
+  const userLogin = useSelector((store) => store.userLogin.userInfo);
+  const updatedUser = useSelector((store) => store.updateProfile.user)
 
-  if (useSelector((store) => store.updateProfile.success) === true) {
-    console.log("i picked update "  );
-     user = useSelector((store) => store.updateProfile.user);
-  } else {
-    console.log("i picked login ");
-    user = useSelector((store) => store.userLogin.userInfo);
+  if (useSelector((store) => store.updateProfile.success) === true && userLogin._id === updatedUser._id) {
+    user = updatedUser ; 
+  }else{
+    user = userLogin ; 
   }
+  console.log(user);
+  // if (useSelector((store) => store.updateProfile.success) === true ) {
+  //   console.log("i picked update "  );
+  //    user = useSelector((store) => store.updateProfile.user);
+  // } else {
+  //   console.log("i picked login ");
+  //   user = useSelector((store) => store.userLogin.userInfo);
+  // }
 
 
   document.body.style = "background-color: white";

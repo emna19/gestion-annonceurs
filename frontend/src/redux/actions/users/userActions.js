@@ -212,6 +212,7 @@ const logoutAction = () => async (dispatch) => {
   
     dispatch({
       type: USER_LOGOUT_SUCCESS,
+      payload : {}
     });
     
   } catch (error) {}

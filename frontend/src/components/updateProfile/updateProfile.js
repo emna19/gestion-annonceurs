@@ -7,14 +7,24 @@ import { useNavigate } from "react-router-dom";
 const UpdateProfile = () => {
   let user = {};
 
-  if (useSelector((store) => store.updateProfile.success) === true) {
-     // eslint-disable-next-line react-hooks/rules-of-hooks
-     user = useSelector((store) => store.updateProfile.user);
-  } else {
-     // eslint-disable-next-line react-hooks/rules-of-hooks
-     user = useSelector((state) => state.userProfile.user);
+  const userLogin = useSelector((store) => store.userLogin.userInfo);
+  const updatedUser = useSelector((store) => store.updateProfile.user)
 
+  if (useSelector((store) => store.updateProfile.success) === true && userLogin._id === updatedUser._id) {
+    user = updatedUser ; 
+  }else{
+    user = userLogin ; 
   }
+  console.log(user);
+
+  // if (useSelector((store) => store.updateProfile.success) === true) {
+  //    // eslint-disable-next-line react-hooks/rules-of-hooks
+  //    user = useSelector((store) => store.updateProfile.user);
+  // } else {
+  //    // eslint-disable-next-line react-hooks/rules-of-hooks
+  //    user = useSelector((state) => state.userProfile.user);
+
+  // }
 
 
 
