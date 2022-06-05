@@ -182,7 +182,7 @@ export default function SignUp() {
               </div>
             </div>
             <div className="input-elements row g-2">
-              <div className="col-md-4">
+              <div className="col-md-4 country-width">
                 <input
                   type="text"
                   className="form-control"
@@ -193,8 +193,8 @@ export default function SignUp() {
                   required
                 />
               </div>
-              <div className="col-md-4">
-                <select
+              {/* <div className="col-md-4">
+                 <select
                   className="form-select"
                   id="validationCustom04"
                   defaultValue=""
@@ -204,8 +204,8 @@ export default function SignUp() {
                     State
                   </option>
                   <option>...</option>
-                </select>
-              </div>
+                </select> 
+              </div> */}
               <div className="col-md-4">
                 <select
                   className="form-select"
