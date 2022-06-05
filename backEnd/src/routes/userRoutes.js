@@ -24,7 +24,8 @@ router.post('/', UserController.createUser);
 // user delete route 
 router.delete('/:id', UserController.deleteUser);
 
-
+/// user update from admin 
+router.put('/:id', UserController.updateUserByAdmin) ; 
 
 
 module.exports = router;
