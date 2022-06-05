@@ -44,7 +44,7 @@ export default function AudView(props) {
 
     const styles={
         card:{
-            width: "457px",
+            width: "473px",
             fontSize: "18px",
             backgroundColor: "transparent"
         },

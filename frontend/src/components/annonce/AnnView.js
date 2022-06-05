@@ -35,7 +35,7 @@ export default function AudView(props) {
 
   const styles = {
     card: {
-      width: clicked ? "768px" : "457px",
+      width: clicked ? "688px" : "603px",
       fontSize: "18px",
       backgroundColor: "transparent",
     },
@@ -60,7 +60,7 @@ export default function AudView(props) {
   function submit(e) {
     e.preventDefault();
     Axios.put(url, annonce).then((response) => {
-      return setUpdatedAt(response.data.updatedAt), setClicked(!clicked);
+      return (setUpdatedAt(response.data.updatedAt), setClicked(!clicked))
     });
   }
 
@@ -206,20 +206,20 @@ export default function AudView(props) {
             <h2 className="mb-5 card-title fw-bold">{annonce.name}</h2>
 
             <div className="row mb-4 px-3">
-              <span className="col-4 text-start card-text fw-bold">
+              <span className="col-3 text-start card-text fw-bold">
                 Start date:
               </span>
-              <div className="col-8 text-start countries">
+              <div className="col-9 text-start countries">
                 {annonce.startDate !== "Start Date"
                   ? format(parseISO(annonce.startDate), "yyyy/MM/dd")
                   : null}
               </div>
             </div>
             <div className="row mb-4 px-3">
-              <span className="col-4 text-start card-text fw-bold">
+              <span className="col-3 text-start card-text fw-bold">
                 End date:
               </span>
-              <div className="col-8 text-start countries">
+              <div className="col-9 text-start countries">
                 {annonce.endtDate !== "End Date"
                   ? format(parseISO(annonce.endtDate), "yyyy/MM/dd")
                   : null}
@@ -227,45 +227,45 @@ export default function AudView(props) {
             </div>
 
             <div className="row mb-4 px-3">
-              <span className="col-4 text-start card-text fw-bold">
+              <span className="col-3 text-start card-text fw-bold">
                 Audience:
               </span>
-              <div className="col-8 text-start countries">
+              <div className="col-9 text-start countries">
                 {audinAnn.name}
               </div>
             </div>
 
             <div className="row mb-4 px-3">
-              <span className="col-4 text-start card-text fw-bold">
+              <span className="col-3 text-start card-text fw-bold">
                 Sector:
               </span>
-              <div className="col-8 text-start countries">{annonce.sector}</div>
+              <div className="col-9 text-start countries">{annonce.sector}</div>
             </div>
             <div className="row mb-4 px-3">
-              <span className="col-4 text-start card-text fw-bold">
+              <span className="col-3 text-start card-text fw-bold">
                 Budget:
               </span>
-              <div className="col-8 text-start keywords">{annonce.budget}</div>
+              <div className="col-9 text-start keywords">{annonce.budget}</div>
             </div>
             <div className="row mb-4 px-3">
-              <span className="col-4 text-start card-text fw-bold">
+              <span className="col-3 text-start card-text fw-bold">
               Click url:
               </span>
-              <div className="col-7 text-start movieIds">
+              <div className="col-9 text-start movieIds">
                 {annonce.clickUrl}
               </div>
             </div>
             <div className="row mb-4 px-3">
-              <span className="col-4 text-start card-text fw-bold">
+              <span className="col-3 text-start card-text fw-bold">
                 Source url:
               </span>
-              <div className="col-7 text-start movieIds">
+              <div className="col-9 text-start movieIds">
                 {annonce.sourceUrl}
               </div>
             </div>
             <div className="row mb-4 px-3">
-              <span className="col-4 text-start card-text fw-bold">Type:</span>
-              <div className="col-8 text-start movieIds">{annonce.type}</div>
+              <span className="col-3 text-start card-text fw-bold">Type:</span>
+              <div className="col-9 text-start movieIds">{annonce.type}</div>
             </div>
             <div className="row mb-1 px-3">
               <div className="text-center">
@@ -323,10 +323,10 @@ export default function AudView(props) {
               </div>
 
               <div className="row mb-4 px-3 align-items-center">
-                <span className="col-4 text-start card-text fw-bold">
+                <span className="col-3 text-start card-text fw-bold">
                   Start date:
                 </span>
-                <div className="col-4">
+                <div className="col-auto card-zone-text">
                   <input
                     type="date"
                     style={{ fontSize: "18px" }}
@@ -341,8 +341,8 @@ export default function AudView(props) {
                   />
                 </div>
 
-                <span className="col-4 card-text fw-bold">End date:</span>
-                <div className="col-4">
+                <span className="col-3 card-text fw-bold">End date:</span>
+                <div className="col-auto card-zone-text">
                   <input
                     type="date"
                     style={{ fontSize: "18px" }}
@@ -358,10 +358,10 @@ export default function AudView(props) {
                 </div>
               </div>
               <div className="row mb-4 px-3 align-items-center">
-                <span className="col-4 text-start card-text fw-bold">
+                <span className="col-3 text-start card-text fw-bold">
                   Audience:
                 </span>
-                <div className="col-4">
+                <div className="col-4 card-zone-text">
                   <select
                     style={{ fontSize: "18px" }}
                     className="form-select form-control countries-select"
@@ -381,8 +381,8 @@ export default function AudView(props) {
                   </select>
                 </div>
 
-                <span className="col-4  card-text fw-bold">Sector:</span>
-                <div className="col-4">
+                <span className="col-3 card-text fw-bold">Sector:</span>
+                <div className="col-4 card-zone-text">
                   <select
                     style={{ fontSize: "18px" }}
                     className="form-select form-control countries-select"
@@ -401,10 +401,10 @@ export default function AudView(props) {
                 </div>
               </div>
               <div className="row mb-4 px-3 align-items-center">
-                <span className="col-4 text-start card-text fw-bold">
+                <span className="col-3 text-start card-text fw-bold">
                   Budget:
                 </span>
-                <div className="col-4">
+                <div className="col-4 card-zone-text">
                   <input
                     type="text"
                     style={{ fontSize: "18px" }}
@@ -415,8 +415,8 @@ export default function AudView(props) {
                     placeholder="Budget"
                   />
                 </div>
-                <span className="col-4 card-text fw-bold">Type:</span>
-                <div className="col-4">
+                <span className="col-3 card-text fw-bold">Type:</span>
+                <div className="col-4 card-zone-text">
                   <input
                     type="text"
                     style={{ fontSize: "18px" }}
@@ -429,7 +429,7 @@ export default function AudView(props) {
                 </div>
               </div>
               <div className="row mb-4 px-3 align-items-center">
-                <span className="col-4 text-start card-text fw-bold">
+                <span className="col-3 text-start card-text fw-bold">
                   Click url:
                 </span>
                 <div className="col-8">
@@ -440,12 +440,12 @@ export default function AudView(props) {
                     id="clickUrl"
                     onChange={handle}
                     value={annonce.clickUrl}
-                    placeholder="Page url"
+                    placeholder="Click url"
                   />
                 </div>
               </div>
               <div className="row mb-5 px-3 align-items-center">
-                <span className="col-4 text-start card-text fw-bold">
+                <span className="col-3 text-start card-text fw-bold">
                   Source url:
                 </span>
                 <div className="col-8">
