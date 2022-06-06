@@ -160,7 +160,7 @@ export default function AnnViewAdmin(props) {
                     <div className='text-center'>
                     <button id="isValid" type="button" className="home-container-Add"
                     style={{height: "38px"}}
-                    onClick={() =>  {return(validate())}}>
+                    onClick={() =>  {return(validate(),window.location.href = '/Admin')}}>
                             Validate
                     </button>
                     </div>
