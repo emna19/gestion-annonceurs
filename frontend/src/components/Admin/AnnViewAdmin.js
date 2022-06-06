@@ -40,6 +40,17 @@ export default function AnnViewAdmin(props) {
         }
     }
 
+    const state = {
+        reload: false
+      };
+    
+    const refreshPage = () => {
+        this.setState(
+          {reload: true},
+          () => (this.setState({reload: false}))
+        )
+    }
+
     function handle(e) {
         const newAnnonce = {...annonce}
         if (e.target.id === "startDate" || e.target.id === "endtDate" ) {
@@ -51,7 +62,7 @@ export default function AnnViewAdmin(props) {
 
     function validate(e) {
         Axios.put(url, {"isValid": true})
-            .then(response => {return (setUpdatedAt(response.data.updatedAt))});
+            .then(response => {return (setUpdatedAt(response.data.updatedAt),refreshPage)});
     }
 
     function submit(e) {
@@ -83,6 +94,8 @@ export default function AnnViewAdmin(props) {
       }, []);
 
       console.log(props.infos.User)
+
+      
 
     return( 
     <>

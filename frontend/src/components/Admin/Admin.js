@@ -104,10 +104,7 @@ export default function Admin() {
                 </tr>
                 
                 {expand &&
-                <> {props.user.isAdmin &&
-                    <><tr className='ads-table' style={{height: "37px"}}>
-                        <th></th><th style={{color:"#F44336"}}>User is Admin</th><th></th><th></th><th></th><th></th></tr></>
-                    }
+                <> 
                     {props.user.isAdmin === undefined && <>{tab.length !==0 ?
                     <>
                     <tr className='ads-table' style={{height: "37px"}}>
