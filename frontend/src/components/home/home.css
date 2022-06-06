@@ -119,5 +119,9 @@
 }
 
 .Annonce .card-text {
-    width: 136px
+    width: 128px
+}
+
+.Annonce .card-zone-text {
+    width: 187px
 }

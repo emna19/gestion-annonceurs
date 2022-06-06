@@ -12,6 +12,7 @@ export default function Film() {
 
   function handleImpression(e) {
 
+    window.open(params.state.item.clickUrl, '_blank', 'noopener,noreferrer')
     navigator.geolocation.getCurrentPosition(function(position) {
       setCountry(position.coords.latitude.toString()+ "-" + position.coords.longitude.toString()) 
     })
@@ -30,7 +31,7 @@ export default function Film() {
       top: 0,
       overflow: "hidden",
       position: "fixed"}}>
-        <ReactPlayer width='100%' height='100%' url='https://www.youtube.com/watch?v=fRrWBVk_8_0' onPlay={handleImpression}/>
+        <ReactPlayer width='100%' height='100%' url={params.state.item.sourceUrl} onPlay={handleImpression}/>
       </div>
       )
 }

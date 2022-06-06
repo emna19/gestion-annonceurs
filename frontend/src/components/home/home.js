@@ -21,6 +21,8 @@ export default function Home() {
 
   const [audience, setAudience] = useState([])
 
+  const [testAudience, setTestAudience] = useState([])
+
   
 
   
@@ -174,34 +176,11 @@ export default function Home() {
 
   document.body.style = "background-color: white";
 
-  // to not display same audience in different advertisements
-  let audienceInAnnonce = annonce.map(item => item.audience)
-  let uniqAudience = [...new Set(audienceInAnnonce)];
 
-  useEffect(() => {
-  if (annonce.length !==0) {
-    const promises = uniqAudience.map(item => Axios.get('http://localhost:5000/audiences/'+item))
-    Promise.all( promises)
-      .then((values) => {
-        setAudience(values.map(item =>item.data))
-        // for(const dataObj of values.map(item =>item.data)){
-        //   labels.push(parseInt(dataObj.minAge))
-        //   labels.push(parseInt(dataObj.maxAge))
-        //   name.push(dataObj.name)
-        // }
-        // setChartAudience({
-        //   labels: name,
-        //   datasets: [{
-        //     label:'Audience Age',
-        //     data: labels
-        //   }]
-        // })
-        
-      })
-      }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[annonce])
-    console.log(audience)
+    useEffect(() => {
+      Axios.get('http://localhost:5000/audiences/user/'+user._id)
+        .then(res => setAudience(res.data))
+    },[])
       
 
   useEffect(() => {
@@ -269,16 +248,6 @@ export default function Home() {
       () => this.setState({reload: false})
     )
   }
-
-
-let displayCountries =[]
-  if (audience.countries !== undefined){
-  let displayCountries = audience.countries.map((element) => element+',')
-    displayCountries = displayCountries.filter(displayCountry => displayCountry !== "null,")
-    console.log(displayCountries)
-    if (displayCountries.length !== 0)  displayCountries[displayCountries.length-1]=displayCountries[displayCountries.length-1].replace(",","")
-  }
-  if (annonce.length!==0) console.log(annonce[0].audience)
 
   if (annonce.length !== 0) {console.log(format( parseISO(annonce[0].startDate), 'yyyy/MM/dd kk:mm:ss')); console.log(annonce[0].audience)}
 
@@ -360,11 +329,11 @@ let displayCountries =[]
                     <h5 className="mb-3 card-title">{ item.name }</h5>
                     <div className='row mb-3'>
                       <span className="col-auto text-start card-text">Start date:</span>
-                      <div className='col-auto'>{ format( parseISO(item.startDate), 'yyyy/MM/dd kk:mm:ss')}</div>
+                      <div className='col-auto'>{ format( parseISO(item.startDate), 'yyyy/MM/dd')}</div>
                     </div>
                     <div className='row mb-3'>
                       <span className="col-auto text-start card-text">End date:</span>
-                      <div className='col-auto'>{format( parseISO(item.startDate), 'yyyy/MM/dd kk:mm:ss')}</div>
+                      <div className='col-auto'>{format( parseISO(item.endtDate), 'yyyy/MM/dd')}</div>
                     </div>
                     {item.isValid ?  null: <div className='row mb-3 validation'>
                       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="red" className="col-auto bi bi-x-circle" viewBox="0 0 16 16">
@@ -432,7 +401,23 @@ let displayCountries =[]
                     </div>
                     <div className='row mb-3'>
                       <span className="col-auto text-start card-text">Countries:</span>
-                      <div className='col-auto'>{ displayCountries.length === 0 ? <a>None</a> : displayCountries }</div>
+                      <div className='col-8' 
+                      style={{textAlign : "left"}}
+                      >
+                        { item.countries.length === 0 ? <a>None</a> :
+                          item.countries.map((element, index) =>  
+                          index === item.countries.length-1 ? 
+                          <p key= {index} 
+                            style={{display:"inline"}}>
+                            {element}
+                          </p> : 
+                          <p key= {index} 
+                            style={{display:"inline"}}>
+                              {element},
+                          </p>
+                          ) 
+                        }
+                      </div>
                     </div>
                 </div>
               </div>
@@ -451,7 +436,7 @@ let displayCountries =[]
 
         {viewClicked && <div className="overlay">
             <div >
-              {componentName === "Annonce" ? <AnnView audienceID={<GetAudienceById id = {item.audience}/>} onClick={() => {setViewClicked(!viewClicked)}} infos= {item}/> : <AudView onClick={() => { return(setViewClicked(!viewClicked),refreshPage)}} infos= {item}/>}
+              {componentName === "Annonce" ? <AnnView userID={user._id} audienceID={item.audience} onClick={() => {setViewClicked(!viewClicked)}} infos= {item}/> : <AudView onClick={() => { return(setViewClicked(!viewClicked),refreshPage)}} infos= {item}/>}
             </div>
           </div>
         }

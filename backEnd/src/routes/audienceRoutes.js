@@ -9,6 +9,8 @@ router.get('/', AudienceController.allAudiences);
   //get audience by id 
 router.get('/:id', AudienceController.audienceById);
 
+router.get('/user/:id', AudienceController.getAudiencesByUserId)
+
 router.put('/:id', AudienceController.updateAudience);
 
 router.delete('/:id', AudienceController.deleteAudience);
