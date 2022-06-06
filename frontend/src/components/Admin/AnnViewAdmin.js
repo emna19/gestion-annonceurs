@@ -50,6 +50,7 @@ export default function AnnViewAdmin(props) {
           () => (this.setState({reload: false}))
         )
     }
+    console.log("ok")
 
     function handle(e) {
         const newAnnonce = {...annonce}
