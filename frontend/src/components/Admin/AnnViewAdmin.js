@@ -30,7 +30,7 @@ export default function AnnViewAdmin(props) {
 
     const styles={
         card:{
-            width: clicked ? "688px" : "603px",
+            width: clicked ? "768px":"457px",
             fontSize: "18px",
             backgroundColor: "transparent"
         },
@@ -40,29 +40,17 @@ export default function AnnViewAdmin(props) {
         }
     }
 
-    const state = {
-        reload: false
-      };
-    
-    const refreshPage = () => {
-        this.setState(
-          {reload: true},
-          () => (this.setState({reload: false}))
-        )
-    }
-
     function handle(e) {
         const newAnnonce = {...annonce}
-        if (e.target.id === "startDate" || e.target.id === "endtDate" ) {
-            newAnnonce[e.target.id] = new Date(e.target.value).toISOString()
-        } else {newAnnonce[e.target.id] = e.target.value}
+        if (e.target.id === "startDate" || e.target.id === "endtDate" ) {newAnnonce[e.target.id] = new Date(e.target.value).toISOString()}
+        else {newAnnonce[e.target.id] = e.target.value}
         // newAnnonce[e.target.id] = e.target.value
         setAnnonce(newAnnonce)
     }
 
     function validate(e) {
         Axios.put(url, {"isValid": true})
-            .then(response => {return (setUpdatedAt(response.data.updatedAt),refreshPage)});
+            .then(response => {return (setUpdatedAt(response.data.updatedAt))});
     }
 
     function submit(e) {
@@ -82,20 +70,14 @@ export default function AnnViewAdmin(props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
 
-    console.log(aud)
-
     useEffect(() => {
        
-        fetch('http://localhost:5000/audiences/user/'+props.infos.User)
+        fetch('http://localhost:5000/audiences')
             .then(res => res.json())
             .then(data => setAudience(data))
     
     // empty dependency array means this effect will only run once (like componentDidMount in classes)
       }, []);
-
-      console.log(props.infos.User)
-
-      
 
     return( 
     <>
@@ -119,16 +101,16 @@ export default function AnnViewAdmin(props) {
 
             <div className="row mb-4 px-3">
                 <span className="col-4 text-start card-text fw-bold">Start date:</span>
-                <div className='col-8 text-start countries'>{ annonce.startDate !== 'Start Date' ? format( parseISO(annonce.startDate), 'yyyy/MM/dd') : null }</div>
+                <div className='col-8 text-start countries'>{ annonce.startDate !== 'Start Date' ? format( parseISO(annonce.startDate), 'yyyy/MM/dd kk:mm:ss') : null }</div>
             </div>
             <div className="row mb-4 px-3">
                 <span className="col-4 text-start card-text fw-bold">End date:</span>
-                <div className='col-8 text-start countries'>{ annonce.endtDate !== 'End Date' ? format( parseISO(annonce.endtDate), 'yyyy/MM/dd') : null }</div>
+                <div className='col-8 text-start countries'>{ annonce.endtDate !== 'End Date' ? format( parseISO(annonce.endtDate), 'yyyy/MM/dd kk:mm:ss') : null }</div>
             </div>
 
             <div className="row mb-4 px-3">
                 <span className="col-4 text-start card-text fw-bold">Audience:</span>
-                <div className='col-8 text-start countries'>{ aud.name }</div>
+                <div className='col-8 text-start countries'>{ props.audienceID }</div>
 
                 
             </div>
@@ -179,70 +161,32 @@ export default function AnnViewAdmin(props) {
             <div className='col-auto'>
             </div>
             <div className='col-auto' onClick={props.onClick}>
-                <svg 
-                    xmlns="http://www.w3.org/2000/svg" 
-                    width="35" 
-                    height="35" 
-                    fill="currentColor" 
-                    className="bi bi-x" 
-                    viewBox="0 0 16 16"
-                >
+                <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" className="bi bi-x" viewBox="0 0 16 16">
                     <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
                 </svg> 
             </div>
            </div>
            <form onSubmit={submit} className="row g-2" >
                 <div className="col-md-5 mb-5" style={{margin: "38px auto"}}>
-                    <input 
-                    type="text" 
-                    style={{fontSize: "25px"}} 
-                    className="AudView form-control fw-bold text-center"  
-                    id="name" 
-                    onChange={handle} 
-                    value={annonce.name} 
-                    placeholder= "Name" 
-                />
+                    <input type="text" style={{fontSize: "25px"}} className="AudView form-control fw-bold text-center"  id="name" onChange={handle} value={annonce.name} placeholder= "Name" />
                 </div>
             
                 <div className="row mb-4 px-3 align-items-center">
-                    <span className="col-3 text-start card-text fw-bold">Start date:</span>
-                    <div className="col-auto card-zone-text">
-                        <input 
-                            type="date" 
-                            style={{fontSize: "18px"}} 
-                            className="AudView form-control"  
-                            id="startDate" 
-                            onChange={handle} 
-                            value={format( parseISO(annonce.startDate), 'yyyy-MM-dd')} 
-                            placeholder= "Start date"
-                        />
+                    <span className="col-4 text-start card-text fw-bold">Start date:</span>
+                    <div className="col-4">
+                        <input type="text" style={{fontSize: "18px"}} className="AudView form-control"  id="startDate" onChange={handle} value={format( parseISO(annonce.startDate), 'yyyy/MM/dd kk:mm:ss')} placeholder= "Start date" />
                     </div>
                 
-                    <span className="col-3 card-text fw-bold">End date:</span>
-                    <div className="col-auto card-zone-text">
-                        <input 
-                            type="date" 
-                            style={{fontSize: "18px"}} 
-                            className="AudView form-control"  
-                            id="endtDate" 
-                            onChange={handle} 
-                            value={format( parseISO(annonce.endtDate), 'yyyy-MM-dd')} 
-                            placeholder= "End date"
-                        />
+                    <span className="col-4 card-text fw-bold">End date:</span>
+                    <div className="col-4">
+                        <input type="text" style={{fontSize: "18px"}} className="AudView form-control"  id="endtDate" onChange={handle} value={format( parseISO(annonce.startDate), 'yyyy/MM/dd kk:mm:ss')} placeholder= "End date" />
                     </div>
                 
                 </div>
                 <div className="row mb-4 px-3 align-items-center">
-                    <span className="col-3 text-start card-text fw-bold">Audience:</span>
-                    <div className="col-4 card-zone-text"> 
-                        <select 
-                            style={{fontSize: "18px"}} 
-                            className="form-select form-control countries-select" 
-                            onChange={handle} 
-                            value={annonce.audience} 
-                            id="audience" 
-                            aria-label="Default select example"
-                        >
+                    <span className="col-4 text-start card-text fw-bold">Audience:</span>
+                    <div className="col-4"> 
+                        <select style={{fontSize: "18px"}} className="form-select form-control countries-select" onChange={handle} value={annonce.audience} id="audience" aria-label="Default select example">
                             <option value="" disabled>Choose...</option>
                             {audience.map((item, index) => (
                                 <option key={index} value={item._id}>{item.name}</option>
@@ -250,15 +194,9 @@ export default function AnnViewAdmin(props) {
                         </select>
                      </div>           
                 
-                    <span className="col-3 card-text fw-bold">Sector:</span>
-                    <div className="col-4 card-zone-text">
-                        <select 
-                            style={{fontSize: "18px"}} 
-                            className="form-select form-control countries-select" 
-                            onChange={handle} value={annonce.sector} 
-                            id="sector" 
-                            aria-label="Default select example"
-                        >
+                    <span className="col-4  card-text fw-bold">Sector:</span>
+                    <div className="col-4">
+                        <select style={{fontSize: "18px"}} className="form-select form-control countries-select" onChange={handle} value={annonce.sector} id="sector" aria-label="Default select example">
                             <option value="" disabled>Choose...</option>
                             <option value="1">One</option>
                             <option value="2">Two</option>
@@ -267,55 +205,25 @@ export default function AnnViewAdmin(props) {
                     </div>
                 </div>
                 <div className="row mb-4 px-3 align-items-center">
-                    <span className="col-3 text-start card-text fw-bold">Budget:</span>
-                    <div className="col-4 card-zone-text">
-                        <input 
-                            type="text" 
-                            style={{fontSize: "18px"}} 
-                            className="AudView form-control"  
-                            id="budget" 
-                            onChange={handle} 
-                            value={annonce.budget } 
-                            placeholder= "Budget"
-                        />
+                    <span className="col-4 text-start card-text fw-bold">Budget:</span>
+                    <div className="col-4">
+                        <input type="text" style={{fontSize: "18px"}} className="AudView form-control"  id="budget" onChange={handle} value={annonce.budget } placeholder= "Budget" />
                     </div>
-                    <span className="col-3 card-text fw-bold">Type:</span>
-                    <div className="col-4 card-zone-text">
-                        <input 
-                            type="text" 
-                            style={{fontSize: "18px"}} 
-                            className="AudView form-control"  
-                            id="type" 
-                            onChange={handle} 
-                            value={annonce.type } 
-                            placeholder= "Type" 
-                        />
+                    <span className="col-4 card-text fw-bold">Type:</span>
+                    <div className="col-4">
+                        <input type="text" style={{fontSize: "18px"}} className="AudView form-control"  id="type" onChange={handle} value={annonce.type } placeholder= "Type" />
                     </div>
                 </div>
                 <div className="row mb-4 px-3 align-items-center">
-                    <span className="col-3 text-start card-text fw-bold">Click url:</span>
+                    <span className="col-4 text-start card-text fw-bold">Page url:</span>
                     <div className="col-8">
-                        <input 
-                            type="text" 
-                            style={{fontSize: "18px"}} 
-                            className="AudView form-control"  
-                            id="clickUrl" onChange={handle} 
-                            value={annonce.clickUrl } 
-                            placeholder= "Click url" 
-                        />
+                        <input type="text" style={{fontSize: "18px"}} className="AudView form-control"  id="clickUrl" onChange={handle} value={annonce.clickUrl } placeholder= "Page url" />
                     </div>
                 </div> 
                 <div className="row mb-5 px-3 align-items-center">
-                    <span className="col-3 text-start card-text fw-bold">Source url:</span>
+                    <span className="col-4 text-start card-text fw-bold">Source url:</span>
                     <div className="col-8">
-                        <input 
-                        type="text" 
-                        style={{fontSize: "18px"}} 
-                        className="AudView form-control"  
-                        id="sourceUrl" onChange={handle} 
-                        value={annonce.sourceUrl } 
-                        placeholder= "Source url" 
-                        />
+                        <input type="text" style={{fontSize: "18px"}} className="AudView form-control"  id="sourceUrl" onChange={handle} value={annonce.sourceUrl } placeholder= "Source url" />
                     </div>
                 </div> 
                      
