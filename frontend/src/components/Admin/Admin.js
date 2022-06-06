@@ -63,7 +63,7 @@ export default function Admin() {
                 <tr key={props.index}>
                     <td>{props.index+1}</td>
                     <td><a href="#"> {props.user.name}</a></td>
-                    <td>{ props.user.createdAt ? format( parseISO(props.user.createdAt), 'yyyy/MM/dd') : null }</td>
+                    <td>{ props.user.createdAt ? format( parseISO(props.user.createdAt), 'yyyy/MM/dd kk:mm:ss') : null }</td>
                     <td> {props.user.isAdmin ? `Admin`: `Advertiser`} </td>
                     {props.user.token ? 
                         <td><span className="status text-success">&bull;</span> Active </td> : 
@@ -71,30 +71,22 @@ export default function Admin() {
                     }
                     <td>
                         {/* settings annonceur */}
-                        <a style={{cursor : props.user.isAdmin ? "not-allowed" : "pointer", color : props.user.isAdmin ? "grey" : "#114a71"}} 
-                            onClick={() => {return (
-                                        setViewClicked(!viewClicked),
-                                        setComponentName("User"),
-                                        setItem(props.user)
-                                )}}
-                            href="#" className="settings" title="Settings" data-toggle="tooltip"
-                         >
+                        <a onClick={() => {return (
+                                    setViewClicked(!viewClicked),
+                                    setComponentName("User"),
+                                    setItem(props.user)
+                            )}}
+                         href="#" className="settings" title="Settings" data-toggle="tooltip">
                          <i className="material-icons">&#xE8B8;</i>
                          </a>
                         {/* delete annonceur */}
-                        <a style={{cursor : props.user.isAdmin ? "not-allowed" : "pointer", color : props.user.isAdmin ? "grey" : "#F17B22"}}
-                            onClick={
-                                ()=>{ if (!props.user.isAdmin) {
-                            const  user = props.user._id
-                            Axios.delete(usersUrl+user).then(res => {window.location.href = '/admin'})}  }} 
-                            id={props.user.id} className="delete" title="Delete" data-toggle="tooltip"><i className="material-icons">&#xE5C9;</i></a>
+                        <a onClick={
+                            ()=>{ 
+                        const  user = props.user._id
+                        Axios.delete(usersUrl+user).then(res => {window.location.href = '/admin'})  }} 
+                         id={props.user.id} className="delete" title="Delete" data-toggle="tooltip"><i className="material-icons">&#xE5C9;</i></a>
                         {/* gerer annonce */}
-                        <a style={{cursor : props.user.isAdmin ? "not-allowed" : "pointer", color : props.user.isAdmin ? "grey" : "#114a71"}}
-                            onClick={() => { return (props.user.isAdmin ? null: setExpand(!expand))}}  
-                            className="settings" 
-                            title="Settings" 
-                            data-toggle="tooltip"
-                        >
+                        <a onClick={() => { return (setExpand(!expand))}} style={{cursor: "pointer"}} className="settings" title="Settings" data-toggle="tooltip">
                             {expand ? <i className="material-icons">expand_less</i> :
                             <i className="material-icons">expand_more</i>
                             } 
@@ -105,7 +97,7 @@ export default function Admin() {
                 
                 {expand &&
                 <> 
-                    {props.user.isAdmin === undefined && <>{tab.length !==0 ?
+                    {tab.length !==0 ?
                     <>
                     <tr className='ads-table' style={{height: "37px"}}>
                     <th>Ads</th>
@@ -141,8 +133,7 @@ export default function Admin() {
                     )}
                     </>
                     : <><tr className='ads-table' style={{height: "37px"}}>
-                        <th></th><th style={{color:"#F44336"}}>User has no Ads</th><th></th><th></th><th></th><th></th></tr></>
-                    }</>}
+                        <th></th><th style={{color:"#F44336"}}>User has no Ads</th><th></th><th></th><th></th><th></th></tr></>}
                     
                 </>
                 }

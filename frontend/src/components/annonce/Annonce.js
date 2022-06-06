@@ -63,7 +63,7 @@ export default function Annonce() {
 
     useEffect(() => {
        
-        fetch('http://localhost:5000/audiences/user/'+user._id)
+        fetch('http://localhost:5000/audiences')
             .then(res => res.json())
             .then(data => setAudience(data))
     
