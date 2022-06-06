@@ -4,12 +4,9 @@ import { parseISO, format, getDay } from "date-fns";
 import BarChart from "../charts/BarChart";
 
 export default function AudView(props) {
-
   const url = "http://localhost:5000/annonces/" + props.infos._id;
 
   const [clicked, setClicked] = useState(false);
-
-  const [audinAnn, setAudinAnn] = useState([])
 
   const [verifyClicked, setVerifyClicked] = useState(false);
 
@@ -35,7 +32,7 @@ export default function AudView(props) {
 
   const styles = {
     card: {
-      width: clicked ? "688px" : "603px",
+      width: clicked ? "768px" : "457px",
       fontSize: "18px",
       backgroundColor: "transparent",
     },
@@ -60,7 +57,7 @@ export default function AudView(props) {
   function submit(e) {
     e.preventDefault();
     Axios.put(url, annonce).then((response) => {
-      return (setUpdatedAt(response.data.updatedAt), setClicked(!clicked))
+      return setUpdatedAt(response.data.updatedAt), setClicked(!clicked);
     });
   }
 
@@ -69,7 +66,7 @@ export default function AudView(props) {
   }, [props.infos]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/audiences/user/"+props.userID)
+    fetch("http://localhost:5000/audiences")
       .then((res) => res.json())
       .then((data) => setAudience(data));
 
@@ -86,7 +83,6 @@ export default function AudView(props) {
       });
     }
   }, [annonce]);
-  console.log(annonce)
 
   useEffect(() => {
     let count = {};
@@ -121,12 +117,6 @@ export default function AudView(props) {
   }, [impression]);
 
   console.log(verifyClicked);
-
-  useEffect(()=>{
-    Axios.get('http://localhost:5000/audiences/'+props.audienceID)
-      .then(res => setAudinAnn(res.data))
-    
-  },[])
 
   return (
     <>
@@ -206,66 +196,66 @@ export default function AudView(props) {
             <h2 className="mb-5 card-title fw-bold">{annonce.name}</h2>
 
             <div className="row mb-4 px-3">
-              <span className="col-3 text-start card-text fw-bold">
+              <span className="col-4 text-start card-text fw-bold">
                 Start date:
               </span>
-              <div className="col-9 text-start countries">
+              <div className="col-8 text-start countries">
                 {annonce.startDate !== "Start Date"
-                  ? format(parseISO(annonce.startDate), "yyyy/MM/dd")
+                  ? format(parseISO(annonce.startDate), "yyyy/MM/dd kk:mm:ss")
                   : null}
               </div>
             </div>
             <div className="row mb-4 px-3">
-              <span className="col-3 text-start card-text fw-bold">
+              <span className="col-4 text-start card-text fw-bold">
                 End date:
               </span>
-              <div className="col-9 text-start countries">
+              <div className="col-8 text-start countries">
                 {annonce.endtDate !== "End Date"
-                  ? format(parseISO(annonce.endtDate), "yyyy/MM/dd")
+                  ? format(parseISO(annonce.endtDate), "yyyy/MM/dd kk:mm:ss")
                   : null}
               </div>
             </div>
 
             <div className="row mb-4 px-3">
-              <span className="col-3 text-start card-text fw-bold">
+              <span className="col-4 text-start card-text fw-bold">
                 Audience:
               </span>
-              <div className="col-9 text-start countries">
-                {audinAnn.name}
+              <div className="col-8 text-start countries">
+                {props.audienceID}
               </div>
             </div>
 
             <div className="row mb-4 px-3">
-              <span className="col-3 text-start card-text fw-bold">
+              <span className="col-4 text-start card-text fw-bold">
                 Sector:
               </span>
-              <div className="col-9 text-start countries">{annonce.sector}</div>
+              <div className="col-8 text-start countries">{annonce.sector}</div>
             </div>
             <div className="row mb-4 px-3">
-              <span className="col-3 text-start card-text fw-bold">
+              <span className="col-4 text-start card-text fw-bold">
                 Budget:
               </span>
-              <div className="col-9 text-start keywords">{annonce.budget}</div>
+              <div className="col-8 text-start keywords">{annonce.budget}</div>
             </div>
             <div className="row mb-4 px-3">
-              <span className="col-3 text-start card-text fw-bold">
-              Click url:
+              <span className="col-4 text-start card-text fw-bold">
+                Page url:
               </span>
-              <div className="col-9 text-start movieIds">
+              <div className="col-7 text-start movieIds">
                 {annonce.clickUrl}
               </div>
             </div>
             <div className="row mb-4 px-3">
-              <span className="col-3 text-start card-text fw-bold">
+              <span className="col-4 text-start card-text fw-bold">
                 Source url:
               </span>
-              <div className="col-9 text-start movieIds">
+              <div className="col-7 text-start movieIds">
                 {annonce.sourceUrl}
               </div>
             </div>
             <div className="row mb-4 px-3">
-              <span className="col-3 text-start card-text fw-bold">Type:</span>
-              <div className="col-9 text-start movieIds">{annonce.type}</div>
+              <span className="col-4 text-start card-text fw-bold">Type:</span>
+              <div className="col-8 text-start movieIds">{annonce.type}</div>
             </div>
             <div className="row mb-1 px-3">
               <div className="text-center">
@@ -274,7 +264,7 @@ export default function AudView(props) {
                   className="home-container-Add"
                   style={{
                     height: "38px",
-                    width: "150px",
+                    width: "78px",
                     letterSpacing: "0.1em",
                     fontSize: "17px",
                   }}
@@ -282,7 +272,7 @@ export default function AudView(props) {
                     return setVerifyClicked(!verifyClicked);
                   }}
                 >
-                  View statistics
+                  Verify
                 </button>
               </div>
             </div>
@@ -323,45 +313,45 @@ export default function AudView(props) {
               </div>
 
               <div className="row mb-4 px-3 align-items-center">
-                <span className="col-3 text-start card-text fw-bold">
+                <span className="col-4 text-start card-text fw-bold">
                   Start date:
                 </span>
-                <div className="col-auto card-zone-text">
+                <div className="col-4">
                   <input
-                    type="date"
+                    type="text"
                     style={{ fontSize: "18px" }}
                     className="AudView form-control"
                     id="startDate"
                     onChange={handle}
                     value={format(
                       parseISO(annonce.startDate),
-                      "yyyy-MM-dd"
+                      "yyyy/MM/dd kk:mm:ss"
                     )}
                     placeholder="Start date"
                   />
                 </div>
 
-                <span className="col-3 card-text fw-bold">End date:</span>
-                <div className="col-auto card-zone-text">
+                <span className="col-4 card-text fw-bold">End date:</span>
+                <div className="col-4">
                   <input
-                    type="date"
+                    type="text"
                     style={{ fontSize: "18px" }}
                     className="AudView form-control"
                     id="endtDate"
                     onChange={handle}
                     value={format(
-                      parseISO(annonce.endtDate),
-                      "yyyy-MM-dd"
+                      parseISO(annonce.startDate),
+                      "yyyy/MM/dd kk:mm:ss"
                     )}
                     placeholder="End date"
                   />
                 </div>
               </div>
               <div className="row mb-4 px-3 align-items-center">
-                <span className="col-3 text-start card-text fw-bold">
+                <span className="col-4 text-start card-text fw-bold">
                   Audience:
                 </span>
-                <div className="col-4 card-zone-text">
+                <div className="col-4">
                   <select
                     style={{ fontSize: "18px" }}
                     className="form-select form-control countries-select"
@@ -381,8 +371,8 @@ export default function AudView(props) {
                   </select>
                 </div>
 
-                <span className="col-3 card-text fw-bold">Sector:</span>
-                <div className="col-4 card-zone-text">
+                <span className="col-4  card-text fw-bold">Sector:</span>
+                <div className="col-4">
                   <select
                     style={{ fontSize: "18px" }}
                     className="form-select form-control countries-select"
@@ -401,10 +391,10 @@ export default function AudView(props) {
                 </div>
               </div>
               <div className="row mb-4 px-3 align-items-center">
-                <span className="col-3 text-start card-text fw-bold">
+                <span className="col-4 text-start card-text fw-bold">
                   Budget:
                 </span>
-                <div className="col-4 card-zone-text">
+                <div className="col-4">
                   <input
                     type="text"
                     style={{ fontSize: "18px" }}
@@ -415,8 +405,8 @@ export default function AudView(props) {
                     placeholder="Budget"
                   />
                 </div>
-                <span className="col-3 card-text fw-bold">Type:</span>
-                <div className="col-4 card-zone-text">
+                <span className="col-4 card-text fw-bold">Type:</span>
+                <div className="col-4">
                   <input
                     type="text"
                     style={{ fontSize: "18px" }}
@@ -429,8 +419,8 @@ export default function AudView(props) {
                 </div>
               </div>
               <div className="row mb-4 px-3 align-items-center">
-                <span className="col-3 text-start card-text fw-bold">
-                  Click url:
+                <span className="col-4 text-start card-text fw-bold">
+                  Page url:
                 </span>
                 <div className="col-8">
                   <input
@@ -440,12 +430,12 @@ export default function AudView(props) {
                     id="clickUrl"
                     onChange={handle}
                     value={annonce.clickUrl}
-                    placeholder="Click url"
+                    placeholder="Page url"
                   />
                 </div>
               </div>
               <div className="row mb-5 px-3 align-items-center">
-                <span className="col-3 text-start card-text fw-bold">
+                <span className="col-4 text-start card-text fw-bold">
                   Source url:
                 </span>
                 <div className="col-8">
