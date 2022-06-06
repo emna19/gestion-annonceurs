@@ -40,19 +40,6 @@ export default function AnnViewAdmin(props) {
         }
     }
 
-
-    const state = {
-        reload: false
-      };
-    
-    const refreshPage = () => {
-        this.setState(
-          {reload: true},
-          () => (this.setState({reload: false}))
-        )
-    }
-    console.log("okk")
-
     function handle(e) {
         const newAnnonce = {...annonce}
         if (e.target.id === "startDate" || e.target.id === "endtDate" ) {newAnnonce[e.target.id] = new Date(e.target.value).toISOString()}
@@ -155,7 +142,7 @@ export default function AnnViewAdmin(props) {
                     <div className='text-center'>
                     <button id="isValid" type="button" className="home-container-Add"
                     style={{height: "38px"}}
-                    onClick={() =>  {return(validate(),window.location.href = '/Admin')}}>
+                    onClick={() =>  {return(validate())}}>
                             Validate
                     </button>
                     </div>
