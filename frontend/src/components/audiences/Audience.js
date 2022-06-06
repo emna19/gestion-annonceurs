@@ -26,7 +26,6 @@ export default function Audience() {
 
     const countryCodes = Object.keys(countries.countries);
     const countryNames = countryCodes.map(code => countries.countries[code].name);
-    console.log(country[0].name);
 
     
 
