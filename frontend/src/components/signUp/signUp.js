@@ -206,7 +206,20 @@ export default function SignUp() {
                   <option>...</option>
                 </select> 
               </div> */}
-              <div className="col-md-4">
+              <div className="col-md-4 city-width">
+                <input
+                  type="text"
+                  className="form-control"
+                  onChange={handle}
+                  id="city"
+                  value={user.city}
+                  placeholder="city"
+                  required
+                />
+              </div>
+
+
+              {/* <div className="col-md-4">
                 <select
                   className="form-select"
                   onChange={handle}
@@ -220,7 +233,7 @@ export default function SignUp() {
                   </option>
                   <option>...</option>
                 </select>
-              </div>
+              </div> */}
             </div>
             <div className="row g-2">
               <div className="form-check col-auto">
