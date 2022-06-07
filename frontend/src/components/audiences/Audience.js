@@ -119,7 +119,7 @@ export default function Audience() {
                         </div>
                     </div>
                     <div className="col-6 buttons">
-                        <button type="reset" className="btn cancel btn-primary">Cancel</button>
+                        <button type="reset" className="btn cancel btn-primary"  onClick={()=>{window.location.href = '/home/audience/create'}}>Cancel</button>
                         <button type="submit" className="btn save btn-primary">Save</button>
                     </div> 
                 </form>
