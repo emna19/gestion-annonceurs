@@ -74,6 +74,7 @@ export default function SignUp() {
                   onChange={handle}
                   id="name"
                   value={user.name}
+                  style={{width: "452px"}}
                   placeholder="Name"
                   required
                 />
