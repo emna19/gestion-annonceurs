@@ -3,11 +3,15 @@ import {  useState } from "react";
 import { useDispatch } from "react-redux";
 import { createUserAction } from "../../redux/actions/users/userActions";
 import { useNavigate } from "react-router-dom";
+import countries from "countries-list";
 
 
 export default function SignUp() {
   //add background color to signup
   document.body.style = "background-color:  #114a71";
+
+  const countryCodes = Object.keys(countries.countries);
+  const countryNames = countryCodes.map(code => countries.countries[code].name);
 
   ////////////// NEW with redux //////////////
   const [user, setUser] = useState({
@@ -174,7 +178,13 @@ export default function SignUp() {
             </div>
             <div className="input-elements row g-2">
               <div className="col-md-4 country-width">
-                <input
+              <select className="form-select form-control countries-select" onChange={handle}  value={user.country} id="country" aria-label="Default select example">
+                                    {countryNames.map((item, j) => (
+                                        <option key={j} value={item}>{item}</option>
+                                    ))} 
+                                    
+                                </select>
+                {/* <input
                   type="text"
                   className="form-control"
                   onChange={handle}
@@ -182,7 +192,7 @@ export default function SignUp() {
                   value={user.country}
                   placeholder="Country"
                   required
-                />
+                /> */}
               </div>
               {/* <div className="col-md-4">
                  <select
