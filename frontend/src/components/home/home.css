@@ -125,3 +125,11 @@
 .Annonce .card-zone-text {
     width: 187px
 }
+
+.home .empty {
+    text-align: center;
+    font-size: 30px;
+    color: #114a71;
+    letter-spacing: 10px;
+    margin: auto;
+}

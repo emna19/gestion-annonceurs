@@ -265,13 +265,13 @@ export default function Home() {
               marginLeft: "230px", 
               marginBottom: "40px"}}
             >
-              { audience.length!== 0 && <div style={{textAlign: "center",
+              { impression.length === 0 ? <div className="empty">No Impressions</div> : <> { audience.length!== 0 && <div style={{textAlign: "center",
                       
                       position: "absolute",
                       left: "1%",
                       right: "1%",}}><BarChart chartData={chartAudience}/>
                     </div>
-              } 
+              } </>}
             </div>
           
           <div className="home-container-head">
@@ -298,7 +298,7 @@ export default function Home() {
 
           <div id="carouselExampleControlsNoTouching" className="carousel slide" data-bs-touch="false" data-bs-interval="false">  
             <div className="row carousel-inner audiences announcements login-container">
-              {annonce.map((item, index) =>(
+              { annonce.length === 0 ? <div className="empty">No Ads</div> : <> {annonce.map((item, index) =>(
                   <div key={index} className="card text-center">
                   <div className="card-body">
                     <div className='row mb-4 justify-content-between'>
@@ -346,6 +346,8 @@ export default function Home() {
                   </div>
                 </div>
                 ))}
+                </>
+              }
 
             </div>
           </div>
@@ -374,7 +376,7 @@ export default function Home() {
           <div id="carouselExampleControlsNoTouching" className="carousel slide" data-bs-touch="false" data-bs-interval="false">
             <div className="row carousel-inner audiences login-container">
               
-            {audience.map((item, index) =>(
+            { audience.length === 0 ? <div className="empty">No Audience</div> : <>{audience.map((item, index) =>(
                 
                 <div key={index} className="card text-center">
                 <div className="card-body">
@@ -422,6 +424,8 @@ export default function Home() {
                 </div>
               </div>
               ))}
+              </>
+            }
             </div>
             {/* <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="prev">
               <span className="carousel-control-prev-icon" aria-hidden="true"></span>
