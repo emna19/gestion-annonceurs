@@ -118,40 +118,40 @@ export default function AnnViewAdmin(props) {
            <h2 className="mb-5 card-title fw-bold">{annonce.name}</h2>
 
             <div className="row mb-4 px-3">
-                <span className="col-4 text-start card-text fw-bold">Start date:</span>
-                <div className='col-8 text-start countries'>{ annonce.startDate !== 'Start Date' ? format( parseISO(annonce.startDate), 'yyyy/MM/dd') : null }</div>
+                <span className="col-3 text-start card-text fw-bold">Start date:</span>
+                <div className='col-9 text-start countries'>{ annonce.startDate !== 'Start Date' ? format( parseISO(annonce.startDate), 'yyyy/MM/dd') : null }</div>
             </div>
             <div className="row mb-4 px-3">
-                <span className="col-4 text-start card-text fw-bold">End date:</span>
-                <div className='col-8 text-start countries'>{ annonce.endtDate !== 'End Date' ? format( parseISO(annonce.endtDate), 'yyyy/MM/dd') : null }</div>
+                <span className="col-3 text-start card-text fw-bold">End date:</span>
+                <div className='col-9 text-start countries'>{ annonce.endtDate !== 'End Date' ? format( parseISO(annonce.endtDate), 'yyyy/MM/dd') : null }</div>
             </div>
 
             <div className="row mb-4 px-3">
-                <span className="col-4 text-start card-text fw-bold">Audience:</span>
-                <div className='col-8 text-start countries'>{ aud.name }</div>
+                <span className="col-3 text-start card-text fw-bold">Audience:</span>
+                <div className='col-9 text-start countries'>{ aud.name }</div>
 
                 
             </div>
 
             <div className="row mb-4 px-3">
-                <span className="col-4 text-start card-text fw-bold">Sector:</span>
-                <div className='col-8 text-start countries'>{annonce.sector}</div>
+                <span className="col-3 text-start card-text fw-bold">Sector:</span>
+                <div className='col-9 text-start countries'>{annonce.sector}</div>
             </div>
             <div className="row mb-4 px-3">
-                <span className="col-4 text-start card-text fw-bold">Budget:</span>
-                <div className='col-8 text-start keywords'>{ annonce.budget }</div>
+                <span className="col-3 text-start card-text fw-bold">Budget:</span>
+                <div className='col-9 text-start keywords'>{ annonce.budget }</div>
             </div>
             <div className="row mb-4 px-3">
-                <span className="col-4 text-start card-text fw-bold">Page url:</span>
-                <div className='col-7 text-start movieIds'>{ annonce.clickUrl}</div>
+                <span className="col-3 text-start card-text fw-bold">Click url:</span>
+                <div className='col-9 text-start movieIds'>{ annonce.clickUrl}</div>
             </div> 
             <div className="row mb-4 px-3">
-                <span className="col-4 text-start card-text fw-bold">Source url:</span>
-                <div className='col-7 text-start movieIds'>{ annonce.sourceUrl}</div>
+                <span className="col-3 text-start card-text fw-bold">Source url:</span>
+                <div className='col-9 text-start movieIds'>{ annonce.sourceUrl}</div>
             </div>   
             <div className="row mb-4 px-3">
-                <span className="col-4 text-start card-text fw-bold">Type:</span>
-                <div className='col-8 text-start movieIds'>{ annonce.type}</div>
+                <span className="col-3 text-start card-text fw-bold">Type:</span>
+                <div className='col-9 text-start movieIds'>{ annonce.type}</div>
             </div> 
             {annonce.isValid ?  
                 <i style={{color: "green"}} className="material-icons">check</i> :
