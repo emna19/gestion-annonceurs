@@ -141,7 +141,7 @@ export default function Annonce() {
                         </div>
                         
                         <div className="row mb">
-                            <label htmlFor="exampleInputPassword1" className="col-2 form-label">Page url:</label>
+                            <label htmlFor="exampleInputPassword1" className="col-2 form-label">Click url:</label>
                             <div className="col-auto">
                                 <input type="text" placeholder="https://www.google.com/" onChange={handle} value={annonce.clickUrl} id="clickUrl" className="lg-input form-control" />
                             </div>
@@ -154,7 +154,7 @@ export default function Annonce() {
                         </div>
                     </div>
                     <div className="col-6 buttons">
-                        <button type="reset" className="btn cancel btn-primary">Cancel</button>
+                        <button type="reset" className="btn cancel btn-primary" onClick={()=>{window.location.href = '/home/annonce/create'}}>Cancel</button>
                         <button type="submit" className="btn save btn-primary">Save</button>
                     </div> 
                 </form>

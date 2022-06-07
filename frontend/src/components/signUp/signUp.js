@@ -78,17 +78,7 @@ export default function SignUp() {
                   required
                 />
               </div>
-              <div className="col-md-5">
-                <input
-                  type="file"
-                  className="form-control"
-                  onChange={handle}
-                  id="photo"
-                  value={user.photo}
-                  placeholder="Photo"
-                  
-                />
-              </div>
+          
             </div>
             <div className="input-elements row g-2">
               <div className="col">
@@ -206,7 +196,7 @@ export default function SignUp() {
                   <option>...</option>
                 </select> 
               </div> */}
-              <div className="col-md-4">
+              {/* <div className="col-md-4">
                 <select
                   className="form-select"
                   onChange={handle}
@@ -220,6 +210,17 @@ export default function SignUp() {
                   </option>
                   <option>...</option>
                 </select>
+              </div> */}
+              <div className="col-md-4 city-width">
+                <input
+                  type="text"
+                  className="form-control"
+                  onChange={handle}
+                  id="city"
+                  value={user.city}
+                  placeholder="city"
+                  required
+                />
               </div>
             </div>
             <div className="row g-2">

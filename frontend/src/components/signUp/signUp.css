@@ -77,3 +77,7 @@ letter-spacing: 0.02em;
 .country-width {
     width : 300px
 }
+
+input#name {
+    width: 452px;
+}
