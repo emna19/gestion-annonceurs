@@ -121,10 +121,10 @@ export default function Annonce() {
                                 <div className="col-3">
                                     <select style={{margin:"0px"}} className="form-select form-control countries-select" onChange={handle} value={annonce.sector} id="sector" aria-label="Default select example">
                                         <option value="" disabled>Choose...</option>
-                                        <option value="1">Agroalimentaire</option>
-                                        <option value="2">Industrie</option>
-                                        <option value="3">Énergie</option>
-                                        <option value ="4">Commerce </option>
+                                        <option value="Agro-alimentaires">Agro-alimentaires</option>
+                                        <option value="Industrie">Industrie</option>
+                                        <option value="Énergie">Énergie</option>
+                                        <option value ="Commerce">Commerce </option>
                                     </select>
                                 </div>
                         </div>
