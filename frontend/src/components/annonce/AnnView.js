@@ -394,9 +394,10 @@ export default function AudView(props) {
                     <option value="" disabled>
                       Choose...
                     </option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                      <option value="Agro-alimentaires">Agro-alimentaires</option>
+                      <option value="Industrie">Industrie</option>
+                      <option value="Énergie">Énergie</option>
+                      <option value ="Commerce">Commerce </option>
                   </select>
                 </div>
               </div>
